@@ -1,0 +1,1 @@
+enum FirebaseRequestType { login, register }

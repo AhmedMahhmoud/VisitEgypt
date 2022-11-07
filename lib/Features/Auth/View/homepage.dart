@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:task/Features/Auth/View/login_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -14,7 +15,13 @@ class HomePage extends StatelessWidget {
             const Text("Hello There"),
             ElevatedButton(
                 onPressed: () {
-                  FirebaseAuth.instance.signOut();
+                  FirebaseAuth.instance
+                      .signOut()
+                      .then((value) => Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          )));
                 },
                 child: const Text("Sign out"))
           ],
