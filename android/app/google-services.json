@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "298404424743",
+    "project_id": "visitegypt-6fc57",
+    "storage_bucket": "visitegypt-6fc57.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298404424743:android:617da9e620e409ba477202",
+        "android_client_info": {
+          "package_name": "com.example.task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "298404424743-cstvokkfiqpnpcnvu82rb2jnqufss47n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHbji-MbBJUImGOipQSYKhGLB47Ff_MII"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "298404424743-cstvokkfiqpnpcnvu82rb2jnqufss47n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
