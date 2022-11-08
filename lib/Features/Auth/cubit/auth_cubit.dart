@@ -9,7 +9,9 @@ part 'auth_state.dart';
 
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.authRepository}) : super(AuthInitial());
+
   final AuthRepository authRepository;
+
   Future<void> firebaseSignUp(AuthModel authModel) async {
     makeFirebaseRequest(FirebaseRequestType.register, authModel);
   }
