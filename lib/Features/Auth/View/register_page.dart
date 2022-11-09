@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:task/Features/Auth/Model/login.dart';
-import 'package:task/Features/Auth/View/homepage.dart';
+import 'package:task/Features/Home/View/homepage.dart';
 import 'package:task/Features/Auth/cubit/auth_cubit.dart';
 
 import 'login_page.dart';

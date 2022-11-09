@@ -7,6 +7,8 @@ import 'package:task/Features/Auth/View/login_page.dart';
 import 'package:task/Features/Auth/cubit/auth_cubit.dart';
 import 'package:task/Injection/dependency_injection.dart' as di;
 
+import 'Features/Home/Cubit/home_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
         return MultiBlocProvider(
             providers: [
               BlocProvider(create: (_) => di.sl<AuthCubit>()),
+              BlocProvider(create: (_) => di.sl<HomeCubit>()..getAllPlaces()),
             ],
             child: const MaterialApp(
                 debugShowCheckedModeBanner: false,

@@ -22,7 +22,9 @@ dev_dependencies:
   build_runner: ^2.3.2
   equatable: ^2.0.5
   firebase_auth: ^4.1.1
+  dropdown_search: ^5.0.3
   firebase_core: ^2.1.1
+  lottie:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
@@ -39,6 +41,7 @@ flutter:
   assets:
     - assets/images/
     - assets/fonts/
+    - assets/lotties/
 
   fonts:
     - family: Poppins
