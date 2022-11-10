@@ -25,7 +25,6 @@ class _RegisterPageState extends State<RegisterPage> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.background,
         body: BlocListener<AuthCubit, AuthState>(
           listener: (ctx, state) {
             if (state is ErrorAuthState) {

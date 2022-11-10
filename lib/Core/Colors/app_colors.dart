@@ -9,6 +9,7 @@ class CustomColors {
   static const niceGrey = Color(0xFFF1EFF1);
   static const niceOrange = Color(0xFFFFA41B);
   static const lightGold = Color(0xFFF2C37A);
-
+  static const successColor = Colors.green;
+  static const errorColor = Color.fromARGB(223, 223, 0, 0);
   static const dateTicketColorK = Color(0xffFF4729);
 }

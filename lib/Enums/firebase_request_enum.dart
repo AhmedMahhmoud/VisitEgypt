@@ -1,1 +1,1 @@
-enum FirebaseRequestType { login, register }
+enum FirebaseRequestType { login, register, forget }

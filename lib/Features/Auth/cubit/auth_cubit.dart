@@ -16,21 +16,32 @@ class AuthCubit extends Cubit<AuthState> {
     makeFirebaseRequest(FirebaseRequestType.register, authModel);
   }
 
+  Future<void> firebaseResetPassword(AuthModel auth) async {
+    makeFirebaseRequest(FirebaseRequestType.forget, auth);
+  }
+
   Future<void> firebaseSignIn(AuthModel loginModel) async {
     makeFirebaseRequest(FirebaseRequestType.login, loginModel);
   }
 
   Future<void> makeFirebaseRequest(
       FirebaseRequestType requestType, AuthModel authModel) async {
-    emit(LoadingAuthState());
     late UserCredential userCridentials;
     try {
-      if (requestType == FirebaseRequestType.login) {
-        userCridentials = await authRepository.firebaseLogin(authModel);
-      } else if (requestType == FirebaseRequestType.register) {
-        userCridentials = await authRepository.firebaseRegister(authModel);
+      if (requestType == FirebaseRequestType.forget) {
+        emit(LoadingForgetPasswordState());
+        await authRepository.firebaseResetPassword(authModel.username);
+        emit(LoadedForgetPasswordState());
+      } else {
+        emit(LoadingAuthState());
+
+        if (requestType == FirebaseRequestType.login) {
+          userCridentials = await authRepository.firebaseLogin(authModel);
+        } else if (requestType == FirebaseRequestType.register) {
+          userCridentials = await authRepository.firebaseRegister(authModel);
+        }
+        emit(LoadedAuthState(userCredential: userCridentials));
       }
-      emit(LoadedAuthState(userCredential: userCridentials));
     } catch (e) {
       emit(ErrorAuthState(errorMsg: e.toString()));
     }

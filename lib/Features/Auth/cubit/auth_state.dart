@@ -18,6 +18,10 @@ class LoadedAuthState extends AuthState {
   List<Object> get props => [userCredential];
 }
 
+class LoadedForgetPasswordState extends AuthState {}
+
+class LoadingForgetPasswordState extends AuthState {}
+
 class ErrorAuthState extends AuthState {
   final String errorMsg;
   const ErrorAuthState({required this.errorMsg});

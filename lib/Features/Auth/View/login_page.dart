@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:task/Core/Shared/SharedPreferences%20(Singelton)/shared_pref.dart';
 import 'package:task/Features/Auth/Model/login.dart';
+import 'package:task/Features/Auth/View/forgot_password.dart';
 import 'package:task/Features/Home/View/homepage.dart';
 import 'package:task/Features/Auth/View/register_page.dart';
 import 'package:task/Features/Auth/cubit/auth_cubit.dart';
@@ -18,24 +20,31 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
   @override
+  void initState() {
+    rememberValue = Prefs.getBool("rememberMe") ?? false;
+    super.initState();
+  }
+
+  setRememberMe(rememberValue) => Prefs.setBool("rememberMe", rememberValue);
+  @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthCubit, AuthState>(
-      listener: (ctx, state) async {
-        if (state is ErrorAuthState) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.errorMsg)));
-        } else if (state is LoadedAuthState) {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ));
-        }
-      },
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: BlocListener<AuthCubit, AuthState>(
+        listenWhen: (previous, current) => previous == LoadingAuthState(),
+        listener: (ctx, state) async {
+          if (state is ErrorAuthState) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(state.errorMsg)));
+          } else if (state is LoadedAuthState) {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ));
+          }
+        },
         child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
           body: Container(
             padding: const EdgeInsets.all(20),
             child: Column(
@@ -94,17 +103,45 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      CheckboxListTile(
-                        title: const Text("Remember me"),
-                        contentPadding: EdgeInsets.zero,
-                        value: rememberValue,
-                        activeColor: Theme.of(context).colorScheme.primary,
-                        onChanged: (newValue) {
-                          setState(() {
-                            rememberValue = newValue!;
-                          });
-                        },
-                        controlAffinity: ListTileControlAffinity.leading,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: CheckboxListTile(
+                              title: const Text("Remember me"),
+                              contentPadding: EdgeInsets.zero,
+                              value: rememberValue,
+                              activeColor:
+                                  Theme.of(context).colorScheme.primary,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  rememberValue = newValue!;
+                                  setRememberMe(newValue);
+                                });
+                              },
+                              controlAffinity: ListTileControlAffinity.leading,
+                            ),
+                          ),
+                          Expanded(
+                              flex: 1,
+                              child: TextButton(
+                                child: const Text(
+                                  "Forgot passwrd ?",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.underline),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ResetPasswordPage(
+                                                title: "Reset Password"),
+                                      ));
+                                },
+                              ))
+                        ],
                       ),
                       const SizedBox(
                         height: 20,
