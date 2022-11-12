@@ -6,9 +6,9 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:task/Core/Styles/text_style.dart';
 import 'package:task/Features/Auth/Model/login.dart';
 import 'package:task/Features/Auth/View/login_page.dart';
-import 'package:task/Features/Auth/cubit/auth_cubit.dart';
 
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
+import '../../Auth/View/cubit/auth_cubit.dart';
 import '../../Home/View/homepage.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -115,9 +115,6 @@ class _SplashScreenState extends State<SplashScreen>
                                           TyperAnimatedText(
                                               'Add application name here'),
                                         ],
-                                        onTap: () {
-                                          print("Tap Event");
-                                        },
                                       ),
                                     ),
                                   )),

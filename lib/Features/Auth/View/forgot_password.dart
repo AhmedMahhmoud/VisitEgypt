@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/Features/Auth/Model/login.dart';
 import 'package:task/Features/Auth/View/login_page.dart';
-import 'package:task/Features/Auth/cubit/auth_cubit.dart';
 import '../../../Core/Shared/methods.dart';
+import 'cubit/auth_cubit.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors

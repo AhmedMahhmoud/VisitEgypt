@@ -5,7 +5,8 @@ import 'package:task/Features/Auth/Model/login.dart';
 import 'package:task/Features/Auth/View/forgot_password.dart';
 import 'package:task/Features/Home/View/homepage.dart';
 import 'package:task/Features/Auth/View/register_page.dart';
-import 'package:task/Features/Auth/cubit/auth_cubit.dart';
+
+import 'cubit/auth_cubit.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

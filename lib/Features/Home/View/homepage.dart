@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task/Features/Auth/View/login_page.dart';
 import 'package:task/Features/Home/View/widgets/place_card.dart';
 import 'package:task/Features/Home/View/widgets/search_bar.dart';
 import 'package:task/Features/Home/View/widgets/filter_by_list.dart';
 
 import '../../../Core/Colors/app_colors.dart';
-import '../../../Core/Constants/constants.dart';
-import '../Cubit/home_cubit.dart';
+import 'Cubit/home_cubit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,6 +23,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          onPressed: (() => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(),
+              )))),
       backgroundColor: CustomColors.niceBlue,
       body: SafeArea(
         bottom: false,
@@ -30,11 +36,12 @@ class _HomePageState extends State<HomePage> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               image: const DecorationImage(
-                image: AssetImage(
-                  'assets/images/bg1.jpeg',
-                ),
-                fit: BoxFit.cover,colorFilter: ColorFilter.mode(Colors.white, BlendMode.softLight)
-              )),
+                  image: AssetImage(
+                    'assets/images/bg1.jpeg',
+                  ),
+                  fit: BoxFit.cover,
+                  colorFilter:
+                      ColorFilter.mode(Colors.white, BlendMode.softLight))),
           child: Column(
             children: <Widget>[
               SearchBox(onChanged: (value) async {
@@ -49,7 +56,7 @@ class _HomePageState extends State<HomePage> {
                   children: <Widget>[
                     // Our background
                     Container(
-                      margin:  EdgeInsets.only(top: 100.h),
+                      margin: EdgeInsets.only(top: 100.h),
                       decoration: const BoxDecoration(
                         color: CustomColors.niceGrey,
                         borderRadius: BorderRadius.only(
