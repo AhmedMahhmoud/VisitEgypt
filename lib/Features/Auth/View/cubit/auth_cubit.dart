@@ -55,7 +55,11 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       late UserCredential userCridentials;
       final FirebaseAuthService firebaseAuthService = FirebaseAuthService();
+
+
       Position userLocation = await GeoLocatorService.getCurrentUserLocation();
+
+
       try {
         userCridentials = await authRepository.firebaseRegister(authModel);
       } catch (e) {

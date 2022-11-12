@@ -6,6 +6,7 @@ import 'package:task/Features/Auth/Model/user.dart';
 import 'package:task/FirebaseServices/firebase_services.dart';
 
 class FirebaseAuthService extends FirebaseServices {
+
   @override
   addUserToFirestore(UserData user) async {
     await FirebaseFirestore.instance

@@ -5,7 +5,7 @@ import 'package:task/Features/Auth/View/login_page.dart';
 import 'package:task/Features/Home/View/widgets/place_card.dart';
 import 'package:task/Features/Home/View/widgets/search_bar.dart';
 import 'package:task/Features/Home/View/widgets/filter_by_list.dart';
-
+import 'package:location/location.dart';
 import '../../../Core/Colors/app_colors.dart';
 import 'Cubit/home_cubit.dart';
 
@@ -20,6 +20,45 @@ class _HomePageState extends State<HomePage> {
   String searchedName = '';
   final _controller = ScrollController();
 
+/*
+Future<void>locationServices()async{
+  Location location=Location();
+  bool _serviceEnabled;
+  PermissionStatus _permissionLocation;
+  LocationData _locData;
+
+  _serviceEnabled=await location.serviceEnabled();
+  if(!_serviceEnabled){
+    _serviceEnabled=await location.requestService();
+    if(!_serviceEnabled){
+      return;
+    }
+  }
+
+
+
+  _permissionLocation=await location.hasPermission();
+  if(_permissionLocation== PermissionStatus.denied){
+    _permissionLocation= await location.requestPermission();
+    if(_permissionLocation!=PermissionStatus.granted){
+      return;
+    }
+  }
+
+
+
+
+  _locData=await location.getLocation();
+}
+
+*/
+
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HomeCubit>(context).getUserAddress();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +72,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         bottom: false,
         child: Container(
-          decoration: BoxDecoration(
+          /*        decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               image: const DecorationImage(
                   image: AssetImage(
@@ -41,15 +80,43 @@ class _HomePageState extends State<HomePage> {
                   ),
                   fit: BoxFit.cover,
                   colorFilter:
-                      ColorFilter.mode(Colors.white, BlendMode.softLight))),
+                      ColorFilter.mode(Colors.white, BlendMode.softLight))),*/
           child: Column(
             children: <Widget>[
+              BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+                if (state is UserAddressLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return Padding(
+                    padding: EdgeInsets.only(left: 20.w, top: 12.h),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.location_city,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          width: 6,
+                        ),
+                        Text(
+                          BlocProvider.of<HomeCubit>(context, listen: true)
+                              .userAddress,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              }),
               SearchBox(onChanged: (value) async {
-                //     searchedName = value;
+
 
                 BlocProvider.of<HomeCubit>(context).searchInPlaces(value);
               }),
-              FilterByList(),
+              FilterByList(cityName:BlocProvider.of<HomeCubit>(context,listen: true).userAddress),
               SizedBox(height: 10.h),
               Expanded(
                 child: Stack(
@@ -69,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: BlocBuilder<HomeCubit, HomeState>(
                           builder: (context, state) {
-                        if (state is SearchLoading) {
+                        if (state is ListLoading) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
