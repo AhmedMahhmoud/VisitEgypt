@@ -20,38 +20,7 @@ class _HomePageState extends State<HomePage> {
   String searchedName = '';
   final _controller = ScrollController();
 
-/*
-Future<void>locationServices()async{
-  Location location=Location();
-  bool _serviceEnabled;
-  PermissionStatus _permissionLocation;
-  LocationData _locData;
 
-  _serviceEnabled=await location.serviceEnabled();
-  if(!_serviceEnabled){
-    _serviceEnabled=await location.requestService();
-    if(!_serviceEnabled){
-      return;
-    }
-  }
-
-
-
-  _permissionLocation=await location.hasPermission();
-  if(_permissionLocation== PermissionStatus.denied){
-    _permissionLocation= await location.requestPermission();
-    if(_permissionLocation!=PermissionStatus.granted){
-      return;
-    }
-  }
-
-
-
-
-  _locData=await location.getLocation();
-}
-
-*/
 
   @override
   void initState() {
@@ -62,12 +31,12 @@ Future<void>locationServices()async{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
+  /*    floatingActionButton: FloatingActionButton(
           onPressed: (() => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => const LoginPage(),
-              )))),
+              )))),*/
       backgroundColor: CustomColors.niceBlue,
       body: SafeArea(
         bottom: false,

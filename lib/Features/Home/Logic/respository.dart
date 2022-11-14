@@ -1,6 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/Core/Constants/constants.dart';
 import 'package:task/Services/Geolocator/geolocator.dart';
+import '../../../main.dart';
 import '../Model/place_model.dart';
+import '../View/Cubit/home_cubit.dart';
 
 abstract class HomeRepository {
   Future<List<PlaceModel>> getAllPlaces();
@@ -12,7 +15,10 @@ abstract class HomeRepository {
   List<PlaceModel> filterPlacesByLocation(String cityName);
 
   Future<String> getUserAddress();
+
+  String mapCityName(String cityName);
 }
+
 /// i should use filteredList in cubit instead of constant.allPlaces
 
 class HomeRepositoryImp implements HomeRepository {
@@ -25,10 +31,22 @@ class HomeRepositoryImp implements HomeRepository {
   List<PlaceModel> searchInPlaces(String placeName) {
     List<PlaceModel> results = [];
     if (placeName.isEmpty) {
-
-      return Constants.allPlaces;
+      if (BlocProvider.of<HomeCubit>(navigatorKey.currentState!.context)
+              .selectedIndex ==
+          2) {
+        return filterPlacesByLocation(
+            BlocProvider.of<HomeCubit>(navigatorKey.currentState!.context)
+                .userAddress);
+      } else if (BlocProvider.of<HomeCubit>(navigatorKey.currentState!.context)
+              .selectedIndex ==
+          1) {
+        return filterPlacesByRate();
+      } else {
+        return Constants.allPlaces;
+      }
     } else {
-      results = Constants.allPlaces
+      results = BlocProvider.of<HomeCubit>(navigatorKey.currentState!.context)
+          .filteredPlaces
           .where((place) =>
               place.placeName.toLowerCase().contains(placeName.toLowerCase()))
           .toList();
@@ -48,24 +66,35 @@ class HomeRepositoryImp implements HomeRepository {
 
   @override
   Future<String> getUserAddress() async {
-    String address=await GeoLocatorService.getCurrentAddress();
+    String address = await GeoLocatorService.getCurrentAddress();
     return address;
   }
 
   @override
   List<PlaceModel> filterPlacesByLocation(String cityName) {
     List<PlaceModel> results = [];
-    print('salah $cityName');
     if (cityName.isEmpty) {
       return Constants.allPlaces;
     } else {
-
       results = Constants.allPlaces
-          .where((place) =>
-          place.cityOfPlace.toLowerCase().contains(cityName.toLowerCase().substring(0,3)))
+          .where((place) => place.cityOfPlace
+              .toLowerCase()
+              .contains(mapCityName(cityName).toLowerCase().substring(0, 3)))
           .toList();
     }
     return results;
+  }
 
+  @override
+  String mapCityName(String cityName) {
+    String finalCityName = '';
+    if (cityName.contains('cai') || cityName.contains('قاهر')) {
+      finalCityName = 'cairo';
+    } else if (cityName.contains('giz') || cityName.contains('جيز')) {
+      finalCityName = 'giza';
+    } else if (cityName.contains('aswa') || cityName.contains('سوا')) {
+      finalCityName = 'aswan';
+    }
+    return finalCityName;
   }
 }

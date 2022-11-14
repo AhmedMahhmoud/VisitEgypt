@@ -31,6 +31,10 @@ class GeoLocatorService {
       print('locality ${placeMark[0].locality}');
       print('street ${placeMark[0].street}');
       print('subLocality ${placeMark[0].subLocality}');
-    return placeMark[0].name.toString();
+    return placeMark[0].administrativeArea.toString();
   }
+
+
+
+
 }
