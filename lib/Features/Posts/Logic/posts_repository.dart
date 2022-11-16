@@ -1,3 +1,4 @@
+import 'dart:core';
 
 import '../../../FirebaseServices/Upload/firebase_upload_images.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +7,8 @@ import '../Model/posts_model.dart';
 
 abstract class PostsRepository {
   addNewPost(Posts post);
- //List<Posts>retrieveAllPosts();
+
+List<Posts> retrieveAllPosts(List<QueryDocumentSnapshot> docs);
 }
 
 class PostsRepositoryImpl implements PostsRepository {
@@ -31,14 +33,23 @@ class PostsRepositoryImpl implements PostsRepository {
     }
   }
 
-/*  @override
-List<Posts> retrieveAllPosts() {
-List<Posts> retrievedPosts=[];
+  @override
+ List<Posts> retrieveAllPosts(List<QueryDocumentSnapshot> docs) {
+    List<Posts> retrievedPosts = [];
 
+    docs.forEach((document) {
+      List<String> postImages = [];
+      for (int i = 0; i < document['postImages'].length; i++) {
+        postImages.add(document['postImages'][i]);
+      }
 
+        retrievedPosts.add(Posts(
+          postImages: [],
+          postContent: document['postContent'],
+          userID: document['userID'],
+          retrievedPostImages: postImages));
+    });
 
-
-
-    return retrievedPosts;
-  }*/
+    return  retrievedPosts;
+  }
 }

@@ -29,3 +29,11 @@ class PostsErrorState extends PostsState {
   @override
   List<Object> get props => [errorMsg];
 }
+
+
+class RetrievePostsErrorState extends PostsState {
+  final String errorMsg;
+  const RetrievePostsErrorState({required this.errorMsg});
+  @override
+  List<Object> get props => [errorMsg];
+}

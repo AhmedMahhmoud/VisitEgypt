@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 
@@ -25,13 +26,14 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
-/*
-  retrievePosts(){
-
+  retrievePosts(List<QueryDocumentSnapshot> docs){
+    try {
+      emit(RetrievePostsLoadingState());
+      retrievedPosts= postsRepository.retrieveAllPosts(docs);
+      emit(RetrievePostsDoneState(retrievedPosts: retrievedPosts));
+    } catch (e) {
+      emit(RetrievePostsErrorState(errorMsg: e.toString()));
+    }
   }
-*/
-
-
-
 
 }

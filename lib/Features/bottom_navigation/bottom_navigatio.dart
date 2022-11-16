@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Core/Colors/app_colors.dart';
 import '../Home/View/homepage.dart';
 import '../More/views/more_screen.dart';
-import '../Posts/View/pages/posts.dart';
+import '../Posts/View/pages/posts_screen.dart';
 
 
 
