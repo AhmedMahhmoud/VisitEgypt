@@ -31,7 +31,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> makeFirebaseRequest(
       FirebaseRequestType requestType, AuthModel authModel) async {
-    late UserCredential? userCridentials;
+     UserCredential? userCridentials;
     try {
       if (requestType == FirebaseRequestType.forget) {
         emit(LoadingForgetPasswordState());

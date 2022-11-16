@@ -20,6 +20,8 @@ dependencies:
   animated_text_kit: ^4.2.2
   auto_size_text: ^3.0.0
   build_runner: ^2.3.2
+  cached_network_image: ^3.2.2
+
   cloud_firestore: ^4.0.5
   dropdown_search: ^5.0.3
   equatable: ^2.0.5

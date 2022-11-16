@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 
 import '../../Home/View/homepage.dart';
+import '../../bottom_navigation/bottom_navigatio.dart';
 import '../Model/login.dart';
 import 'cubit/auth_cubit.dart';
 import 'login_page.dart';
@@ -37,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const HomePage(),
+                    builder: (context) =>  BottomNav(comingIndex: 0,),
                   ));
             }
           },

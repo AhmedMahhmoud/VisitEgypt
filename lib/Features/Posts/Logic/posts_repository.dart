@@ -5,7 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../Model/posts_model.dart';
 
 abstract class PostsRepository {
-  addNewPost(Posts post) {}
+  addNewPost(Posts post);
+ //List<Posts>retrieveAllPosts();
 }
 
 class PostsRepositoryImpl implements PostsRepository {
@@ -29,4 +30,15 @@ class PostsRepositoryImpl implements PostsRepository {
       rethrow;
     }
   }
+
+/*  @override
+List<Posts> retrieveAllPosts() {
+List<Posts> retrievedPosts=[];
+
+
+
+
+
+    return retrievedPosts;
+  }*/
 }

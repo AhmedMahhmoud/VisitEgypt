@@ -76,6 +76,8 @@ class Constants {
   static const SizedBox widthSpace = SizedBox(
     width: 5,
   );
+static const String postsCollection='posts';
+static const String usersCollection='users';
 
   static const kDefaultShadow = BoxShadow(
     offset: Offset(0, 15),

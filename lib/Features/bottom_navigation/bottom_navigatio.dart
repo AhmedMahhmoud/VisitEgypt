@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../Core/Colors/app_colors.dart';
 import '../Home/View/homepage.dart';
+import '../More/views/more_screen.dart';
 import '../Posts/View/pages/posts.dart';
 
 
@@ -18,7 +19,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int currentIndex = 1;
 
-  final tabs = [const HomePage(), const PostsPage()];
+  final tabs = [const HomePage(), const PostsPage(),MoreScreen()];
 
   //final keyOne = GlobalKey();
   @override
@@ -45,8 +46,8 @@ class _BottomNavState extends State<BottomNav> {
         currentIndex: currentIndex,
         elevation: 20,
         items: const [  BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.article), label: "Posts"),
-        //  BottomNavigationBarItem(icon: Icon(Icons.article_outlined), label: "Settings")
+          BottomNavigationBarItem(icon: Icon(Icons.article_outlined), label: "Posts"),
+          BottomNavigationBarItem(icon: Icon(Icons.more_vert_outlined), label: "More")
         ],
       ),
     );

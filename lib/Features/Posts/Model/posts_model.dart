@@ -4,12 +4,18 @@ import 'dart:io';
 import 'package:equatable/equatable.dart';
 
 class Posts extends Equatable {
+
+  // in case posting
   final List<File> postImages;
+
+  // in case retrieving
+  final List<String>? retrievedPostImages;
   final String postContent;
   final String userID;
   // final String locationName;
   const Posts({
-    required this.postImages,
+     required this.postImages,
+     this.retrievedPostImages,
     required this.postContent,
     // required this.locationName,
     required this.userID,

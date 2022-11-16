@@ -8,6 +8,10 @@ import '../../Model/posts_model.dart';
 part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
+
+
+  List<Posts> retrievedPosts=[];
+
   final PostsRepository postsRepository;
   PostsCubit({required this.postsRepository}) : super(PostsInitial());
 
@@ -20,4 +24,14 @@ class PostsCubit extends Cubit<PostsState> {
       emit(PostsErrorState(errorMsg: e.toString()));
     }
   }
+
+/*
+  retrievePosts(){
+
+  }
+*/
+
+
+
+
 }
