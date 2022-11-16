@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_pickers/image_pickers.dart';
-import 'package:task/Core/Colors/app_colors.dart';
-
+import '../../../../Core/Colors/app_colors.dart';
 import '../widgets/add_post_card.dart';
 
 class PostsPage extends StatefulWidget {

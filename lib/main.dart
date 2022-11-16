@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:task/Services/Geolocator/geolocator.dart';
+
 import 'package:firebase_core/firebase_core.dart';
-import 'package:task/Core/Shared/SharedPreferences%20(Singelton)/shared_pref.dart';
-import 'package:task/Features/Posts/View/cubit/posts_cubit.dart';
-import 'package:task/Injection/dependency_injection.dart' as di;
+import 'package:visit_egypt/Injection/dependency_injection.dart' as di;
+import 'Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import 'Features/Auth/View/cubit/auth_cubit.dart';
 import 'Features/Home/View/Cubit/home_cubit.dart';
 import 'Features/Home/View/homepage.dart';
+import 'Features/Posts/View/cubit/posts_cubit.dart';
+import 'Features/Splash/View/splash_screen.dart';
+import 'Features/bottom_navigation/bottom_navigatio.dart';
+import 'Services/Geolocator/geolocator.dart';
+
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
@@ -39,11 +43,16 @@ class MyApp extends StatelessWidget {
                 create: (context) => di.sl<PostsCubit>(),
               )
             ],
-            child:  MaterialApp(
+            child: MaterialApp(
                 debugShowCheckedModeBanner: false,
                 navigatorKey: navigatorKey,
                 title: 'Visit Egypt',
-                home: const HomePage()));
+                home:
+                const SplashScreen()
+                //BottomNav(comingIndex: 0)
+                //const HomePage()
+
+                ));
       },
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task/Core/Constants/constants.dart';
-import 'package:task/Services/Geolocator/geolocator.dart';
+
+import '../../../Core/Constants/constants.dart';
+import '../../../Services/Geolocator/geolocator.dart';
 import '../../../main.dart';
 import '../Model/place_model.dart';
 import '../View/Cubit/home_cubit.dart';

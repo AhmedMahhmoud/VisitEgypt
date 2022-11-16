@@ -1,7 +1,7 @@
-import 'package:task/Features/Auth/Model/login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
+import '../Model/login.dart';
 
 abstract class AuthRepository {
   Future<UserCredential> firebaseLogin(AuthModel authModel);

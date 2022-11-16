@@ -1,7 +1,8 @@
-import 'package:task/Features/Posts/Model/posts_model.dart';
 
 import '../../../FirebaseServices/Upload/firebase_upload_images.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../Model/posts_model.dart';
 
 abstract class PostsRepository {
   addNewPost(Posts post) {}

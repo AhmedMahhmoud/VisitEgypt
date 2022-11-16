@@ -1,12 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:task/Enums/firebase_request_enum.dart';
-import 'package:task/Features/Auth/Logic/respository.dart';
-import 'package:task/Features/Auth/Model/login.dart';
-import 'package:task/FirebaseServices/Auth/firebase_auth_service.dart';
+
 import 'package:geolocator/geolocator.dart';
-import 'package:task/Services/Geolocator/geolocator.dart';
+
+import '../../../../Enums/firebase_request_enum.dart';
+import '../../../../FirebaseServices/Auth/firebase_auth_service.dart';
+import '../../../../Services/Geolocator/geolocator.dart';
+import '../../Logic/respository.dart';
+import '../../Model/login.dart';
 import '../../Model/user.dart';
 part 'auth_state.dart';
 

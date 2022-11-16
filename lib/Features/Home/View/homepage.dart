@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task/Features/Auth/View/login_page.dart';
-import 'package:task/Features/Home/View/widgets/place_card.dart';
-import 'package:task/Features/Home/View/widgets/search_bar.dart';
-import 'package:task/Features/Home/View/widgets/filter_by_list.dart';
-import 'package:location/location.dart';
+
+import 'package:visit_egypt/Features/Home/View/widgets/filter_by_list.dart';
+import 'package:visit_egypt/Features/Home/View/widgets/place_card.dart';
+import 'package:visit_egypt/Features/Home/View/widgets/search_bar.dart';
 import '../../../Core/Colors/app_colors.dart';
 import 'Cubit/home_cubit.dart';
 
@@ -86,10 +85,12 @@ class _HomePageState extends State<HomePage> {
                 BlocProvider.of<HomeCubit>(context).searchInPlaces(value);
               }),
               FilterByList(cityName:BlocProvider.of<HomeCubit>(context,listen: true).userAddress),
-              SizedBox(height: 10.h),
+              SizedBox(height: 20.h),
               Expanded(
                 child: Stack(
+
                   children: <Widget>[
+
                     // Our background
                     Container(
                       margin: EdgeInsets.only(top: 100.h),

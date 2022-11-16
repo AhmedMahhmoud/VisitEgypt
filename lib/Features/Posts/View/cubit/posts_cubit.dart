@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:task/Features/Posts/Logic/posts_repository.dart';
-import 'package:task/Features/Posts/Model/posts_model.dart';
+
+
+import '../../Logic/posts_repository.dart';
+import '../../Model/posts_model.dart';
 
 part 'posts_state.dart';
 

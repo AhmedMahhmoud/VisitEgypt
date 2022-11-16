@@ -3,13 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:task/Core/Styles/text_style.dart';
-import 'package:task/Features/Auth/Model/login.dart';
-import 'package:task/Features/Auth/View/login_page.dart';
+
 
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
+import '../../../Core/Styles/text_style.dart';
+import '../../Auth/Model/login.dart';
 import '../../Auth/View/cubit/auth_cubit.dart';
+import '../../Auth/View/login_page.dart';
 import '../../Home/View/homepage.dart';
+import '../../bottom_navigation/bottom_navigatio.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -107,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen>
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     isPasswordRemembered
-                                                        ? const HomePage()
+                                                        ? BottomNav(comingIndex: 0,)
                                                         : const LoginPage(),
                                               ));
                                         },

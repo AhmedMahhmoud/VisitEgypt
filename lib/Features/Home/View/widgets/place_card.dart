@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task/Core/Constants/constants.dart';
+
 
 import '../../../../Core/Colors/app_colors.dart';
+import '../../../../Core/Constants/constants.dart';
 import '../../Model/place_model.dart';
 
 class PlaceCard extends StatelessWidget {
