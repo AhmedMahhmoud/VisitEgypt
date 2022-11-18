@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:task/Features/Posts/View/pages/add_post_page.dart';
 import '../../../../Core/Colors/app_colors.dart';
 import 'package:animate_do/animate_do.dart';
-
-import 'add_post_dialog.dart';
 
 class AddPostCard extends StatelessWidget {
   const AddPostCard({super.key});
@@ -12,13 +11,15 @@ class AddPostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlideInDown(
       child: InkWell(
-        onTap: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return PostDialog();
-            },
-          );
+        onTap: () async {
+          await Navigator.push(
+              context,
+              PageRouteBuilder(
+                opaque: false,
+                pageBuilder: (context, animation, secondaryAnimation) =>
+                    FadeTransition(
+                        opacity: animation, child: const AddPostPage()),
+              ));
         },
         child: Padding(
           padding: const EdgeInsets.all(15),

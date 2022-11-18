@@ -23,6 +23,7 @@ class PostsRepositoryImpl implements PostsRepository {
         "postContent": post.postContent,
         "userID": post.userID,
         "postImages": resultImageUrls,
+        "location": post.locationName
       });
     } catch (e) {
       rethrow;
