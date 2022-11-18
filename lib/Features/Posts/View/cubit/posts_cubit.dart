@@ -1,11 +1,18 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:task/Features/Posts/Logic/posts_repository.dart';
-import 'package:task/Features/Posts/Model/posts_model.dart';
+
+
+import '../../Logic/posts_repository.dart';
+import '../../Model/posts_model.dart';
 
 part 'posts_state.dart';
 
 class PostsCubit extends Cubit<PostsState> {
+
+
+  List<Posts> retrievedPosts=[];
+
   final PostsRepository postsRepository;
   PostsCubit({required this.postsRepository}) : super(PostsInitial());
 
@@ -18,4 +25,15 @@ class PostsCubit extends Cubit<PostsState> {
       emit(PostsErrorState(errorMsg: e.toString()));
     }
   }
+
+  retrievePosts(List<QueryDocumentSnapshot> docs){
+    try {
+      emit(RetrievePostsLoadingState());
+      retrievedPosts= postsRepository.retrieveAllPosts(docs);
+      emit(RetrievePostsDoneState(retrievedPosts: retrievedPosts));
+    } catch (e) {
+      emit(RetrievePostsErrorState(errorMsg: e.toString()));
+    }
+  }
+
 }

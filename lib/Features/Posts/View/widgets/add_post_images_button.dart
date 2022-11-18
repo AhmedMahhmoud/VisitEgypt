@@ -35,6 +35,12 @@ class _AddPostImagesButtonState extends State<AddPostImagesButton> {
     }
   }
 
+  clearImages() {
+    images.clear();
+    widget.getImages(images);
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -42,36 +48,50 @@ class _AddPostImagesButtonState extends State<AddPostImagesButton> {
       child: InkWell(
         onTap: () => selectImages(),
         child: images.isNotEmpty
-            ? SizedBox(
-                height: 100.h,
-                child: Column(
-                  children: [
-                    const Divider(
-                      color: CustomColors.greyK,
-                      thickness: 1,
+            ? Stack(
+                children: [
+                  SizedBox(
+                    height: 100.h,
+                    child: Column(
+                      children: [
+                        const Divider(
+                          color: CustomColors.greyK,
+                          thickness: 1,
+                        ),
+                        Wrap(
+                            spacing: 20,
+                            alignment: WrapAlignment.center,
+                            direction: Axis.horizontal,
+                            children: images
+                                .map((e) => FadeIn(
+                                      duration: const Duration(seconds: 1),
+                                      child: SizedBox(
+                                          width: 80.w,
+                                          height: 80.h,
+                                          child: CircleAvatar(
+                                            backgroundColor: Colors.white,
+                                            backgroundImage: FileImage(
+                                              File(
+                                                e.path!,
+                                              ),
+                                            ),
+                                          )),
+                                    ))
+                                .toList()),
+                      ],
                     ),
-                    Wrap(
-                        spacing: 20,
-                        alignment: WrapAlignment.center,
-                        direction: Axis.horizontal,
-                        children: images
-                            .map((e) => FadeIn(
-                                  duration: const Duration(seconds: 1),
-                                  child: SizedBox(
-                                      width: 80.w,
-                                      height: 80.h,
-                                      child: CircleAvatar(
-                                        backgroundColor: Colors.white,
-                                        backgroundImage: FileImage(
-                                          File(
-                                            e.path!,
-                                          ),
-                                        ),
-                                      )),
-                                ))
-                            .toList()),
-                  ],
-                ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: IconButton(
+                        onPressed: () {
+                          clearImages();
+                        },
+                        icon: const Icon(
+                          (Icons.cancel),
+                        ),
+                      ))
+                ],
               )
             : Column(
                 children: [

@@ -4,9 +4,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as Path;
 
-import 'package:task/FirebaseServices/firebase_services.dart';
+
+import '../firebase_services.dart';
 
 class FirebaseUploadImagesService extends FirebaseServices {
+
   @override
   Future<List<String>> uploadImagesToFirestore(List<File> images) async {
     try {

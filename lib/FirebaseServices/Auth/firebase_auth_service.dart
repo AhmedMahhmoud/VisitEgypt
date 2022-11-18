@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:task/Features/Auth/Model/user.dart';
-import 'package:task/FirebaseServices/firebase_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../Features/Auth/Model/user.dart';
+import '../firebase_services.dart';
 
 class FirebaseAuthService extends FirebaseServices {
   @override

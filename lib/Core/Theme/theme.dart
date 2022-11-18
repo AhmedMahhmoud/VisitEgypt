@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task/Core/Colors/app_colors.dart';
+
+import '../Colors/app_colors.dart';
 
 class CustomTheme {
   static ThemeData get lightTheme {

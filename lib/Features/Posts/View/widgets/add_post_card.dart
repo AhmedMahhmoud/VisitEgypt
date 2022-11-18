@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task/Features/Posts/View/pages/add_post_page.dart';
 import '../../../../Core/Colors/app_colors.dart';
 import 'package:animate_do/animate_do.dart';
+
+import '../pages/add_post_page.dart';
 
 class AddPostCard extends StatelessWidget {
   const AddPostCard({super.key});

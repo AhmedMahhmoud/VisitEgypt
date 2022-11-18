@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task/FirebaseServices/Auth/firebase_auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../FirebaseServices/Auth/firebase_auth_service.dart';
 
 class UserCircularAvatar extends StatelessWidget {
   const UserCircularAvatar({super.key});
