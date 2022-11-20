@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../Core/Colors/app_colors.dart';
 import '../Home/View/homepage.dart';
@@ -42,12 +43,12 @@ class _BottomNavState extends State<BottomNav> {
         },
         unselectedItemColor: Colors.grey[400],
         selectedItemColor: Colors.white,
-        backgroundColor: CustomColors.niceBlue,
+        backgroundColor: Colors.black38,
         currentIndex: currentIndex,
         elevation: 20,
-        items: const [  BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.article_outlined), label: "Posts"),
-          BottomNavigationBarItem(icon: Icon(Icons.more_vert_outlined), label: "More")
+        items:  [  BottomNavigationBarItem(icon: Image.asset('assets/images/home.png',height: 30.h,), label: "Home"),
+          BottomNavigationBarItem(icon: Image.asset('assets/images/posts.png',height: 30.h,), label: "Posts"),
+          BottomNavigationBarItem(icon: Image.asset('assets/images/gear.png',height: 30.h,), label: "More")
         ],
       ),
     );

@@ -50,21 +50,29 @@ class _PostsPageState extends State<PostsPage> {
       },
       child: Scaffold(
         body: SafeArea(
-          child: SizedBox(
+          child: Container(
+              decoration: BoxDecoration(
+                 // borderRadius: BorderRadius.circular(15),
+                  image: const DecorationImage(
+                    image: AssetImage(
+                      'assets/images/bgg.jpg',
+                    ),
+                    fit: BoxFit.cover,
+                  )),
             child: Column(
               children: [
                 const AddPostCard(),
+
                 SizedBox(
-                  height: 20.h,
-                ),
-                SizedBox(
-                  height: 550.h,
+                  height: 600.h,
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection(Constants.postsCollection)
                           .snapshots(),
+
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
+
                         if (!snapshot.hasData) {
                           return const Center(
                               child: CircularProgressIndicator());
@@ -77,7 +85,7 @@ class _PostsPageState extends State<PostsPage> {
                             {
                               postsCubit.retrievePosts(snapshot.data!.docs);
 
-                              return ListView.separated(
+                              return postsCubit.retrievedPosts.isNotEmpty? ListView.separated(
                                 itemCount: postsCubit.retrievedPosts.length,
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
@@ -94,7 +102,23 @@ class _PostsPageState extends State<PostsPage> {
                                     ),
                                   );
                                 },
-                              );
+                              ):Center(child: Column(
+                                children: [
+                                  Lottie.asset('assets/lotties/horus.json',height: 320.h),
+
+
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: AutoSizeText(
+                                      'There are no posts',textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,color: CustomColors.niceYellow,
+                                        fontSize: setResponsiveFontSize(28),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ));
                             }
                         }
                       }),

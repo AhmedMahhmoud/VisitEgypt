@@ -23,10 +23,10 @@ class AddPostCard extends StatelessWidget {
               ));
         },
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding:  EdgeInsets.symmetric(horizontal: 8.w,vertical: 16.h),
           child: SizedBox(
             width: 400.w,
-            height: 100.h,
+            height: 75.h,
             child: Card(
               shadowColor: CustomColors.lightGold,
               elevation: 3,

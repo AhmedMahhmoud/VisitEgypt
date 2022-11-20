@@ -40,15 +40,14 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         bottom: false,
         child: Container(
-          /*        decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              image: const DecorationImage(
+                  decoration: const BoxDecoration(
+              image: DecorationImage(
                   image: AssetImage(
-                    'assets/images/bg1.jpeg',
+                    'assets/images/bgg.jpg',
                   ),
                   fit: BoxFit.cover,
                   colorFilter:
-                      ColorFilter.mode(Colors.white, BlendMode.softLight))),*/
+                      ColorFilter.mode(Colors.white, BlendMode.softLight))),
           child: Column(
             children: <Widget>[
               BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
@@ -65,8 +64,8 @@ class _HomePageState extends State<HomePage> {
                           Icons.location_city,
                           color: Colors.white,
                         ),
-                        const SizedBox(
-                          width: 6,
+                         SizedBox(
+                          width: 6.w,
                         ),
                         Text(
                           BlocProvider.of<HomeCubit>(context, listen: true)
@@ -103,29 +102,27 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
 
-                    Expanded(
-                      child: BlocBuilder<HomeCubit, HomeState>(
-                          builder: (context, state) {
-                        if (state is ListLoading) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else {
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            controller: _controller,
-                            itemCount: BlocProvider.of<HomeCubit>(context)
-                                .filteredPlaces
-                                .length,
-                            itemBuilder: (context, index) => PlaceCard(
-                                itemIndex: index,
-                                press: () {},
-                                place: BlocProvider.of<HomeCubit>(context)
-                                    .filteredPlaces[index]),
-                          );
-                        }
-                      }),
-                    ),
+                    BlocBuilder<HomeCubit, HomeState>(
+                        builder: (context, state) {
+                      if (state is ListLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          controller: _controller,
+                          itemCount: BlocProvider.of<HomeCubit>(context)
+                              .filteredPlaces
+                              .length,
+                          itemBuilder: (context, index) => PlaceCard(
+                              itemIndex: index,
+                              press: () {},
+                              place: BlocProvider.of<HomeCubit>(context)
+                                  .filteredPlaces[index]),
+                        );
+                      }
+                    }),
                   ],
                 ),
               ),

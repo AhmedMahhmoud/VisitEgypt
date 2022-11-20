@@ -9,6 +9,7 @@ abstract class PostsRepository {
   addNewPost(Posts post);
 
   List<Posts> retrieveAllPosts(List<QueryDocumentSnapshot> docs);
+
 }
 
 class PostsRepositoryImpl implements PostsRepository {
@@ -27,6 +28,7 @@ class PostsRepositoryImpl implements PostsRepository {
         "postContent": post.postContent,
         "userID": post.userID,
         "postImages": resultImageUrls,
+        "postOwnerName": post.postOwnerName,
         "location": post.locationName
       });
     } catch (e) {
@@ -44,14 +46,18 @@ class PostsRepositoryImpl implements PostsRepository {
         postImages.add(document['postImages'][i]);
       }
 
+      //getUserNameByID(document['userID']);
+
       retrievedPosts.add(Posts(
           postImages: const [],
+          postOwnerName: document['postOwnerName'],
           postContent: document['postContent'],
           userID: document['userID'],
           retrievedPostImages: postImages,
           locationName: document['location']));
     }
-
     return retrievedPosts;
   }
+
+
 }

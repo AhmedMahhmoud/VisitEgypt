@@ -36,12 +36,13 @@ class PostCardItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const UserAvatar(username: 'U'),
+                       UserAvatar(username: postsCubit.retrievedPosts[index].
+                      postOwnerName.toString().substring(0,1).toUpperCase()),
                       SizedBox(
                         width: 8.w,
                       ),
-                      AutoSizeText(
-                        'username',
+                      AutoSizeText(postsCubit.retrievedPosts[index].postOwnerName.toString().split('@')[0]
+                        ,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: setResponsiveFontSize(18),

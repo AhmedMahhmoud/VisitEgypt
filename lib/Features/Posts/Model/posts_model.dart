@@ -8,6 +8,8 @@ class Posts extends Equatable {
   // in case posting
   final List<File> postImages;
 
+  final String? postOwnerName;
+
   // in case retrieving
   final List<String>? retrievedPostImages;
   final String postContent;
@@ -16,6 +18,7 @@ class Posts extends Equatable {
   const Posts({
      required this.postImages,
      this.retrievedPostImages,
+     this.postOwnerName,
     required this.postContent,
     required this.locationName,
     required this.userID,

@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
+import '../../../Core/Styles/text_style.dart';
 import '../../Home/View/homepage.dart';
 import '../../bottom_navigation/bottom_navigatio.dart';
 import '../Model/login.dart';
@@ -27,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+
         body: BlocListener<AuthCubit, AuthState>(
           listener: (ctx, state) {
             if (state is ErrorAuthState) {
@@ -42,28 +46,35 @@ class _RegisterPageState extends State<RegisterPage> {
                   ));
             }
           },
-          child: Container(
+          child: Container(  decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: const DecorationImage(
+                image: AssetImage(
+                  'assets/images/bg2.jpg',
+                ),
+                fit: BoxFit.cover,
+              )),
             padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                const Text(
+                 AutoSizeText(
                   'Sign up',
                   style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40,
+                    fontWeight: FontWeight.bold,fontFamily: 'Changa',
+                    fontSize: setResponsiveFontSize(40),
                   ),
                 ),
-                const SizedBox(
-                  height: 60,
+                 SizedBox(
+                  height: 30.h,
                 ),
                 Form(
                   key: _formKey,
                   child: Column(
                     children: [
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       TextFormField(
                         controller: _email,
@@ -75,15 +86,15 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                         maxLines: 1,
                         decoration: InputDecoration(
-                          hintText: 'Enter your email',
-                          prefixIcon: const Icon(Icons.email),
+                          hintText: '  Enter your email',
+                          prefixIcon: Image.asset('assets/images/maill.png',height: 30.h,width: 30.w,),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.w),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       TextFormField(
                         controller: _password,
@@ -96,15 +107,15 @@ class _RegisterPageState extends State<RegisterPage> {
                         maxLines: 1,
                         obscureText: true,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock),
-                          hintText: 'Enter your password',
+                          prefixIcon: Image.asset('assets/images/pass.png',height: 30.h,width: 30.w,),
+                          hintText: '  Enter your password',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       BlocBuilder<AuthCubit, AuthState>(
                           builder: (context, state) {
@@ -125,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               padding:
                                   const EdgeInsets.fromLTRB(40, 15, 40, 15),
                             ),
-                            child: const Text(
+                            child: const AutoSizeText(
                               'Sign up',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -134,13 +145,13 @@ class _RegisterPageState extends State<RegisterPage> {
                           );
                         }
                       }),
-                      const SizedBox(
-                        height: 20,
+                       SizedBox(
+                        height: 20.h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Already registered?'),
+                          const AutoSizeText('Already registered?'),
                           TextButton(
                             onPressed: () {
                               Navigator.pushReplacement(
@@ -150,7 +161,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               );
                             },
-                            child: const Text('Sign in'),
+                            child: const AutoSizeText('Sign in',style: TextStyle(fontFamily: 'Changa',)),
                           ),
                         ],
                       ),

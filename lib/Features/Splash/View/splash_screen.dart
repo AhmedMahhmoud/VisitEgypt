@@ -5,6 +5,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 
+import '../../../Core/Colors/app_colors.dart';
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../../../Core/Styles/text_style.dart';
 import '../../Auth/Model/login.dart';
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(milliseconds: 1500),
     );
     animationValue = Tween(begin: 1.0, end: 0.5).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.easeIn));
@@ -66,7 +67,7 @@ class _SplashScreenState extends State<SplashScreen>
                         image: DecorationImage(
                             opacity: animationValue.value,
                             image: const AssetImage(
-                              "assets/images/splash.jpg",
+                              "assets/images/bgg.jpg",
                             ),
                             fit: BoxFit.fill))),
                 animationValue.value < 0.6
@@ -83,13 +84,13 @@ class _SplashScreenState extends State<SplashScreen>
                                   image: DecorationImage(
                                       opacity: 0.9,
                                       image: AssetImage(
-                                        "assets/images/sphinx.png",
+                                        "assets/images/logo.PNG",
                                       ),
                                       fit: BoxFit.cover)),
                             ),
                           ),
-                          const SizedBox(
-                            height: 50,
+                           SizedBox(
+                            height: 10.h,
                           ),
                           animationValue.value == 0.5
                               ? FadeIn(
@@ -99,7 +100,7 @@ class _SplashScreenState extends State<SplashScreen>
                                       child: Center(
                                     child: DefaultTextStyle(
                                       style: TextStyles.boldStyle.copyWith(
-                                          color: Colors.white, fontSize: 30),
+                                          color: Colors.white, fontSize: setResponsiveFontSize(30)),
                                       child: AnimatedTextKit(
                                         repeatForever: false,
                                         totalRepeatCount: 1,
@@ -115,7 +116,7 @@ class _SplashScreenState extends State<SplashScreen>
                                         },
                                         animatedTexts: [
                                           TyperAnimatedText(
-                                              'Add application name here'),
+                                              'Visit Egypt',textStyle:  const TextStyle(fontFamily: 'Changa',color: CustomColors.niceYellow)),
                                         ],
                                       ),
                                     ),

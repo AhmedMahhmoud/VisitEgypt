@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddPostHeader extends StatelessWidget {
   final String content;
@@ -20,17 +22,17 @@ class AddPostHeader extends StatelessWidget {
           icon: const Icon(Icons.arrow_back),
           color: Colors.white,
         ),
-        const SizedBox(
-          width: 20,
+         SizedBox(
+          width: 20.w,
         ),
-        const Text(
+        const AutoSizeText(
           "Ceate Post",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         Expanded(child: Container()),
         TextButton(
           onPressed: content.isEmpty ? null : () => addPostFun(),
-          child: Text(
+          child: AutoSizeText(
             "POST",
             style:
                 TextStyle(color: content.isEmpty ? Colors.grey : Colors.white),

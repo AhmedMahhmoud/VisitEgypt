@@ -64,6 +64,7 @@ class _PostPageState extends State<AddPostPage>
         } else if (state is PostsLoadedState) {
           ConstantMethods.showContentToast(
               context, "Post uploaded successfully !");
+          Navigator.pop(context);
         }
       },
       child:
@@ -106,7 +107,7 @@ class _PostPageState extends State<AddPostPage>
                                                 }
                                                 final Posts post = Posts(
                                                     locationName:
-                                                        _selectedLocation,
+                                                        _selectedLocation,postOwnerName: FirebaseAuth.instance.currentUser!.email,
                                                     postImages: imageFiles,
                                                     postContent:
                                                         _textEditingController
