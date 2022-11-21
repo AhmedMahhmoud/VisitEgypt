@@ -19,8 +19,6 @@ class _HomePageState extends State<HomePage> {
   String searchedName = '';
   final _controller = ScrollController();
 
-
-
   @override
   void initState() {
     super.initState();
@@ -30,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-  /*    floatingActionButton: FloatingActionButton(
+      /*    floatingActionButton: FloatingActionButton(
           onPressed: (() => Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -40,7 +38,7 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         bottom: false,
         child: Container(
-                  decoration: const BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
                     'assets/images/bgg.jpg',
@@ -64,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                           Icons.location_city,
                           color: Colors.white,
                         ),
-                         SizedBox(
+                        SizedBox(
                           width: 6.w,
                         ),
                         Text(
@@ -79,17 +77,15 @@ class _HomePageState extends State<HomePage> {
                 }
               }),
               SearchBox(onChanged: (value) async {
-
-
                 BlocProvider.of<HomeCubit>(context).searchInPlaces(value);
               }),
-              FilterByList(cityName:BlocProvider.of<HomeCubit>(context,listen: true).userAddress),
+              FilterByList(
+                  cityName: BlocProvider.of<HomeCubit>(context, listen: true)
+                      .userAddress),
               SizedBox(height: 20.h),
               Expanded(
                 child: Stack(
-
                   children: <Widget>[
-
                     // Our background
                     Container(
                       margin: EdgeInsets.only(top: 100.h),

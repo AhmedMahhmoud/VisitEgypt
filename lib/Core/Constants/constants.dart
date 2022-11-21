@@ -62,12 +62,12 @@ class Constants {
         placeRate: 8),
     PlaceModel(
         placeId: 8,
-        placeName: 'Nubian Museum',
-        cityOfPlace: 'Aswan',
+        placeName: 'El Qanater El-Khayreya',
+        cityOfPlace: 'El Qalyubiya',
         placeDescription:
-            'Aswan\'s rather fantastic Nubian Museum is one of Egypt\'s best and a must for anyone interested in the history and culture of both ancient and modern Nubia.',
-        placeImage: 'assets/images/NubianMuseum.jpg',
-        placeRate: 6),
+            'El Qanater El Khayreya is one of the major cities in El Qalyubiya Governorate in the north of Cairo, where the Nile splits off into the Damietta and Rosetta (or Rashid) Branches, marking the beginning of the Nile Delta.',
+        placeImage: 'assets/images/qanater.PNG',
+        placeRate: 9),
   ];
 
   static const SizedBox heightSpace = SizedBox(
@@ -81,7 +81,7 @@ static const String usersCollection='users';
 
   static const kDefaultShadow = BoxShadow(
     offset: Offset(0, 15),
-    blurRadius: 27,
+    blurRadius: 30,
     color: Colors.black12, // Black color with 12% opacity
   );
 }

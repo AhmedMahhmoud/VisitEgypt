@@ -1,7 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:visit_egypt/Core/Styles/text_style.dart';
 
 import '../../../../Core/Colors/app_colors.dart';
 import '../../../../Core/Constants/constants.dart';
@@ -22,21 +23,16 @@ class PlaceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.symmetric(
-        horizontal: 20.w,
-        vertical: 10.h,
-      ),
-      // color: Colors.blueAccent,
-      height: 160.h,
-      child: InkWell(
-        //  onTap: press,
+    return InkWell(
+      //  onTap: press,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[
             // Those are our background
             Container(
-              height: 140.h,
+              height: 165.h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(22),
                 color: itemIndex.isEven
@@ -45,91 +41,101 @@ class PlaceCard extends StatelessWidget {
                 boxShadow: const [Constants.kDefaultShadow],
               ),
               child: Container(
-                margin: EdgeInsets.only(right: 10.w),
+                margin: EdgeInsets.only(right: 12.w),
                 decoration: BoxDecoration(
                   color: Colors.white,
+                  image: DecorationImage(
+                    image: AssetImage(
+                      place.placeImage,
+                    ),
+                    fit: BoxFit.fill,
+                    colorFilter: const ColorFilter.mode(
+                        Colors.white, BlendMode.softLight),
+                  ),
                   borderRadius: BorderRadius.circular(22),
                 ),
               ),
             ),
-            // our product image
-            Positioned(
-              top: 0,
-              right: 0,
-              child: Hero(
-                tag: '${place.placeId}',
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  height: 160.h,
-                  // image is square but we add extra 20 + 20 padding thats why width is 200
-                  width: 160.w,
-                  child: Image.asset(
-                    place.placeImage,
-                    fit: BoxFit.fitHeight,
-                  ),
+
+            Positioned(top: 8.h, right: 16.w, child: Container(
+             // height: 30.h,width: 60.w,
+              child: Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 6.w),
+                child:                            Text(
+                  place.placeName,
+                  maxLines: 2,
+                  style: TextStyle(
+                      fontFamily: 'Changa',
+                      color: Colors.black38,
+                      //      fontSize: setResponsiveFontSize(16),
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),color: Colors.white,boxShadow: const [Constants.kDefaultShadow]
+              ),
+            )),
             Positioned(
-              bottom: 0,
-              left: 0,
+              bottom: 0.h,
+              left: 0.w,
               child: SizedBox(
-                height: 128.h,
-                // our image take 200 width, thats why we set out total width - 200
+                height: 130.h,
                 width: size.width - 200.w,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    //  const Spacer(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
-                      child: Text(
-                        place.placeName,
-                        maxLines: 2,
-                        style: Theme.of(context).textTheme.button,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10.h,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      child: Text(
-                        place.placeDescription,
-                        maxLines: 4,overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontWeight: FontWeight.w400,color: Colors.black.withOpacity(0.5)),
-                      ),
-                    ),
                     const Spacer(),
-
-
                     Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 8.w,
                         vertical: 5.h, // 5 top and bottom
                       ),
                       width: 75.w,
-                      decoration:  BoxDecoration(
-                        color: Colors.black.withOpacity(0.8),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.7),
                         borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(22),
                           topRight: Radius.circular(22),
                         ),
                       ),
                       child: Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 4.w),
-                        child: Row(
-
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        padding: EdgeInsets.symmetric(horizontal: 4.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              place.placeRate.toString(), maxLines: 1,
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, color: CustomColors.lightGold),
-                              // style: Theme.of(context).textTheme.button,
-                            ),
-                            const Icon(Icons.star,color: CustomColors.lightGold,)
+                            Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                place.placeRate.toString(), maxLines: 1,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: CustomColors.lightGold),
+                                // style: Theme.of(context).textTheme.button,
+                              ),
+                               Icon(
+                                Icons.star,
+                                color: CustomColors.lightGold,   size: 22.w,
+                              )
+                            ]),
+                         /*   Padding(
+                              padding: EdgeInsets.only(bottom: 4.h),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on_sharp,
+                                    size: 16.w,
+                                    color: CustomColors.lightGold,
+                                  ),
+                                  AutoSizeText(
+                                    place.cityOfPlace,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: CustomColors.lightGold),
+                                  ),
+                                ],
+                              ),
+                            ),*/
                           ],
                         ),
                       ),

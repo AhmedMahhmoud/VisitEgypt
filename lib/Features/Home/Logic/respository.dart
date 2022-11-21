@@ -89,12 +89,14 @@ class HomeRepositoryImp implements HomeRepository {
   @override
   String mapCityName(String cityName) {
     String finalCityName = '';
-    if (cityName.contains('cai') || cityName.contains('قاهر')) {
+    if (cityName.toLowerCase().contains('cai') || cityName.contains('قاهر')) {
       finalCityName = 'cairo';
-    } else if (cityName.contains('giz') || cityName.contains('جيز')) {
+    } else if (cityName.toLowerCase().contains('giz') || cityName.contains('جيز')) {
       finalCityName = 'giza';
-    } else if (cityName.contains('aswa') || cityName.contains('سوا')) {
+    } else if (cityName.toLowerCase().contains('aswa') || cityName.contains('سوا')) {
       finalCityName = 'aswan';
+    }else if (cityName.toLowerCase().contains('qua') || cityName.contains('قلي')) {
+      finalCityName = 'qualiobya';
     }
     return finalCityName;
   }

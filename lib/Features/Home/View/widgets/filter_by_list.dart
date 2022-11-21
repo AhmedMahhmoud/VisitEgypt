@@ -52,7 +52,6 @@ class _FilterByListState extends State<FilterByList> {
                   break;
 
                   case 2: {
-                    print('radwan ${widget.cityName}');
                     BlocProvider.of<HomeCubit>(context).filterPlacesByLocation(widget.cityName!);
                   }
                   break;
