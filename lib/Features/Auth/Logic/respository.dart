@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../Model/login.dart';
 
 abstract class AuthRepository {
@@ -13,18 +14,19 @@ class AuthRepositoryImp implements AuthRepository {
   @override
   Future<UserCredential> firebaseLogin(AuthModel authModel) async {
     try {
-      Prefs.setStringList("userData", [authModel.username, authModel.password]);
       return await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: authModel.username,
         password: authModel.password,
       );
     } on FirebaseAuthException catch (e) {
+      log(e.toString());
       if (e.code == 'user-not-found') {
         throw ('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         throw ('Wrong password provided for that user.');
+      } else {
+        throw e.code;
       }
-      throw e.code;
     }
   }
 

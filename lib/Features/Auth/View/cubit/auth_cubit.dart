@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:geolocator/geolocator.dart';
 
+import '../../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../../../../Enums/firebase_request_enum.dart';
 import '../../../../FirebaseServices/Auth/firebase_auth_service.dart';
 import '../../../../Services/Geolocator/geolocator.dart';
@@ -31,7 +34,7 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> makeFirebaseRequest(
       FirebaseRequestType requestType, AuthModel authModel) async {
-     UserCredential? userCridentials;
+    UserCredential? userCridentials;
     try {
       if (requestType == FirebaseRequestType.forget) {
         emit(LoadingForgetPasswordState());
@@ -40,16 +43,18 @@ class AuthCubit extends Cubit<AuthState> {
       } else {
         emit(LoadingAuthState());
         if (requestType == FirebaseRequestType.login) {
+          log(authModel.toString());
           userCridentials = await authRepository.firebaseLogin(authModel);
+          Prefs.setStringList(
+                  "userData", [authModel.username, authModel.password])
+              .whenComplete(() => log("user cached"));
         } else if (requestType == FirebaseRequestType.register) {
           userCridentials = await signUpUser(authModel);
         }
         emit(LoadedAuthState(userCredential: userCridentials!));
       }
     } catch (e) {
-      if (userCridentials != null) {
-        emit(ErrorAuthState(errorMsg: e.toString()));
-      }
+      emit(ErrorAuthState(errorMsg: e.toString()));
     }
   }
 
@@ -58,9 +63,7 @@ class AuthCubit extends Cubit<AuthState> {
       late UserCredential userCridentials;
       final FirebaseAuthService firebaseAuthService = FirebaseAuthService();
 
-
       Position userLocation = await GeoLocatorService.getCurrentUserLocation();
-
 
       try {
         userCridentials = await authRepository.firebaseRegister(authModel);

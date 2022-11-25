@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -50,15 +49,20 @@ class _PostsPageState extends State<PostsPage> {
       },
       child: Scaffold(
         body: SafeArea(
-          child: SizedBox(
+          child: Container(
+            decoration: const BoxDecoration(
+                // borderRadius: BorderRadius.circular(15),
+                image: DecorationImage(
+              image: AssetImage(
+                'assets/images/bgg.jpg',
+              ),
+              fit: BoxFit.cover,
+            )),
             child: Column(
               children: [
                 const AddPostCard(),
                 SizedBox(
-                  height: 20.h,
-                ),
-                SizedBox(
-                  height: 550.h,
+                  height: 600.h,
                   child: StreamBuilder(
                       stream: FirebaseFirestore.instance
                           .collection(Constants.postsCollection)
@@ -77,24 +81,50 @@ class _PostsPageState extends State<PostsPage> {
                             {
                               postsCubit.retrievePosts(snapshot.data!.docs);
 
-                              return ListView.separated(
-                                itemCount: postsCubit.retrievedPosts.length,
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemBuilder: (context, index) {
-                                  return PostCardItem(postsCubit: postsCubit,index: index,);
-                                },
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20.w),
-                                    child: const Divider(
-                                      thickness: 2,
-                                    ),
-                                  );
-                                },
-                              );
+                              return postsCubit.retrievedPosts.isNotEmpty
+                                  ? ListView.separated(
+                                      itemCount:
+                                          postsCubit.retrievedPosts.length,
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      itemBuilder: (context, index) {
+                                        return PostCardItem(
+                                          postsCubit: postsCubit,
+                                          index: index,
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20.w),
+                                          child: const Divider(
+                                            thickness: 2,
+                                          ),
+                                        );
+                                      },
+                                    )
+                                  : Center(
+                                      child: Column(
+                                      children: [
+                                        Lottie.asset(
+                                            'assets/lotties/horus.json',
+                                            height: 320.h),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: AutoSizeText(
+                                            'There are no posts',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: CustomColors.niceYellow,
+                                              fontSize:
+                                                  setResponsiveFontSize(28),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ));
                             }
                         }
                       }),
