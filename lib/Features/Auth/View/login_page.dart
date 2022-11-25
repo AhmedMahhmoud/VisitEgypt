@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visit_egypt/Features/Auth/View/register_page.dart';
 
-
-
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
-import '../../Home/View/homepage.dart';
 import '../../bottom_navigation/bottom_navigatio.dart';
 import '../Model/login.dart';
 import 'cubit/auth_cubit.dart';
@@ -44,7 +41,9 @@ class _LoginPageState extends State<LoginPage> {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BottomNav(comingIndex: 0,),
+                  builder: (context) => BottomNav(
+                    comingIndex: 0,
+                  ),
                 ));
           }
         },

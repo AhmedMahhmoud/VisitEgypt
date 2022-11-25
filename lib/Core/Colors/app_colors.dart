@@ -12,4 +12,7 @@ class CustomColors {
   static const successColor = Colors.green;
   static const errorColor = Color.fromARGB(223, 223, 0, 0);
   static const dateTicketColorK = Color(0xffFF4729);
+  //? testing pallete colors (dessert)
+  static const dessertPrimary = Color(0xffAD764A);
+  static const dessertSecondary = Color(0xfF395D6B);
 }
