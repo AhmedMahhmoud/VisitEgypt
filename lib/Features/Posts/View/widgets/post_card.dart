@@ -1,6 +1,9 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visit_egypt/Features/Posts/View/widgets/user_avatar.dart';
 
@@ -20,6 +23,7 @@ class PostCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var post = postsCubit.retrievedPosts[index];
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
         decoration: BoxDecoration(
@@ -36,13 +40,16 @@ class PostCardItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                       UserAvatar(username: postsCubit.retrievedPosts[index].
-                      postOwnerName.toString().substring(0,1).toUpperCase()),
+                      UserAvatar(
+                          username: post.postOwnerName
+                              .toString()
+                              .substring(0, 1)
+                              .toUpperCase()),
                       SizedBox(
                         width: 8.w,
                       ),
-                      AutoSizeText(postsCubit.retrievedPosts[index].postOwnerName.toString().split('@')[0]
-                        ,
+                      AutoSizeText(
+                        post.postOwnerName.toString().split('@')[0],
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: setResponsiveFontSize(18),
@@ -53,25 +60,25 @@ class PostCardItem extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 8.w,
-                  ),  Padding(
-                    padding:  EdgeInsets.only(right: 8.w,top: 8.h,bottom: 8.h,left: 10.w),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        right: 8.w, top: 8.h, bottom: 8.h, left: 10.w),
                     child: AutoSizeText(
-                      postsCubit.retrievedPosts[index].postContent,
+                      post.postContent,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: setResponsiveFontSize(16)),
                       textAlign: TextAlign.start,
                     ),
                   ),
-
                 ],
               ),
-              postsCubit.retrievedPosts[index].retrievedPostImages!.isNotEmpty
+              post.retrievedPostImages!.isNotEmpty
                   ? SizedBox(
                       height: 200.h,
                       child: ListView.builder(
-                        itemCount: postsCubit
-                            .retrievedPosts[index].retrievedPostImages!.length,
+                        itemCount: post.retrievedPostImages!.length,
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         itemBuilder: (context, i) {
@@ -92,9 +99,8 @@ class PostCardItem extends StatelessWidget {
                                             height: 400.h,
                                             width: double.infinity,
                                             child: CachedNetworkImage(
-                                              imageUrl: postsCubit
-                                                  .retrievedPosts[index]
-                                                  .retrievedPostImages![i],
+                                              imageUrl:
+                                                  post.retrievedPostImages![i],
                                               fit: BoxFit.fill,
                                             ),
                                           ),
@@ -102,8 +108,7 @@ class PostCardItem extends StatelessWidget {
                                       });
                                 },
                                 child: CachedNetworkImage(
-                                  imageUrl: postsCubit.retrievedPosts[index]
-                                      .retrievedPostImages![i],
+                                  imageUrl: post.retrievedPostImages![i],
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -112,9 +117,52 @@ class PostCardItem extends StatelessWidget {
                         },
                       ),
                     )
-                  : Container()
+                  : Container(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 500),
+                    child: ZoomIn(
+                      key: UniqueKey(),
+                      child: GestureDetector(
+                        onTap: () {
+                          handleLikeTap(
+                              context,
+                              post.likes,
+                              FirebaseAuth.instance.currentUser!.uid,
+                              post.postID!);
+                        },
+                        child: Icon(
+                          postsCubit.retrievedPosts[index].likes.containsKey(
+                                  FirebaseAuth.instance.currentUser!.uid)
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: Colors.pink,
+                          size: 30,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Text(
+                    "${postsCubit.retrievedPosts[index].likes.length} Likes",
+                    style: TextStyles.regularStyle,
+                  )
+                ],
+              )
             ],
           ),
         ));
+  }
+
+  void handleLikeTap(
+      context, Map<dynamic, dynamic> likesMap, String userID, String postID) {
+    if (likesMap.containsKey(userID)) {
+      likesMap[userID] = !likesMap[userID];
+    } else {
+      likesMap.addAll({userID: true});
+    }
+    BlocProvider.of<PostsCubit>(context, listen: false)
+        .likePost(postID, likesMap);
   }
 }

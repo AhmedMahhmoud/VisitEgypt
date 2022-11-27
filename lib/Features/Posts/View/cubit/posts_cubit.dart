@@ -14,7 +14,7 @@ class PostsCubit extends Cubit<PostsState> {
 
   PostsCubit({required this.postsRepository}) : super(PostsInitial());
 
-  uploadPostImages(Posts post) async {
+  addNewPost(Posts post) async {
     try {
       emit(PostsLoadingState());
       await postsRepository.addNewPost(post);
@@ -24,10 +24,14 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
+  likePost(String postID, newMap) async {
+    await postsRepository.likePost(postID, newMap);
+  }
+
   retrievePosts(List<QueryDocumentSnapshot> docs) {
     try {
       emit(RetrievePostsLoadingState());
-      retrievedPosts =  postsRepository.retrieveAllPosts(docs);
+      retrievedPosts = postsRepository.retrieveAllPosts(docs);
       emit(RetrievePostsDoneState(retrievedPosts: retrievedPosts));
     } catch (e) {
       emit(RetrievePostsErrorState(errorMsg: e.toString()));

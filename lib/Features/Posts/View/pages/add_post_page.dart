@@ -107,7 +107,11 @@ class _PostPageState extends State<AddPostPage>
                                                 }
                                                 final Posts post = Posts(
                                                     locationName:
-                                                        _selectedLocation,postOwnerName: FirebaseAuth.instance.currentUser!.email,
+                                                        _selectedLocation,
+                                                    postOwnerName: FirebaseAuth
+                                                        .instance
+                                                        .currentUser!
+                                                        .email,
                                                     postImages: imageFiles,
                                                     postContent:
                                                         _textEditingController
@@ -115,10 +119,16 @@ class _PostPageState extends State<AddPostPage>
                                                     userID: FirebaseAuth
                                                         .instance
                                                         .currentUser!
-                                                        .uid);
+                                                        .uid,
+                                                    likes: {
+                                                      FirebaseAuth
+                                                          .instance
+                                                          .currentUser!
+                                                          .uid: false
+                                                    });
                                                 await context
                                                     .read<PostsCubit>()
-                                                    .uploadPostImages(post);
+                                                    .addNewPost(post);
                                               },
                                               content:
                                                   _textEditingController.text,

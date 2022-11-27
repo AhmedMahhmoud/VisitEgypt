@@ -44,13 +44,15 @@ class _LoginPageState extends State<LoginPage> {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BottomNav(comingIndex: 0,),
+                    builder: (context) => BottomNav(
+                      comingIndex: 0,
+                    ),
                   ));
             }
           },
           child: Scaffold(
             body: Container(
-              padding:  EdgeInsets.all(20.w),
+              padding: EdgeInsets.all(20.w),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                   image: const DecorationImage(
@@ -63,15 +65,18 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 20.h,),
+                  SizedBox(
+                    height: 20.h,
+                  ),
                   AutoSizeText(
                     'Sign In',
                     style: TextStyle(
-                      fontWeight: FontWeight.bold,fontFamily: 'Changa',
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Changa',
                       fontSize: setResponsiveFontSize(40),
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 30.h,
                   ),
                   Form(
@@ -89,13 +94,17 @@ class _LoginPageState extends State<LoginPage> {
                           maxLines: 1,
                           decoration: InputDecoration(
                             hintText: '  Enter your email',
-                            prefixIcon: Image.asset('assets/images/maill.png',height: 30.h,width: 30.w,),
+                            prefixIcon: Image.asset(
+                              'assets/images/maill.png',
+                              height: 30.h,
+                              width: 30.w,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 20.h,
                         ),
                         TextFormField(
@@ -109,8 +118,12 @@ class _LoginPageState extends State<LoginPage> {
                           maxLines: 1,
                           obscureText: true,
                           decoration: InputDecoration(
-                            prefixIcon: Image.asset('assets/images/pass.png',height: 30.h,width: 30.w,),
-                            hintText:  '  Enter your password',
+                            prefixIcon: Image.asset(
+                              'assets/images/pass.png',
+                              height: 30.h,
+                              width: 30.w,
+                            ),
+                            hintText: '  Enter your password',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.w),
                             ),
@@ -132,7 +145,8 @@ class _LoginPageState extends State<LoginPage> {
                                     setRememberMe(newValue);
                                   });
                                 },
-                                controlAffinity: ListTileControlAffinity.leading,
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
                               ),
                             ),
                             Expanded(
@@ -156,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ))
                           ],
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 20.h,
                         ),
                         BlocBuilder<AuthCubit, AuthState>(
@@ -187,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                             );
                           }
                         }),
-                         SizedBox(
+                        SizedBox(
                           height: 10.h,
                         ),
                         Row(
@@ -203,7 +217,12 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 );
                               },
-                              child: const AutoSizeText('Create an account',style: TextStyle(fontFamily: 'Changa',),),
+                              child: const AutoSizeText(
+                                'Create an account',
+                                style: TextStyle(
+                                  fontFamily: 'Changa',
+                                ),
+                              ),
                             ),
                           ],
                         ),
