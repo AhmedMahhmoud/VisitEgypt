@@ -43,94 +43,140 @@ class _PostsPageState extends State<PostsPage> {
   @override
   Widget build(BuildContext context) {
     var postsCubit = BlocProvider.of<PostsCubit>(context);
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Container(
-            decoration: const BoxDecoration(
-                // borderRadius: BorderRadius.circular(15),
-                image: DecorationImage(
-              image: AssetImage(
-                'assets/images/bgg.jpg',
-              ),
-              fit: BoxFit.cover,
-            )),
-            child: Column(
-              children: [
-                const AddPostCard(),
-                SizedBox(
-                  height: 600.h,
-                  child: StreamBuilder(
-                      stream: FirebaseFirestore.instance
-                          .collection(Constants.postsCollection)
-                          .snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (!snapshot.hasData) {
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+              // borderRadius: BorderRadius.circular(15),
+              image: DecorationImage(
+            image: AssetImage(
+              'assets/images/bgg.jpg',
+            ),
+            fit: BoxFit.cover,
+          )),
+          child: Column(
+            children: [
+              const AddPostCard(),
+              SizedBox(
+                height: 600.h,
+                child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection(Constants.postsCollection).orderBy('createdAt', descending: true)
+                        .snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot)  {
+                      if (!snapshot.hasData) {
+                        return const Center(
+                            child: CircularProgressIndicator());
+                      }
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
                           return const Center(
                               child: CircularProgressIndicator());
-                        }
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          default:
+
+
+                 /*         case ConnectionState.done:
                             {
                               postsCubit.retrievePosts(snapshot.data!.docs);
-
                               return postsCubit.retrievedPosts.isNotEmpty
                                   ? ListView.separated(
-                                      itemCount:
-                                          postsCubit.retrievedPosts.length,
-                                      scrollDirection: Axis.vertical,
-                                      shrinkWrap: true,
-                                      itemBuilder: (context, index) {
-                                        return PostCardItem(
-                                          postsCubit: postsCubit,
-                                          index: index,
-                                        );
-                                      },
-                                      separatorBuilder:
-                                          (BuildContext context, int index) {
-                                        return Padding(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 20.w),
-                                          child: const Divider(
-                                            thickness: 2,
-                                          ),
-                                        );
-                                      },
-                                    )
+                                itemCount:
+                                postsCubit.retrievedPosts.length,
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemBuilder: (context, index) {
+                                  return PostCardItem(
+                                    postsCubit: postsCubit,
+                                    index: index,
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 20.w),
+                                    child: const Divider(
+                                      thickness: 2,
+                                    ),
+                                  );
+                                },
+                              )
                                   : Center(
-                                      child: Column(
-                                      children: [
-                                        Lottie.asset(
-                                            'assets/lotties/horus.json',
-                                            height: 320.h),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: AutoSizeText(
-                                            'There are no posts',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: CustomColors.niceYellow,
-                                              fontSize:
-                                                  setResponsiveFontSize(28),
-                                            ),
+                                  child: Column(
+                                    children: [
+                                      Lottie.asset(
+                                          'assets/lotties/horus.json',
+                                          height: 320.h),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: AutoSizeText(
+                                          'There are no posts',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: CustomColors.niceYellow,
+                                            fontSize:
+                                            setResponsiveFontSize(28),
                                           ),
-                                        )
-                                      ],
-                                    ));
-                            }
-                        }
-                      }),
-                )
-              ],
-            ),
+                                        ),
+                                      )
+                                    ],
+                                  ));
+                            }*/
+
+                        default:
+                          {
+                            postsCubit.retrievePosts(snapshot.data!.docs);
+
+                            return postsCubit.retrievedPosts.isNotEmpty
+                                ? ListView.separated(
+                                    itemCount:
+                                        postsCubit.retrievedPosts.length,
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      return PostCardItem(
+                                        postsCubit: postsCubit,
+                                        index: index,
+                                      );
+                                    },
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 20.w),
+                                        child: const Divider(
+                                          thickness: 2,
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : Center(
+                                    child: Column(
+                                    children: [
+                                      Lottie.asset(
+                                          'assets/lotties/horus.json',
+                                          height: 320.h),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: AutoSizeText(
+                                          'There are no posts',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: CustomColors.niceYellow,
+                                            fontSize:
+                                                setResponsiveFontSize(28),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ));
+                          }
+                      }
+                    }),
+              )
+            ],
           ),
         ),
       ),

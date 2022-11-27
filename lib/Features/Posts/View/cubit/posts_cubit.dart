@@ -32,6 +32,7 @@ class PostsCubit extends Cubit<PostsState> {
     try {
       emit(RetrievePostsLoadingState());
       retrievedPosts = postsRepository.retrieveAllPosts(docs);
+      print('retrieved posts length = ${retrievedPosts.length}');
       emit(RetrievePostsDoneState(retrievedPosts: retrievedPosts));
     } catch (e) {
       emit(RetrievePostsErrorState(errorMsg: e.toString()));

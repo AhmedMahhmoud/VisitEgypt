@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,6 +33,7 @@ class _PostPageState extends State<AddPostPage>
   String _selectedLocation = "";
   List<Media> images = [];
   final TextEditingController _textEditingController = TextEditingController();
+
   @override
   void initState() {
     slidersAnimationController = AnimationController(
@@ -106,6 +108,7 @@ class _PostPageState extends State<AddPostPage>
                                                   }
                                                 }
                                                 final Posts post = Posts(
+                                                    createdAt: Timestamp.now(),
                                                     locationName:
                                                         _selectedLocation,
                                                     postOwnerName: FirebaseAuth

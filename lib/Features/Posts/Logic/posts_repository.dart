@@ -25,6 +25,7 @@ class PostsRepositoryImpl implements PostsRepository {
             .uploadImagesToFirestore(post.postImages);
       }
       await FirebaseFirestore.instance.collection("posts").doc().set({
+        'createdAt': post.createdAt,
         "postContent": post.postContent,
         "userID": post.userID,
         "postImages": resultImageUrls,

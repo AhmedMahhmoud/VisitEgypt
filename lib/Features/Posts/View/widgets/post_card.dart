@@ -83,7 +83,9 @@ class PostCardItem extends StatelessWidget {
                         shrinkWrap: true,
                         itemBuilder: (context, i) {
                           return SizedBox(
-                            width: 200.w,
+                            width: post.retrievedPostImages!.length > 1
+                                ? 200.w
+                                : 350.w,
                             child: Card(
                               child: InkWell(
                                 onTap: () {
@@ -118,6 +120,7 @@ class PostCardItem extends StatelessWidget {
                       ),
                     )
                   : Container(),
+              const Divider(),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

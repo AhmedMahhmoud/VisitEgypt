@@ -8,6 +8,7 @@ class Posts extends Equatable {
   final List<File> postImages;
 
   final String? postOwnerName;
+  final dynamic createdAt;
 
   // in case retrieving
   final List<String>? retrievedPostImages;
@@ -21,6 +22,7 @@ class Posts extends Equatable {
     this.retrievedPostImages,
     this.postOwnerName,
     this.postID,
+    this.createdAt,
     required this.postContent,
     required this.locationName,
     required this.likes,
