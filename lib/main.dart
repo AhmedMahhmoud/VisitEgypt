@@ -1,4 +1,6 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
@@ -19,10 +21,14 @@ void main() async {
   await Firebase.initializeApp();
   await di.initGitIt();
   await Prefs.init();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   Position userLocation = await GeoLocatorService.getCurrentUserLocation();
   Prefs.setDouble('UserLat', userLocation.latitude);
   Prefs.setDouble('UserLng', userLocation.longitude);
-  runApp(const MyApp());
+  runApp(DevicePreview(
+      builder: (context)=>
+     const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -31,7 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(392.72, 807.27),
+      designSize: const Size(360, 690),
       builder: (context, child) {
         return MultiBlocProvider(
             providers: [
@@ -44,6 +50,9 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
                 debugShowCheckedModeBanner: false,
                 navigatorKey: navigatorKey,
+                useInheritedMediaQuery: true,
+                locale: DevicePreview.locale(context),
+                builder: DevicePreview.appBuilder,
                 title: 'Visit Egypt',
                 home: const SplashScreen()
                 //BottomNav(comingIndex: 0)

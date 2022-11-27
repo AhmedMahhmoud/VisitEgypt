@@ -57,8 +57,8 @@ class _PostsPageState extends State<PostsPage> {
           child: Column(
             children: [
               const AddPostCard(),
-              SizedBox(
-                height: 600.h,
+              Expanded(
+               // height: MediaQuery.of(context).size.height*0.7,
                 child: StreamBuilder(
                     stream: FirebaseFirestore.instance
                         .collection(Constants.postsCollection).orderBy('createdAt', descending: true)
