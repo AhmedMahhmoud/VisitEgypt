@@ -28,12 +28,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*    floatingActionButton: FloatingActionButton(
-          onPressed: (() => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginPage(),
-              )))),*/
+      // floatingActionButton: FloatingActionButton(onPressed: (() async {
+      //   PostsRepository postsRepository = PostsRepositoryImpl();
+      //   await postsRepository.getPostsByLocation("Abo El Hol");
+      // })),
       backgroundColor: CustomColors.niceBlue,
       body: SafeArea(
         bottom: false,

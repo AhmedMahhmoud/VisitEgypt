@@ -1,6 +1,8 @@
 import 'dart:core';
 import 'dart:developer';
 
+import 'package:visit_egypt/Core/Constants/constants.dart';
+
 import '../../../FirebaseServices/Upload/firebase_upload_images.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -9,6 +11,7 @@ import '../Model/posts_model.dart';
 abstract class PostsRepository {
   addNewPost(Posts post);
   likePost(String postID, newMap);
+  Future<List<Posts>> getPostsByLocation(String location);
   List<Posts> retrieveAllPosts(List<QueryDocumentSnapshot> docs);
 }
 
@@ -76,5 +79,16 @@ class PostsRepositoryImpl implements PostsRepository {
         .collection("posts")
         .doc(postID)
         .update({"likes": newMap});
+  }
+
+  @override
+  getPostsByLocation(String location) async {
+    var response = await FirebaseFirestore.instance
+        .collection(Constants.postsCollection)
+        .get();
+    var filteredResponse =
+        response.docs.where((element) => element['location'] == location);
+
+    return retrieveAllPosts(filteredResponse.toList());
   }
 }

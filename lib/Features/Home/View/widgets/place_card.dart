@@ -1,8 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:visit_egypt/Core/Styles/text_style.dart';
+import 'package:visit_egypt/Features/Posts/View/pages/posts_by_location.dart';
 
 import '../../../../Core/Colors/app_colors.dart';
 import '../../../../Core/Constants/constants.dart';
@@ -57,24 +55,50 @@ class PlaceCard extends StatelessWidget {
               ),
             ),
 
-            Positioned(top: 8.h, right: 16.w, child: Container(
-             // height: 30.h,width: 60.w,
-              child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 6.w),
-                child:                            Text(
-                  place.placeName,
-                  maxLines: 2,
-                  style: TextStyle(
-                      fontFamily: 'Changa',
-                      color: Colors.black38,
-                      //      fontSize: setResponsiveFontSize(16),
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),color: Colors.white,boxShadow: const [Constants.kDefaultShadow]
-              ),
-            )),
+            Positioned(
+                top: 8.h,
+                right: 16.w,
+                child: Container(
+                  // height: 30.h,width: 60.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: const [Constants.kDefaultShadow]),
+                  // height: 30.h,width: 60.w,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 6.w),
+                    child: Text(
+                      place.placeName,
+                      maxLines: 2,
+                      style: const TextStyle(
+                          fontFamily: 'Changa',
+                          color: Colors.black38,
+                          //      fontSize: setResponsiveFontSize(16),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                )),
+            Positioned(
+                right: 20.w,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PostsByLocation(locationName: place.placeName),
+                        ));
+                  },
+                  child: Card(
+                    elevation: 10,
+                    color: Colors.white,
+                    child: Image.asset(
+                      'assets/images/posts.png',
+                      height: 30.h,
+                      semanticLabel: "Posts",
+                    ),
+                  ),
+                )),
             Positioned(
               bottom: 0.h,
               left: 0.w,
@@ -100,10 +124,7 @@ class PlaceCard extends StatelessWidget {
                       ),
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 4.w),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
+                        child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
@@ -113,31 +134,12 @@ class PlaceCard extends StatelessWidget {
                                     color: CustomColors.lightGold),
                                 // style: Theme.of(context).textTheme.button,
                               ),
-                               Icon(
+                              Icon(
                                 Icons.star,
-                                color: CustomColors.lightGold,   size: 22.w,
-                              )
-                            ]),
-                         /*   Padding(
-                              padding: EdgeInsets.only(bottom: 4.h),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_on_sharp,
-                                    size: 16.w,
-                                    color: CustomColors.lightGold,
-                                  ),
-                                  AutoSizeText(
-                                    place.cityOfPlace,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: CustomColors.lightGold),
-                                  ),
-                                ],
+                                color: CustomColors.lightGold,
+                                size: 22.w,
                               ),
-                            ),*/
-                          ],
-                        ),
+                            ]),
                       ),
                     ),
                   ],
