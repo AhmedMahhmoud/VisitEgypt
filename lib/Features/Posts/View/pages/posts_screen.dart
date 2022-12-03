@@ -11,7 +11,7 @@ import '../../../../Core/Styles/text_style.dart';
 import '../widgets/add_post_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../widgets/post_card.dart';
+import '../widgets/display_post.dart';
 
 class PostsPage extends StatefulWidget {
   const PostsPage({super.key});
@@ -58,24 +58,23 @@ class _PostsPageState extends State<PostsPage> {
             children: [
               const AddPostCard(),
               Expanded(
-               // height: MediaQuery.of(context).size.height*0.7,
+                // height: MediaQuery.of(context).size.height*0.7,
                 child: StreamBuilder(
                     stream: FirebaseFirestore.instance
-                        .collection(Constants.postsCollection).orderBy('createdAt', descending: true)
+                        .collection(Constants.postsCollection)
+                        .orderBy('createdAt', descending: true)
                         .snapshots(),
                     builder: (BuildContext context,
-                        AsyncSnapshot<QuerySnapshot> snapshot)  {
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (!snapshot.hasData) {
-                        return const Center(
-                            child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       switch (snapshot.connectionState) {
                         case ConnectionState.waiting:
                           return const Center(
                               child: CircularProgressIndicator());
 
-
-                 /*         case ConnectionState.done:
+                        /*         case ConnectionState.done:
                             {
                               postsCubit.retrievePosts(snapshot.data!.docs);
                               return postsCubit.retrievedPosts.isNotEmpty
@@ -129,33 +128,12 @@ class _PostsPageState extends State<PostsPage> {
                             postsCubit.retrievePosts(snapshot.data!.docs);
 
                             return postsCubit.retrievedPosts.isNotEmpty
-                                ? ListView.separated(
-                                    itemCount:
-                                        postsCubit.retrievedPosts.length,
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, index) {
-                                      return PostCardItem(
-                                        postsCubit: postsCubit,
-                                        index: index,
-                                      );
-                                    },
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return Padding(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 20.w),
-                                        child: const Divider(
-                                          thickness: 2,
-                                        ),
-                                      );
-                                    },
-                                  )
+                                ? DisplayPostsList(
+                                    posts: postsCubit.retrievedPosts)
                                 : Center(
                                     child: Column(
                                     children: [
-                                      Lottie.asset(
-                                          'assets/lotties/horus.json',
+                                      Lottie.asset('assets/lotties/horus.json',
                                           height: 320.h),
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -165,8 +143,7 @@ class _PostsPageState extends State<PostsPage> {
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: CustomColors.niceYellow,
-                                            fontSize:
-                                                setResponsiveFontSize(28),
+                                            fontSize: setResponsiveFontSize(28),
                                           ),
                                         ),
                                       )

@@ -28,11 +28,15 @@ class PostsCubit extends Cubit<PostsState> {
     await postsRepository.likePost(postID, newMap);
   }
 
+  getPostsByLocation(String location) async {
+    return postsRepository.getPostsByLocation(location);
+  }
+
   retrievePosts(List<QueryDocumentSnapshot> docs) {
     try {
       emit(RetrievePostsLoadingState());
       retrievedPosts = postsRepository.retrieveAllPosts(docs);
-      print('retrieved posts length = ${retrievedPosts.length}');
+
       emit(RetrievePostsDoneState(retrievedPosts: retrievedPosts));
     } catch (e) {
       emit(RetrievePostsErrorState(errorMsg: e.toString()));

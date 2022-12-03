@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:visit_egypt/Features/Posts/Model/posts_model.dart';
 import 'package:visit_egypt/Features/Posts/View/widgets/user_avatar.dart';
 
 import '../../../../Core/Colors/app_colors.dart';
@@ -14,16 +15,13 @@ import '../cubit/posts_cubit.dart';
 class PostCardItem extends StatelessWidget {
   const PostCardItem({
     Key? key,
-    required this.postsCubit,
-    required this.index,
+    required this.posts,
   }) : super(key: key);
 
-  final PostsCubit postsCubit;
-  final int index;
+  final Posts posts;
 
   @override
   Widget build(BuildContext context) {
-    var post = postsCubit.retrievedPosts[index];
     return Container(
         margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
         decoration: BoxDecoration(
@@ -41,7 +39,7 @@ class PostCardItem extends StatelessWidget {
                   Row(
                     children: [
                       UserAvatar(
-                          username: post.postOwnerName
+                          username: posts.postOwnerName
                               .toString()
                               .substring(0, 1)
                               .toUpperCase()),
@@ -49,7 +47,7 @@ class PostCardItem extends StatelessWidget {
                         width: 8.w,
                       ),
                       AutoSizeText(
-                        post.postOwnerName.toString().split('@')[0],
+                        posts.postOwnerName.toString().split('@')[0],
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: setResponsiveFontSize(18),
@@ -65,7 +63,7 @@ class PostCardItem extends StatelessWidget {
                     padding: EdgeInsets.only(
                         right: 8.w, top: 8.h, bottom: 8.h, left: 10.w),
                     child: AutoSizeText(
-                      post.postContent,
+                      posts.postContent,
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: setResponsiveFontSize(16)),
@@ -74,16 +72,16 @@ class PostCardItem extends StatelessWidget {
                   ),
                 ],
               ),
-              post.retrievedPostImages!.isNotEmpty
+              posts.retrievedPostImages!.isNotEmpty
                   ? SizedBox(
                       height: 200.h,
                       child: ListView.builder(
-                        itemCount: post.retrievedPostImages!.length,
+                        itemCount: posts.retrievedPostImages!.length,
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         itemBuilder: (context, i) {
                           return SizedBox(
-                            width: post.retrievedPostImages!.length > 1
+                            width: posts.retrievedPostImages!.length > 1
                                 ? 200.w
                                 : 350.w,
                             child: Card(
@@ -102,7 +100,7 @@ class PostCardItem extends StatelessWidget {
                                             width: double.infinity,
                                             child: CachedNetworkImage(
                                               imageUrl:
-                                                  post.retrievedPostImages![i],
+                                                  posts.retrievedPostImages![i],
                                               fit: BoxFit.fill,
                                             ),
                                           ),
@@ -110,7 +108,7 @@ class PostCardItem extends StatelessWidget {
                                       });
                                 },
                                 child: CachedNetworkImage(
-                                  imageUrl: post.retrievedPostImages![i],
+                                  imageUrl: posts.retrievedPostImages![i],
                                   fit: BoxFit.fill,
                                 ),
                               ),
@@ -132,12 +130,12 @@ class PostCardItem extends StatelessWidget {
                         onTap: () {
                           handleLikeTap(
                               context,
-                              post.likes,
+                              posts.likes,
                               FirebaseAuth.instance.currentUser!.uid,
-                              post.postID!);
+                              posts.postID!);
                         },
                         child: Icon(
-                          postsCubit.retrievedPosts[index].likes.containsKey(
+                          posts.likes.containsKey(
                                   FirebaseAuth.instance.currentUser!.uid)
                               ? Icons.favorite
                               : Icons.favorite_border,
@@ -148,7 +146,7 @@ class PostCardItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${postsCubit.retrievedPosts[index].likes.length} Likes",
+                    "${posts.likes.length} Likes",
                     style: TextStyles.regularStyle,
                   )
                 ],

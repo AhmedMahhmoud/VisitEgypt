@@ -26,9 +26,10 @@ void main() async {
   Position userLocation = await GeoLocatorService.getCurrentUserLocation();
   Prefs.setDouble('UserLat', userLocation.latitude);
   Prefs.setDouble('UserLng', userLocation.longitude);
-  runApp(DevicePreview(
+/*  runApp(DevicePreview(
       builder: (context)=>
-     const MyApp()));
+     const MyApp());*/
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
