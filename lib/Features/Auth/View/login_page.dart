@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visit_egypt/Features/Auth/View/register_page.dart';
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../../../Core/Styles/text_style.dart';
-import '../../bottom_navigation/bottom_navigatio.dart';
+import '../../bottom_navigation/bottom_navigation.dart';
 import '../Model/login.dart';
 import 'cubit/auth_cubit.dart';
 import 'forgot_password.dart';

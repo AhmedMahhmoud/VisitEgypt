@@ -6,6 +6,12 @@ class Constants {
   static const List<PlaceModel> allPlaces = [
     PlaceModel(
         placeId: 1,
+        placeImagesList: [
+          'assets/images/aboelhol.jpg',
+          'assets/images/aboelhol1.jpg',
+          'assets/images/aboelhol2.jpg',
+          'assets/images/aboelhol3.jpeg'
+        ],
         placeName: 'Abo El Hol',
         cityOfPlace: 'Giza',
         placeDescription:
@@ -14,6 +20,12 @@ class Constants {
         placeRate: 8),
     PlaceModel(
         placeId: 2,
+        placeImagesList: [
+          'assets/images/abosimple.jpg',
+          'assets/images/abosimple1.jpg',
+          'assets/images/abosimple2.jpeg',
+          'assets/images/abosimple3.jpg'
+        ],
         placeName: 'Abu Simbel Temple',
         cityOfPlace: 'Aswan',
         placeDescription:
@@ -22,6 +34,13 @@ class Constants {
         placeRate: 7),
     PlaceModel(
         placeId: 3,
+        placeImagesList: [
+          'assets/images/cairotower.jpg',
+          'assets/images/cairotower1.jpg',
+          'assets/images/cairotower2.jpg',
+          'assets/images/cairotower3.jpg',
+          'assets/images/cairotower4.jpg',
+        ],
         placeName: 'Cairo Tower',
         cityOfPlace: 'Cairo',
         placeDescription:
@@ -30,6 +49,13 @@ class Constants {
         placeRate: 7.5),
     PlaceModel(
         placeId: 4,
+        placeImagesList: [
+          'assets/images/mohamedali.jpg',
+          'assets/images/mohamedali1.jpg',
+          'assets/images/mohamedali2.jpg',
+          'assets/images/mohamedali3.jpg',
+          'assets/images/mohamedali4.jpg',
+        ],
         placeName: 'mohamed ali mosque',
         cityOfPlace: 'Cairo',
         placeDescription:
@@ -38,6 +64,14 @@ class Constants {
         placeRate: 9),
     PlaceModel(
         placeId: 5,
+        placeImagesList: [
+          'assets/images/museum.jpg',
+          'assets/images/museum1.jpg',
+          'assets/images/museum2.jpg',
+          'assets/images/museum3.jpg',
+          'assets/images/museum4.jpg',
+          'assets/images/museum5.jpg',
+        ],
         placeName: 'The Egyptian Museum',
         cityOfPlace: 'Cairo',
         placeDescription:
@@ -46,6 +80,13 @@ class Constants {
         placeRate: 8),
     PlaceModel(
         placeId: 6,
+        placeImagesList: [
+          'assets/images/pyramids.jpg',
+          'assets/images/pyramids1.jpg',
+          'assets/images/pyramids2.jpg',
+          'assets/images/pyramids3.jpg',
+          'assets/images/pyramids4.jpg',
+        ],
         placeName: 'Giza pyramid',
         cityOfPlace: 'Giza',
         placeDescription:
@@ -54,6 +95,12 @@ class Constants {
         placeRate: 9),
     PlaceModel(
         placeId: 7,
+        placeImagesList: [
+          'assets/images/PhilaeTemple.jpg',
+          'assets/images/PhilaeTemple1.jpg',
+          'assets/images/PhilaeTemple2.jpg',
+          'assets/images/PhilaeTemple4.jpg',
+        ],
         placeName: 'Philae Temple',
         cityOfPlace: 'Aswan',
         placeDescription:
@@ -62,6 +109,14 @@ class Constants {
         placeRate: 8),
     PlaceModel(
         placeId: 8,
+        placeImagesList: [
+          'assets/images/qanater.PNG',
+          'assets/images/qanater1.jpg',
+          'assets/images/qanater2.jpg',
+          'assets/images/qanater3.jpg',
+          'assets/images/qanater4.jpg',
+          'assets/images/qanater5.jpg',
+        ],
         placeName: 'El Qanater El-Khayreya',
         cityOfPlace: 'El Qalyubiya',
         placeDescription:
@@ -76,8 +131,8 @@ class Constants {
   static const SizedBox widthSpace = SizedBox(
     width: 5,
   );
-static const String postsCollection='posts';
-static const String usersCollection='users';
+  static const String postsCollection = 'posts';
+  static const String usersCollection = 'users';
 
   static const kDefaultShadow = BoxShadow(
     offset: Offset(0, 15),

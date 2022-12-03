@@ -57,24 +57,28 @@ class PlaceCard extends StatelessWidget {
               ),
             ),
 
-            Positioned(top: 8.h, right: 16.w, child: Container(
-             // height: 30.h,width: 60.w,
-              child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 6.w),
-                child:                            Text(
-                  place.placeName,
-                  maxLines: 2,
-                  style: TextStyle(
-                      fontFamily: 'Changa',
-                      color: Colors.black38,
-                      //      fontSize: setResponsiveFontSize(16),
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),color: Colors.white,boxShadow: const [Constants.kDefaultShadow]
-              ),
-            )),
+            Positioned(
+                top: 8.h,
+                right: 16.w,
+                child: Container(
+                  // height: 30.h,width: 60.w,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 6.w),
+                    child: AutoSizeText(
+                      place.placeName,
+                      maxLines: 2,
+                      style: TextStyle(
+                          fontFamily: 'Changa',
+                          color: Colors.black38,
+                          //      fontSize: setResponsiveFontSize(16),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                      boxShadow: const [Constants.kDefaultShadow]),
+                )),
             Positioned(
               bottom: 0.h,
               left: 0.w,
@@ -104,21 +108,22 @@ class PlaceCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                place.placeRate.toString(), maxLines: 1,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: CustomColors.lightGold),
-                                // style: Theme.of(context).textTheme.button,
-                              ),
-                               Icon(
-                                Icons.star,
-                                color: CustomColors.lightGold,   size: 22.w,
-                              )
-                            ]),
-                         /*   Padding(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  AutoSizeText(
+                                    place.placeRate.toString(), maxLines: 1,
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: CustomColors.lightGold),
+                                    // style: Theme.of(context).textTheme.button,
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: CustomColors.lightGold,
+                                    size: 22.w,
+                                  )
+                                ]),
+                            /*   Padding(
                               padding: EdgeInsets.only(bottom: 4.h),
                               child: Row(
                                 children: [

@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/filter_by_list.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/place_card.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/search_bar.dart';
-import '../../../Core/Colors/app_colors.dart';
-import 'Cubit/home_cubit.dart';
+import '../../../../Core/Colors/app_colors.dart';
+import '../../../../Core/Shared/methods.dart';
+import '../Cubit/home_cubit.dart';
+import 'home_details_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -28,13 +30,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*    floatingActionButton: FloatingActionButton(
-          onPressed: (() => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginPage(),
-              )))),*/
-      backgroundColor: CustomColors.niceBlue,
       body: SafeArea(
         bottom: false,
         child: Container(
@@ -111,17 +106,24 @@ class _HomePageState extends State<HomePage> {
                           itemCount: BlocProvider.of<HomeCubit>(context)
                               .filteredPlaces
                               .length,
-                          itemBuilder: (context, index) => PlaceCard(
-                              itemIndex: index,
-                              press: () {},
-                              place: BlocProvider.of<HomeCubit>(context)
-                                  .filteredPlaces[index]),
+                          itemBuilder: (context, index) => InkWell(
+                            onTap: (){
+                              ConstantMethods.navigateTo(context, HomeDetailsPage(placeId:BlocProvider.of<HomeCubit>(context)
+                                  .filteredPlaces[index].placeId ,));
+                            },
+                            child: PlaceCard(
+                                itemIndex: index,
+                                press: () {},
+                                place: BlocProvider.of<HomeCubit>(context)
+                                    .filteredPlaces[index]),
+                          ),
                         );
                       }
                     }),
                   ],
                 ),
               ),
+
             ],
           ),
         ),

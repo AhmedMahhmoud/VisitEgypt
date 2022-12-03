@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../Core/Colors/app_colors.dart';
-import '../Home/View/homepage.dart';
+import '../Home/View/screens/home_page.dart';
 import '../More/views/more_screen.dart';
 import '../Posts/View/pages/posts_screen.dart';
 
