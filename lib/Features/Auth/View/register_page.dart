@@ -6,8 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 import '../../../Core/Styles/text_style.dart';
-import '../../Home/View/homepage.dart';
-import '../../bottom_navigation/bottom_navigatio.dart';
+import '../../Home/View/screens/home_page.dart';
+import '../../bottom_navigation/bottom_navigation.dart';
 import '../Model/login.dart';
 import 'cubit/auth_cubit.dart';
 import 'login_page.dart';

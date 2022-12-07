@@ -8,10 +8,10 @@ class PlaceModel extends Equatable {
   final String placeDescription;
   final String placeImage;
   final double placeRate;
-
-  const PlaceModel({required this.placeId,required this.cityOfPlace,required this.placeName, required this.placeDescription,
-    required this.placeImage, required this.placeRate,});
+final List<String>?placeImagesList;
+  const PlaceModel( {required this.placeId,required this.cityOfPlace,required this.placeName, required this.placeDescription,
+    required this.placeImage, required this.placeRate,this.placeImagesList,});
 
   @override
-  List<Object?> get props => [placeId,placeName, cityOfPlace,placeDescription,placeImage,placeRate];
+  List<Object?> get props => [placeId,placeName, cityOfPlace,placeDescription,placeImage,placeRate,placeImagesList];
 }

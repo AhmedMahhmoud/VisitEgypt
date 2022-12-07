@@ -11,8 +11,8 @@ import '../../../Core/Styles/text_style.dart';
 import '../../Auth/Model/login.dart';
 import '../../Auth/View/cubit/auth_cubit.dart';
 import '../../Auth/View/login_page.dart';
-import '../../Home/View/homepage.dart';
-import '../../bottom_navigation/bottom_navigatio.dart';
+import '../../Home/View/screens/home_page.dart';
+import '../../bottom_navigation/bottom_navigation.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
