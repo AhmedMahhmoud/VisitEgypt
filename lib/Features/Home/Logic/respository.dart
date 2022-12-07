@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:visit_egypt/Features/Home/Model/place_review.dart';
 
 import '../../../Core/Constants/constants.dart';
 import '../../../Services/Geolocator/geolocator.dart';
@@ -10,9 +12,9 @@ abstract class HomeRepository {
   Future<List<PlaceModel>> getAllPlaces();
 
   List<PlaceModel> searchInPlaces(String placeName);
-
+  Future<List<PlaceReview>> getPlacesReviews(String placeName);
   List<PlaceModel> filterPlacesByRate();
-
+  addPlaceReview(String userID, String placeName, PlaceReview placeReview);
   List<PlaceModel> filterPlacesByLocation(String cityName);
 
   Future<String> getUserAddress();
@@ -91,13 +93,42 @@ class HomeRepositoryImp implements HomeRepository {
     String finalCityName = '';
     if (cityName.toLowerCase().contains('cai') || cityName.contains('قاهر')) {
       finalCityName = 'cairo';
-    } else if (cityName.toLowerCase().contains('giz') || cityName.contains('جيز')) {
+    } else if (cityName.toLowerCase().contains('giz') ||
+        cityName.contains('جيز')) {
       finalCityName = 'giza';
-    } else if (cityName.toLowerCase().contains('aswa') || cityName.contains('سوا')) {
+    } else if (cityName.toLowerCase().contains('aswa') ||
+        cityName.contains('سوا')) {
       finalCityName = 'aswan';
-    }else if (cityName.toLowerCase().contains('qua') || cityName.contains('قلي')) {
+    } else if (cityName.toLowerCase().contains('qua') ||
+        cityName.contains('قلي')) {
       finalCityName = 'qualiobya';
     }
     return finalCityName;
+  }
+
+  @override
+  addPlaceReview(
+      String userID, String placeName, PlaceReview placeReview) async {
+    await FirebaseFirestore.instance
+        .collection(Constants.placesCollection)
+        .doc(placeName)
+        .collection('reviews')
+        .doc(userID)
+        .set({'userReview': placeReview.toMap()});
+  }
+
+  @override
+  Future<List<PlaceReview>> getPlacesReviews(String placeName) async {
+    List<PlaceReview> reviewsList = [];
+    var x = await FirebaseFirestore.instance
+        .collection(Constants.placesCollection)
+        .doc(placeName)
+        .collection('reviews')
+        .get();
+    for (int i = 0; i < x.docs.length; i++) {
+      reviewsList.add(PlaceReview.fromMap(x.docs[i].data()['userReview']));
+    }
+
+    return reviewsList;
   }
 }
