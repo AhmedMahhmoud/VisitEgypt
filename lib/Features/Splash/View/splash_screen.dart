@@ -38,6 +38,7 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   bool isPasswordRemembered = Prefs.getBool("rememberMe") ?? false;
+
   displaySplashTime() async {
     _animationController.forward();
 

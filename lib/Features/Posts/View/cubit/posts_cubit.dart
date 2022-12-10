@@ -24,9 +24,11 @@ class PostsCubit extends Cubit<PostsState> {
     }
   }
 
+
   likePost(String postID, newMap) async {
     await postsRepository.likePost(postID, newMap);
   }
+
 
   getPostsByLocation(String location) async {
     return postsRepository.getPostsByLocation(location);
