@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:visit_egypt/Features/Posts/View/pages/posts_by_location.dart';
 
 import '../../../../Core/Colors/app_colors.dart';
 import '../../../../Core/Constants/constants.dart';
@@ -78,7 +77,7 @@ class PlaceCard extends StatelessWidget {
                     ),
                   ),
                 )),
-         /*   Positioned(
+            /*   Positioned(
                 right: 20.w,
                 child: InkWell(
                   onTap: () {

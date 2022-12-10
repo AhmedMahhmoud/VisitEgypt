@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../Colors/app_colors.dart';
 import '../FontManager/font_manager.dart';
 
-
-
 class TextStyles {
   static TextStyle boldStyle = TextStyle(
       fontWeight: FontManager.bold,

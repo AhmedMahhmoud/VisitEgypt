@@ -133,7 +133,7 @@ class Constants {
   );
   static const String postsCollection = 'posts';
   static const String usersCollection = 'users';
-
+  static const String placesCollection = 'placesReviews';
   static const kDefaultShadow = BoxShadow(
     offset: Offset(0, 15),
     blurRadius: 30,

@@ -11,7 +11,6 @@ import '../../../../Core/Colors/app_colors.dart';
 import '../../../../Core/Shared/methods.dart';
 import '../Cubit/home_cubit.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -114,10 +113,14 @@ class _HomePageState extends State<HomePage> {
                               .filteredPlaces
                               .length,
                           itemBuilder: (context, index) => InkWell(
-                            onTap: (){
-                              ConstantMethods.navigateReplacementTo(context,
-                                   HomeDetailsPage(placeId:BlocProvider.of<HomeCubit>(context)
-                                      .filteredPlaces[index].placeId ));
+                            onTap: () {
+                              ConstantMethods.navigateReplacementTo(
+                                  context,
+                                  HomeDetailsPage(
+                                      placeId:
+                                          BlocProvider.of<HomeCubit>(context)
+                                              .filteredPlaces[index]
+                                              .placeId));
                             },
                             child: PlaceCard(
                                 itemIndex: index,
