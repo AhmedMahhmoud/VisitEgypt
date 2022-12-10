@@ -26,15 +26,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     BlocProvider.of<HomeCubit>(context).getUserAddress();
+    BlocProvider.of<HomeCubit>(context).getAllPlaces();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(onPressed: (() async {
-      //   PostsRepository postsRepository = PostsRepositoryImpl();
-      //   await postsRepository.getPostsByLocation("Abo El Hol");
-      // })),
       backgroundColor: CustomColors.niceBlue,
       body: SafeArea(
         bottom: false,
@@ -122,11 +119,15 @@ class _HomePageState extends State<HomePage> {
                                               .filteredPlaces[index]
                                               .placeId));
                             },
-                            child: PlaceCard(
-                                itemIndex: index,
-                                press: () {},
-                                place: BlocProvider.of<HomeCubit>(context)
-                                    .filteredPlaces[index]),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20.w, vertical: 8.h),
+                              child: PlaceCard(
+                                  itemIndex: index,
+                                  press: () {},
+                                  place: BlocProvider.of<HomeCubit>(context)
+                                      .filteredPlaces[index]),
+                            ),
                           ),
                         );
                       }

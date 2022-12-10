@@ -1,17 +1,22 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:visit_egypt/Features/Home/Model/place_model.dart';
 import 'package:visit_egypt/Features/Home/View/screens/home_page.dart';
 import 'package:visit_egypt/Features/Home/View/screens/places_reviews.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/rating_dialog.dart';
+import 'package:visit_egypt/Features/Home/View/widgets/ticket.dart';
 import '../../../../Core/Colors/app_colors.dart';
 import '../../../../Core/Constants/constants.dart';
 import '../../../../Core/Shared/methods.dart';
 import '../../../../Core/Styles/text_style.dart';
 import '../../../Posts/View/pages/posts_by_location.dart';
+import '../Cubit/home_cubit.dart';
+import '../widgets/place_card.dart';
+import '../widgets/ticket_details.dart';
 
 class HomeDetailsPage extends StatefulWidget {
   final int placeId;
@@ -35,10 +40,13 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
     placeModel = Constants.allPlaces
         .where((element) => element.placeId == widget.placeId)
         .first;
+    BlocProvider.of<HomeCubit>(context)
+        .filterPlacesByLocation(placeModel.cityOfPlace);
   }
 
   @override
   Widget build(BuildContext context) {
+    var homeCubit = BlocProvider.of<HomeCubit>(context);
     return WillPopScope(
       onWillPop: () {
         ConstantMethods.navigateReplacementTo(context, const HomePage());
@@ -291,6 +299,55 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                 ),
                               ),
                               SizedBox(
+                                height: 10.h,
+                              ),
+                              homeCubit.filteredPlaces.length > 1
+                                  ? Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 10.w, vertical: 4.h),
+                                      child: AutoSizeText(
+                                        'You will also like',
+                                        style: TextStyle(
+                                            fontFamily: 'Changa',
+                                            color: Colors.black,
+                                            fontSize: setResponsiveFontSize(14),
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                                    )
+                                  : Container(),
+                              homeCubit.filteredPlaces.length > 1
+                                  ? SizedBox(
+                                      height: 150.h,
+                                      child: ListView.builder(
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount:
+                                            homeCubit.filteredPlaces.length,
+                                        itemBuilder: (context, index) {
+                                          if (homeCubit.filteredPlaces[index]
+                                                  .placeName ==
+                                              placeModel.placeName) {
+                                            return Container();
+                                          } else {
+                                            return SizedBox(
+                                              width: 240.h,
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 10.w,
+                                                    vertical: 4.h),
+                                                child: PlaceCard(
+                                                    itemIndex: index,
+                                                    press: () {},
+                                                    place: homeCubit
+                                                        .filteredPlaces[index]),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                      ),
+                                    )
+                                  : Container(),
+                              SizedBox(
                                 height: 50.h,
                               ),
                             ],
@@ -340,102 +397,4 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
       ),
     );
   }
-}
-
-class TicketData extends StatelessWidget {
-  final String placeName;
-
-  const TicketData({
-    Key? key,
-    required this.placeName,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        AutoSizeText(
-          '$placeName Ticket',
-          style: TextStyle(
-              color: Colors.black,
-              fontSize: setResponsiveFontSize(16),
-              fontWeight: FontWeight.bold),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 25.0.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ticketDetailsWidget(
-                  'opening time', '08:00 Am', 'closing time', '7:00 Pm'),
-              Padding(
-                padding: EdgeInsets.only(top: 12.0.h, right: 40.0.w),
-                child: ticketDetailsWidget(
-                    'Price on vacation', '20 LE', 'Price', '40 LE'),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 45.0.h, left: 30.0.w, right: 30.0.w),
-          child: Container(
-            width: 250.0,
-            height: 40.0,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/barcode.jpg'),
-                    fit: BoxFit.cover)),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-Widget ticketDetailsWidget(String firstTitle, String firstDesc,
-    String secondTitle, String secondDesc) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Padding(
-        padding: EdgeInsets.only(left: 12.0.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            AutoSizeText(
-              firstTitle,
-              style: const TextStyle(color: Colors.grey),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 4.0.h),
-              child: AutoSizeText(
-                firstDesc,
-                style: const TextStyle(color: Colors.black),
-              ),
-            )
-          ],
-        ),
-      ),
-      Padding(
-        padding: EdgeInsets.only(right: 20.0.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AutoSizeText(
-              secondTitle,
-              style: const TextStyle(color: Colors.grey),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 4.0.h),
-              child: AutoSizeText(
-                secondDesc,
-                style: const TextStyle(color: Colors.black),
-              ),
-            )
-          ],
-        ),
-      )
-    ],
-  );
 }

@@ -8,7 +8,6 @@ import '../../../main.dart';
 import '../Model/place_model.dart';
 import '../View/Cubit/home_cubit.dart';
 
-
 abstract class HomeRepository {
   Future<List<PlaceModel>> getAllPlaces();
 
@@ -26,8 +25,6 @@ abstract class HomeRepository {
 /// i should use filteredList in cubit instead of constant.allPlaces
 
 class HomeRepositoryImp implements HomeRepository {
-
-
   @override
   Future<List<PlaceModel>> getAllPlaces() async {
     return Constants.allPlaces;
@@ -78,6 +75,7 @@ class HomeRepositoryImp implements HomeRepository {
 
   @override
   List<PlaceModel> filterPlacesByLocation(String cityName) {
+    print(cityName);
     List<PlaceModel> results = [];
     if (cityName.isEmpty) {
       return Constants.allPlaces;
@@ -102,7 +100,7 @@ class HomeRepositoryImp implements HomeRepository {
     } else if (cityName.toLowerCase().contains('aswa') ||
         cityName.contains('سوا')) {
       finalCityName = 'aswan';
-    } else if (cityName.toLowerCase().contains('qua') ||
+    } else if (cityName.toLowerCase().contains('el qa') ||
         cityName.contains('قلي')) {
       finalCityName = 'qualiobya';
     }
