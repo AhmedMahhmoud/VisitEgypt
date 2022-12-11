@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:readmore/readmore.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:visit_egypt/Features/Home/Model/place_model.dart';
 import 'package:visit_egypt/Features/Home/View/screens/home_page.dart';
@@ -157,28 +158,6 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.end,
                                       children: [
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              AutoSizeText(
-                                                placeModel.placeRate.toString(),
-                                                maxLines: 1,
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize:
-                                                        setResponsiveFontSize(
-                                                            14),
-                                                    color:
-                                                        CustomColors.lightGold),
-                                                // style: Theme.of(context).textTheme.button,
-                                              ),
-                                              Icon(
-                                                Icons.star,
-                                                color: CustomColors.lightGold,
-                                                size: 22.w,
-                                              )
-                                            ]),
                                         InkWell(
                                           onTap: () {
                                             showDialog(
@@ -198,54 +177,83 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                                       ),
                                                     ));
                                           },
-                                          child: AutoSizeText(
-                                            "Add your review now",
-                                            style: TextStyles.boldStyle
-                                                .copyWith(
-                                                    fontSize: 13.sp,
-                                                    decoration: TextDecoration
-                                                        .underline),
-                                          ),
+                                          child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () => Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PlacesReviewPage(
+                                                                placeName:
+                                                                    placeModel
+                                                                        .placeName),
+                                                      )),
+                                                  child: AutoSizeText(
+                                                    "View all reviews",
+                                                    style: TextStyles.boldStyle
+                                                        .copyWith(
+                                                            fontSize: 13.sp,
+                                                            color: Colors.grey,
+                                                            decoration:
+                                                                TextDecoration
+                                                                    .underline),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  width: 4.w,
+                                                ),
+                                                AutoSizeText(
+                                                  placeModel.placeRate
+                                                      .toString(),
+                                                  maxLines: 1,
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          setResponsiveFontSize(
+                                                              14),
+                                                      color: CustomColors
+                                                          .lightGold),
+                                                  // style: Theme.of(context).textTheme.button,
+                                                ),
+                                                Icon(
+                                                  Icons.star,
+                                                  color: CustomColors.lightGold,
+                                                  size: 22.w,
+                                                )
+                                              ]),
                                         ),
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        InkWell(
-                                          onTap: () => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PlacesReviewPage(
-                                                        placeName: placeModel
-                                                            .placeName),
-                                              )),
-                                          child: AutoSizeText(
-                                            "View all reviews",
-                                            style: TextStyles.boldStyle
-                                                .copyWith(
-                                                    fontSize: 13.sp,
-                                                    color: Colors.grey,
-                                                    decoration: TextDecoration
-                                                        .underline),
-                                          ),
-                                        )
                                       ],
                                     ),
                                   ],
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 10.w),
-                                child: AutoSizeText(
-                                  placeModel.placeDescription,
-                                  textAlign: TextAlign.start,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black38,
-                                    fontSize: setResponsiveFontSize(16),
-                                  ),
-                                ),
-                              ),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.w),
+                                  child: ReadMoreText(
+                                    placeModel.placeDescription,
+                                    trimLines: 3,
+                                    trimMode: TrimMode.Line,
+                                    lessStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: CustomColors.lightGold,
+                                      fontSize: setResponsiveFontSize(14),
+                                    ),
+                                    trimCollapsedText: 'Show more',
+                                    trimExpandedText: 'Show less',
+                                    moreStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: CustomColors.lightGold,
+                                      fontSize: setResponsiveFontSize(14),
+                                    ),
+                                  )),
                               SizedBox(
                                 height: 10.h,
                               ),
@@ -272,7 +280,7 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                           ),
                                           child: const Center(
                                             child: AutoSizeText(
-                                              'See more',
+                                              'More Info',
                                               style: TextStyle(
                                                   color: Colors.green),
                                             ),
