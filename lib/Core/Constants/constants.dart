@@ -8,6 +8,8 @@ class Constants {
         placeLat: 29.98133015625794,
         placeLong: 31.13773777184683,
         placeId: 1,
+        placeSafetyGuides:
+            'Wear light clothing that is breathable. Cotton trousers/capris and a t-shirt, a maxi dress, jumpsuit, or a maxi skirt and top combo would be ideal.\n\nPack your hat, sunglasses, and a light scarf to protect you from heat and potential sandstorms (these happen more than you think). I totally regretted not bringing mine!.\n\n Wear comfortable shoes as the surfaces at the Pyramid complex can be uneven. I did see a lot of women wearing revealing clothing like shorts and short dresses but I personally didn’t feel comfortable doing so. I was a woman travelling alone and I didn’t want to attract unwanted attention!',
         placeImagesList: [
           'assets/images/aboelhol.jpg',
           'assets/images/aboelhol1.jpg',
@@ -24,6 +26,8 @@ class Constants {
         placeLat: 22.728316423560162,
         placeLong: 32.72951202768114,
         placeId: 2,
+        placeSafetyGuides:
+            'Wear light clothing that is breathable. Cotton trousers/capris and a t-shirt, a maxi dress, jumpsuit, or a maxi skirt and top combo would be ideal.\n\nPack your hat, sunglasses, and a light scarf to protect you from heat and potential sandstorms (these happen more than you think). I totally regretted not bringing mine!.\n\n Wear comfortable shoes as the surfaces at the Pyramid complex can be uneven. I did see a lot of women wearing revealing clothing like shorts and short dresses but I personally didn’t feel comfortable doing so. I was a woman travelling alone and I didn’t want to attract unwanted attention!',
         placeImagesList: [
           'assets/images/abosimple.jpg',
           'assets/images/abosimple1.jpg',
@@ -49,6 +53,8 @@ class Constants {
         ],
         placeName: 'Cairo Tower',
         cityOfPlace: 'Cairo',
+        placeSafetyGuides:
+            'Cairo Tower is open every day from 8:00am until midnight, and until 1:00am in summer. Tickets are priced at 60 EGP per person (while children under 6 years old go free). The best time to visit is either in the late morning after the early haze has burned away; or in the evening when visitors are greeted by the spectacle of a million lights sparkling into life all over the city. ',
         placeDescription:
             'The Cairo Tower is a free-standing concrete tower in Cairo, Egypt. At 187 m (614 ft), it is the tallest structure in Egypt and North Africa. Built from 1956 to 1961, the tower was designed by the Egyptian architect Naoum Shebib, inspired by the Ancient Egyptian Architecture.[1] Its partially open lattice-work design is intended to evoke a pharaonic lotus plant, an iconic symbol of Ancient Egypt.[8] The tower is crowned by a circular observation deck and a revolving restaurant[9] that rotate around its axis occasionally[10] with a view over greater Cairo.[11] According to documents published by Major General Adel Shaheen, the funds for the construction of the tower were originated from the Government of the United States through the CIA that represented by Kermit Roosevelt, which had provided around 3 million to Gamal Abdel Nasser as a personal gift to him with the intent of stopping his support for Algerian Revolution and other African independence movements.[8][12][13] Affronted by the attempt to bribe him, Nasser decided to publicly rebuke the U.S. government by transferring all of the funds to the Egyptian government for the use of the tower construction, which he stated that it would be "visible from the US Embassy just across the Nile, as a taunting symbol of Egypt , Africa and the Middle East\'s resistance, revolutions and pride".[12][14]',
         placeImage: 'assets/images/cairotower.jpg',
@@ -56,6 +62,8 @@ class Constants {
     PlaceModel(
         placeLat: 30.02959626596546,
         placeLong: 31.260698221694632,
+        placeSafetyGuides:
+            ' The mosque stays open from 8 a.m. to 5 p.m. every day but is closed to visitors during Friday midday prayers. At all other times, non-Muslims are welcome to look around but must dress modestly and remove shoes before entering the mosque.',
         placeId: 4,
         placeImagesList: [
           'assets/images/mohamedali.jpg',
@@ -73,6 +81,8 @@ class Constants {
     PlaceModel(
         placeLat: 30.04835144175623,
         placeLong: 31.233659188237386,
+        placeSafetyGuides:
+            'In order to protect the exhibits and to maintain a safe environment where the visitor can appreciate the exhibits comfortably, please confirm with the following regulations: Large bags, large backpacks, luggage, or parcels larger than 40 x 40 cm are not permitted into the museum; you can store them in the cloakroom. Bags and backpacks may be subject to search at any time. Do not bring any sharp items or dangerous materials into the museum (such as knives, screwdrivers, scissors, and firearms). These items must stored in the cloakroom Do not bring umbrellas into the museum. Please leave them in the cloakroom. Do not bring folding seats or any other type of seat within the galleries unless you obtain permission from museum security, Animals or pets are not allowed in the museum. Musical instruments are not allowed inside the museum. Do not bring any advertising banners or carry placards or signs inside the museum unless you obtain approval from the concerned authorities.',
         placeId: 5,
         placeImagesList: [
           'assets/images/museum.jpg',
@@ -92,6 +102,8 @@ class Constants {
         placeLat: 29.979438936150302,
         placeLong: 31.13458813439292,
         placeId: 6,
+        placeSafetyGuides:
+            'Wear light clothing that is breathable. Cotton trousers/capris and a t-shirt, a maxi dress, jumpsuit, or a maxi skirt and top combo would be ideal.\n\nPack your hat, sunglasses, and a light scarf to protect you from heat and potential sandstorms (these happen more than you think). I totally regretted not bringing mine!.\n\n Wear comfortable shoes as the surfaces at the Pyramid complex can be uneven. I did see a lot of women wearing revealing clothing like shorts and short dresses but I personally didn’t feel comfortable doing so. I was a woman travelling alone and I didn’t want to attract unwanted attention!',
         placeImagesList: [
           'assets/images/pyramids.jpg',
           'assets/images/pyramids1.jpg',
@@ -109,6 +121,8 @@ class Constants {
         placeLat: 24.02566197900067,
         placeLong: 32.88420938450248,
         placeId: 7,
+        placeSafetyGuides:
+            'Wear light clothing that is breathable. Cotton trousers/capris and a t-shirt, a maxi dress, jumpsuit, or a maxi skirt and top combo would be ideal.\n\nPack your hat, sunglasses, and a light scarf to protect you from heat and potential sandstorms (these happen more than you think). I totally regretted not bringing mine!.\n\n Wear comfortable shoes as the surfaces at the Pyramid complex can be uneven. I did see a lot of women wearing revealing clothing like shorts and short dresses but I personally didn’t feel comfortable doing so. I was a woman travelling alone and I didn’t want to attract unwanted attention!',
         placeImagesList: [
           'assets/images/PhilaeTemple.jpg',
           'assets/images/PhilaeTemple1.jpg',
@@ -124,6 +138,8 @@ class Constants {
     PlaceModel(
         placeLat: 30.236529925884014,
         placeLong: 31.13759772462791,
+        placeSafetyGuides:
+            'Always swim in a lifeguarded area.\nNever swim alone, regardless of your age or level of swimming skills.\nKeep within your fitness and swimming capabilities.\nBe aware of weather and water conditions and heed warnings.',
         placeId: 8,
         placeImagesList: [
           'assets/images/qanater.PNG',

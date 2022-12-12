@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class PlaceModel extends Equatable {
   final int placeId;
   final String placeName;
+  final String placeSafetyGuides;
   final String cityOfPlace;
   final String placeDescription;
   final String placeImage;
@@ -16,6 +17,7 @@ class PlaceModel extends Equatable {
     required this.placeName,
     required this.placeDescription,
     required this.placeImage,
+    required this.placeSafetyGuides,
     required this.placeRate,
     required this.placeLat,
     required this.placeLong,
@@ -29,6 +31,7 @@ class PlaceModel extends Equatable {
         cityOfPlace,
         placeDescription,
         placeImage,
+        placeSafetyGuides,
         placeRate,
         placeImagesList,
         placeLat,

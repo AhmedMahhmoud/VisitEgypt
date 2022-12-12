@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:readmore/readmore.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:visit_egypt/Features/Home/Model/place_model.dart';
@@ -40,11 +41,50 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
   @override
   void initState() {
     super.initState();
+
     placeModel = Constants.allPlaces
         .where((element) => element.placeId == widget.placeId)
         .first;
     BlocProvider.of<HomeCubit>(context)
         .filterPlacesByLocation(placeModel.cityOfPlace);
+  }
+
+  showMyDialog() {
+    return showDialog(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Safety Guides'),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Lottie.asset('assets/lotties/safetyguide.json'),
+                Text(
+                  placeModel.placeSafetyGuides,
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Got it'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -165,20 +205,34 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                                 vertical: 4.h),
                                             child: Row(
                                               children: [
-                                                AutoSizeText(
-                                                  'Description',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Changa',
-                                                      color: Colors.black,
-                                                      fontSize:
-                                                          setResponsiveFontSize(
-                                                              16),
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                                                InkWell(
+                                                  onTap: () => showMyDialog(),
+                                                  child: AutoSizeText(
+                                                    'Description',
+                                                    style: TextStyle(
+                                                        fontFamily: 'Changa',
+                                                        color: Colors.black,
+                                                        fontSize:
+                                                            setResponsiveFontSize(
+                                                                16),
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
                                                 ),
                                                 const Spacer(),
+                                                InkWell(
+                                                  onTap: () => showMyDialog(),
+                                                  child: Image.asset(
+                                                    'assets/images/safety.png',
+                                                    height: 33.h,
+                                                    width: 40.w,
+                                                  ),
+                                                )
                                               ],
                                             ),
+                                          ),
+                                          SizedBox(
+                                            height: 10.h,
                                           ),
                                           Padding(
                                               padding: EdgeInsets.symmetric(
