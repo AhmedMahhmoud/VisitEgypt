@@ -11,7 +11,9 @@ import '../../Model/place_review.dart';
 
 class DisplayRatingDialog extends StatelessWidget {
   final PlaceModel place;
-  const DisplayRatingDialog({required this.place, super.key});
+  final Function refreshReviewsFuture;
+  const DisplayRatingDialog(
+      {required this.place, super.key, required this.refreshReviewsFuture});
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +42,10 @@ class DisplayRatingDialog extends StatelessWidget {
 
           BlocProvider.of<HomeCubit>(context, listen: false)
               .addPlaceReview(user.uid, place.placeName, placeReview);
+
           ConstantMethods.showContentToast(
               context, "Review added successfully!");
+          refreshReviewsFuture();
         });
   }
 }

@@ -3,8 +3,6 @@ import 'package:geocoding/geocoding.dart';
 
 import '../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 
-
-
 class GeoLocatorService {
   static Future<Position> getCurrentUserLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -22,19 +20,21 @@ class GeoLocatorService {
         desiredAccuracy: LocationAccuracy.high);
   }
 
+  static Future<String> getAddressFromLatLng(double lat, double long) async {
+    List<Placemark> placeMark = await placemarkFromCoordinates(lat, long);
 
-  static Future<String> getCurrentAddress()async{
-    List<Placemark>placeMark=await placemarkFromCoordinates(Prefs.getDouble('UserLat')!,Prefs.getDouble('UserLng')!);
-      print('name ${placeMark[0].name}');
-      print('administrativeArea ${placeMark[0].administrativeArea}');
-      print('country ${placeMark[0].country}');
-      print('locality ${placeMark[0].locality}');
-      print('street ${placeMark[0].street}');
-      print('subLocality ${placeMark[0].subLocality}');
-    return placeMark[0].administrativeArea.toString();
+    return placeMark[0].street.toString();
   }
 
-
-
-
+  static Future<String> getCurrentAddress() async {
+    List<Placemark> placeMark = await placemarkFromCoordinates(
+        Prefs.getDouble('UserLat')!, Prefs.getDouble('UserLng')!);
+    // print('name ${placeMark[0].name}');
+    // print('administrativeArea ${placeMark[0].administrativeArea}');
+    // print('country ${placeMark[0].country}');
+    // print('locality ${placeMark[0].locality}');
+    // print('street ${placeMark[0].street}');
+    // print('subLocality ${placeMark[0].subLocality}');
+    return placeMark[0].administrativeArea.toString();
+  }
 }

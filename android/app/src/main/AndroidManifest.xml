@@ -9,6 +9,9 @@
         android:label="Visit Egypt"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyDqJB00PNv89PvcwyGkk7Wo0tN8-oO7uyA"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

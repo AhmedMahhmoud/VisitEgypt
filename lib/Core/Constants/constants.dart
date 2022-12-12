@@ -5,6 +5,8 @@ import '../../Features/Home/Model/place_model.dart';
 class Constants {
   static const List<PlaceModel> allPlaces = [
     PlaceModel(
+        placeLat: 29.98133015625794,
+        placeLong: 31.13773777184683,
         placeId: 1,
         placeImagesList: [
           'assets/images/aboelhol.jpg',
@@ -19,6 +21,8 @@ class Constants {
         placeImage: 'assets/images/aboelhol.jpg',
         placeRate: 8),
     PlaceModel(
+        placeLat: 22.728316423560162,
+        placeLong: 32.72951202768114,
         placeId: 2,
         placeImagesList: [
           'assets/images/abosimple.jpg',
@@ -33,6 +37,8 @@ class Constants {
         placeImage: 'assets/images/abosimple.jpg',
         placeRate: 7),
     PlaceModel(
+        placeLat: 30.04595558993511,
+        placeLong: 31.22416347791308,
         placeId: 3,
         placeImagesList: [
           'assets/images/cairotower.jpg',
@@ -48,6 +54,8 @@ class Constants {
         placeImage: 'assets/images/cairotower.jpg',
         placeRate: 7.5),
     PlaceModel(
+        placeLat: 30.02959626596546,
+        placeLong: 31.260698221694632,
         placeId: 4,
         placeImagesList: [
           'assets/images/mohamedali.jpg',
@@ -63,6 +71,8 @@ class Constants {
         placeImage: 'assets/images/mohamedali.jpg',
         placeRate: 9),
     PlaceModel(
+        placeLat: 30.04835144175623,
+        placeLong: 31.233659188237386,
         placeId: 5,
         placeImagesList: [
           'assets/images/museum.jpg',
@@ -79,6 +89,8 @@ class Constants {
         placeImage: 'assets/images/museum.jpg',
         placeRate: 8),
     PlaceModel(
+        placeLat: 29.979438936150302,
+        placeLong: 31.13458813439292,
         placeId: 6,
         placeImagesList: [
           'assets/images/pyramids.jpg',
@@ -94,6 +106,8 @@ class Constants {
         placeImage: 'assets/images/pyramids.jpg',
         placeRate: 9),
     PlaceModel(
+        placeLat: 24.02566197900067,
+        placeLong: 32.88420938450248,
         placeId: 7,
         placeImagesList: [
           'assets/images/PhilaeTemple.jpg',
@@ -108,6 +122,8 @@ class Constants {
         placeImage: 'assets/images/PhilaeTemple.jpg',
         placeRate: 8),
     PlaceModel(
+        placeLat: 30.236529925884014,
+        placeLong: 31.13759772462791,
         placeId: 8,
         placeImagesList: [
           'assets/images/qanater.PNG',
