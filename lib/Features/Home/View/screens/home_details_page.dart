@@ -383,8 +383,54 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                                   ),
                                                 )
                                               : Container(),
-                                          SizedBox(
-                                            height: 50.h,
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 16.h,
+                                                horizontal: 10.w),
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    MaterialStateProperty.all(
+                                                        Colors.white),
+                                                shape:
+                                                    MaterialStateProperty.all<
+                                                        RoundedRectangleBorder>(
+                                                  RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            5.0),
+                                                    side: const BorderSide(
+                                                      color: CustomColors
+                                                          .lightGold,
+                                                      width: 2.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    vertical: 12.h),
+                                                child: const AutoSizeText(
+                                                  'See Related Posts',
+                                                  style: TextStyle(
+                                                      color: CustomColors
+                                                          .lightGold,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          PostsByLocation(
+                                                              locationName:
+                                                                  placeModel
+                                                                      .placeName),
+                                                    ));
+                                              },
+                                            ),
                                           ),
                                         ],
                                       ),
@@ -396,7 +442,7 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                           ],
                         ),
                       ),
-                      Positioned(
+                      /*   Positioned(
                           bottom: 16.h,
                           left: 45.w,
                           right: 45.w,
@@ -428,7 +474,7 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                     fontSize: setResponsiveFontSize(18)),
                               ),
                             ),
-                          ))
+                          ))  */
                     ],
                   ),
                 ],
