@@ -14,6 +14,7 @@ import '../../../../Core/Constants/constants.dart';
 import '../../../../Core/Shared/methods.dart';
 import '../../../../Core/Styles/text_style.dart';
 import '../../../Posts/View/pages/posts_by_location.dart';
+import '../../../bottom_navigation/bottom_navigation.dart';
 import '../Cubit/home_cubit.dart';
 import '../widgets/place_card.dart';
 import '../widgets/place_location_map_display.dart';
@@ -92,7 +93,8 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
     var homeCubit = BlocProvider.of<HomeCubit>(context);
     return WillPopScope(
       onWillPop: () {
-        ConstantMethods.navigateReplacementTo(context, const HomePage());
+        ConstantMethods.navigateReplacementTo(
+            context, BottomNav(comingIndex: 0));
         throw '';
       },
       child: Scaffold(
