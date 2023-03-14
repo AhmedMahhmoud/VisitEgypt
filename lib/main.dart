@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:visit_egypt/Features/Home/View/Cubit/trips_cubit.dart';
 import 'package:visit_egypt/Injection/dependency_injection.dart' as di;
 import 'Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import 'Features/Auth/View/cubit/auth_cubit.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider(create: (_) => di.sl<AuthCubit>()),
               BlocProvider(create: (_) => di.sl<HomeCubit>()..getAllPlaces()),
+              BlocProvider(create: (_) => di.sl<TripsCubit>()),
               BlocProvider(
                 create: (context) => di.sl<PostsCubit>(),
               )

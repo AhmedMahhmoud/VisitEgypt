@@ -6,12 +6,10 @@ import '../Home/View/screens/home_page.dart';
 import '../More/views/more_screen.dart';
 import '../Posts/View/pages/posts_screen.dart';
 
-
-
 class BottomNav extends StatefulWidget {
   int comingIndex = -1;
 
-  BottomNav({required this.comingIndex});
+  BottomNav({super.key, required this.comingIndex});
 
   @override
   _BottomNavState createState() => _BottomNavState();
@@ -20,7 +18,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int currentIndex = 1;
 
-  final tabs = [const HomePage(), const PostsPage(),MoreScreen()];
+  final tabs = [const HomePage(), const PostsPage(), const MoreScreen()];
 
   //final keyOne = GlobalKey();
   @override
@@ -46,9 +44,25 @@ class _BottomNavState extends State<BottomNav> {
         backgroundColor: Colors.black38,
         currentIndex: currentIndex,
         elevation: 20,
-        items:  [  BottomNavigationBarItem(icon: Image.asset('assets/images/home.png',height: 30.h,), label: "Home"),
-          BottomNavigationBarItem(icon: Image.asset('assets/images/posts.png',height: 30.h,), label: "Posts"),
-          BottomNavigationBarItem(icon: Image.asset('assets/images/gear.png',height: 30.h,), label: "More")
+        items: [
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/home.png',
+                height: 30.h,
+              ),
+              label: "Home"),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/posts.png',
+                height: 30.h,
+              ),
+              label: "Posts"),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/images/gear.png',
+                height: 30.h,
+              ),
+              label: "More")
         ],
       ),
     );

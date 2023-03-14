@@ -1,10 +1,12 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:geolocator/geolocator.dart';
+import 'package:visit_egypt/Enums/user_type.dart';
 
 import '../../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../../../../Enums/firebase_request_enum.dart';
@@ -19,9 +21,10 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.authRepository}) : super(AuthInitial());
 
   final AuthRepository authRepository;
-
-  Future<void> firebaseSignUp(AuthModel authModel) async {
-    makeFirebaseRequest(FirebaseRequestType.register, authModel);
+  UserTypeEnum userTypeEnum = UserTypeEnum.tourist;
+  Future<void> firebaseSignUp(AuthModel authModel, String userType) async {
+    makeFirebaseRequest(FirebaseRequestType.register, authModel,
+        userType: userType);
   }
 
   Future<void> firebaseResetPassword(AuthModel auth) async {
@@ -33,7 +36,8 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> makeFirebaseRequest(
-      FirebaseRequestType requestType, AuthModel authModel) async {
+      FirebaseRequestType requestType, AuthModel authModel,
+      {String? userType}) async {
     UserCredential? userCridentials;
     try {
       if (requestType == FirebaseRequestType.forget) {
@@ -48,8 +52,17 @@ class AuthCubit extends Cubit<AuthState> {
           Prefs.setStringList(
                   "userData", [authModel.username, authModel.password])
               .whenComplete(() => log("user cached"));
+          var loginData = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(userCridentials.user!.uid)
+              .get();
+          if (loginData.data()!['userType'] == 'tourist') {
+            userTypeEnum = UserTypeEnum.tourist;
+          } else {
+            userTypeEnum = UserTypeEnum.tourguide;
+          }
         } else if (requestType == FirebaseRequestType.register) {
-          userCridentials = await signUpUser(authModel);
+          userCridentials = await signUpUser(authModel, userType!);
         }
         emit(LoadedAuthState(userCredential: userCridentials!));
       }
@@ -58,7 +71,7 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  signUpUser(AuthModel authModel) async {
+  signUpUser(AuthModel authModel, String userType) async {
     try {
       late UserCredential userCridentials;
       final FirebaseAuthService firebaseAuthService = FirebaseAuthService();
@@ -70,8 +83,8 @@ class AuthCubit extends Cubit<AuthState> {
       } catch (e) {
         rethrow;
       }
-      final UserData user =
-          UserData.parseUserCridentalToUserData(userCridentials, userLocation);
+      final UserData user = UserData.parseUserCridentalToUserData(
+          userCridentials, userLocation, userType);
       await firebaseAuthService.addUserToFirestore(user);
       return userCridentials;
     } catch (e) {
