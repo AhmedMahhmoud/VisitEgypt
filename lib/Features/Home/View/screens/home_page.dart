@@ -6,7 +6,7 @@ import 'package:visit_egypt/Features/Auth/View/cubit/auth_cubit.dart';
 import '../../../../Core/Colors/app_colors.dart';
 import '../Cubit/home_cubit.dart';
 import '../widgets/tourguide_home.dart';
-import '../widgets/tourist_home.dart';
+import '../widgets/tourist_page_display.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String searchedName = '';
-  final _controller = ScrollController();
+
   late final UserTypeEnum userTypeEnum;
   @override
   void initState() {
@@ -44,16 +44,7 @@ class _HomePageState extends State<HomePage> {
         body: SafeArea(
           bottom: false,
           child: userTypeEnum == UserTypeEnum.tourist
-              ? Container(
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                            'assets/images/bgg.jpg',
-                          ),
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.white, BlendMode.softLight))),
-                  child: TouristHome(controller: _controller))
+              ? const TouristPageDisplay()
               : ListView(
                   physics: const BouncingScrollPhysics(),
                   children: const [

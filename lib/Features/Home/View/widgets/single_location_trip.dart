@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visit_egypt/Core/Colors/app_colors.dart';
+import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Features/Home/Model/tourguide_trip.dart';
 import 'package:visit_egypt/Features/Home/View/Cubit/trips_cubit.dart';
 
@@ -283,6 +284,7 @@ class _TripCreationDisplayState extends State<TripCreationDisplay> {
                       MaterialPageRoute(
                           builder: (context) => BottomNav(
                                 comingIndex: 0,
+                                firebaseRequestType: FirebaseRequestType.login,
                               )));
                 }
               },

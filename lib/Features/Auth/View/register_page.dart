@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Enums/user_type.dart';
 
 import '../../../Core/Styles/text_style.dart';
@@ -45,6 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   MaterialPageRoute(
                     builder: (context) => BottomNav(
                       comingIndex: 0,
+                      firebaseRequestType: FirebaseRequestType.register,
                     ),
                   ));
             }

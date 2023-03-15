@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Features/Auth/View/register_page.dart';
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../../../Core/Styles/text_style.dart';
@@ -46,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(
                     builder: (context) => BottomNav(
                       comingIndex: 0,
+                      firebaseRequestType: FirebaseRequestType.login,
                     ),
                   ));
             }
