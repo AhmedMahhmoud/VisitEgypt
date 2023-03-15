@@ -11,6 +11,7 @@ import 'package:visit_egypt/Injection/dependency_injection.dart' as di;
 import 'Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import 'Features/Auth/View/cubit/auth_cubit.dart';
 import 'Features/Home/View/Cubit/home_cubit.dart';
+import 'Features/Home/View/screens/tourguide_registeration_page.dart';
 import 'Features/Posts/View/cubit/posts_cubit.dart';
 import 'Features/Splash/View/splash_screen.dart';
 import 'Services/Geolocator/geolocator.dart';
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
                 locale: DevicePreview.locale(context),
                 builder: DevicePreview.appBuilder,
                 title: 'Visit Egypt',
-                home: const SplashScreen()
+                home: const TourguideRegisterationPage()
                 //BottomNav(comingIndex: 0)
                 //const HomePage()
 

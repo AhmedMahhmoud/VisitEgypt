@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:visit_egypt/Core/Colors/app_colors.dart';
 
 import '../../Features/Home/Model/place_model.dart';
 
@@ -157,3 +158,10 @@ class Constants {
     color: Colors.black12, // Black color with 12% opacity
   );
 }
+
+InputDecoration textFieldDecoration = InputDecoration(
+  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+  focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(width: 1, color: CustomColors.greyK),
+      borderRadius: BorderRadius.circular(10)),
+);
