@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-
+import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 
 import '../../../Core/Colors/app_colors.dart';
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
@@ -11,7 +11,6 @@ import '../../../Core/Styles/text_style.dart';
 import '../../Auth/Model/login.dart';
 import '../../Auth/View/cubit/auth_cubit.dart';
 import '../../Auth/View/login_page.dart';
-import '../../Home/View/screens/home_page.dart';
 import '../../bottom_navigation/bottom_navigation.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -90,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen>
                                       fit: BoxFit.cover)),
                             ),
                           ),
-                           SizedBox(
+                          SizedBox(
                             height: 10.h,
                           ),
                           animationValue.value == 0.5
@@ -101,7 +100,8 @@ class _SplashScreenState extends State<SplashScreen>
                                       child: Center(
                                     child: DefaultTextStyle(
                                       style: TextStyles.boldStyle.copyWith(
-                                          color: Colors.white, fontSize: setResponsiveFontSize(30)),
+                                          color: Colors.white,
+                                          fontSize: setResponsiveFontSize(30)),
                                       child: AnimatedTextKit(
                                         repeatForever: false,
                                         totalRepeatCount: 1,
@@ -111,13 +111,21 @@ class _SplashScreenState extends State<SplashScreen>
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     isPasswordRemembered
-                                                        ? BottomNav(comingIndex: 0,)
+                                                        ? BottomNav(
+                                                            comingIndex: 0,
+                                                            firebaseRequestType:
+                                                                FirebaseRequestType
+                                                                    .login,
+                                                          )
                                                         : const LoginPage(),
                                               ));
                                         },
                                         animatedTexts: [
-                                          TyperAnimatedText(
-                                              'Visit Egypt',textStyle:  const TextStyle(fontFamily: 'Changa',color: CustomColors.niceYellow)),
+                                          TyperAnimatedText('Visit Egypt',
+                                              textStyle: const TextStyle(
+                                                  fontFamily: 'Changa',
+                                                  color:
+                                                      CustomColors.niceYellow)),
                                         ],
                                       ),
                                     ),

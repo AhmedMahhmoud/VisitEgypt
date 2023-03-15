@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
 import 'package:ticket_widget/ticket_widget.dart';
+import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Features/Home/Model/place_model.dart';
-import 'package:visit_egypt/Features/Home/View/screens/home_page.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/ticket.dart';
+import 'package:visit_egypt/Features/bottom_navigation/bottom_navigation.dart';
 import '../../../../Core/Colors/app_colors.dart';
 import '../../../../Core/Constants/constants.dart';
 import '../../../../Core/Shared/methods.dart';
@@ -52,7 +53,12 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
     var homeCubit = BlocProvider.of<HomeCubit>(context);
     return WillPopScope(
       onWillPop: () {
-        ConstantMethods.navigateReplacementTo(context, const HomePage());
+        ConstantMethods.navigateReplacementTo(
+            context,
+            BottomNav(
+              firebaseRequestType: FirebaseRequestType.login,
+              comingIndex: 0,
+            ));
         throw '';
       },
       child: Scaffold(

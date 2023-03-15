@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../../Enums/home_filters_enum.dart';
-import '../../Logic/respository.dart';
+import '../../Logic/home_respository.dart';
 import '../../Model/place_model.dart';
 import '../../Model/place_review.dart';
 
