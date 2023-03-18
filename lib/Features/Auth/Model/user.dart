@@ -23,7 +23,6 @@ class UserData extends Equatable {
     return {
       'email': email,
       'userType': userType,
-      'userImage': '',
       // 'username': username,
       'userLocation': {
         "lat": userLocation.latitude,

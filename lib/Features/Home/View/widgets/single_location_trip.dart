@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -255,7 +256,10 @@ class _TripCreationDisplayState extends State<TripCreationDisplay> {
                         } else {
                           TripModel tripModel = TripModel(
                               locations: locations,
+                              hasEnded: false,
+                              usersJoinedIDs: [],
                               numberOfJoiners: 0,
+                              userID: FirebaseAuth.instance.currentUser!.uid,
                               description: _description.text,
                               dayOfMeet: _dayController.text,
                               timeOfMeet: _timeController.text,

@@ -1,0 +1,34 @@
+import 'dart:convert';
+import 'dart:io';
+
+class TourguideRegisterModel {
+  final String userName, phoneNumber;
+  final List<File> images;
+  final String? userImage;
+  final String? userDegreeImage;
+  TourguideRegisterModel(
+      {required this.phoneNumber,
+      required this.images,
+      this.userImage,
+      this.userDegreeImage,
+      required this.userName});
+
+  Map<String, dynamic> toMap() {
+    return {'phoneNumber': phoneNumber, 'userName': userName, 'images': images};
+  }
+
+  factory TourguideRegisterModel.fromMap(Map<String, dynamic> map) {
+    return TourguideRegisterModel(
+      images: [],
+      phoneNumber: map['phoneNumber'],
+      userDegreeImage: map['images'][1],
+      userImage: map['images'][0],
+      userName: map['userName'],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory TourguideRegisterModel.fromJson(String source) =>
+      TourguideRegisterModel.fromMap(json.decode(source));
+}

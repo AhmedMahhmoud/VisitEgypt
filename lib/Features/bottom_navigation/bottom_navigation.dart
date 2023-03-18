@@ -9,7 +9,9 @@ import 'package:visit_egypt/Features/Home/View/widgets/tourist_page_display.dart
 import '../../Enums/user_type.dart';
 import '../Auth/View/cubit/auth_cubit.dart';
 import '../Home/View/Cubit/home_cubit.dart';
+import '../Home/View/Cubit/trips_cubit.dart';
 import '../Home/View/screens/home_page.dart';
+import '../Home/View/screens/tourguide_registeration_page.dart';
 import '../More/views/more_screen.dart';
 import '../Posts/View/pages/posts_screen.dart';
 
@@ -39,12 +41,12 @@ class _BottomNavState extends State<BottomNav> {
     if (userTypeEnum == UserTypeEnum.tourist) {
       BlocProvider.of<HomeCubit>(context).getUserAddress();
       BlocProvider.of<HomeCubit>(context).getAllPlaces();
+      BlocProvider.of<TripsCubit>(context).getAllcreatedTrips();
     }
   }
 
   getUserType() {
     final userType = BlocProvider.of<AuthCubit>(context).userTypeEnum;
-    print("user type : $userType");
     userTypeEnum = userType;
   }
 
@@ -59,48 +61,51 @@ class _BottomNavState extends State<BottomNav> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: userTypeEnum == UserTypeEnum.tourist
-          ? touristTabs[currentIndex]
-          : tourGuide[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        fixedColor: Colors.black,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
-        currentIndex: currentIndex,
-        elevation: 20,
-        items: [
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/images/home.png',
-                height: 30.h,
-              ),
-              label: "Home"),
-          if (userTypeEnum == UserTypeEnum.tourguide) ...[
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/images/tourguide.png',
-                  height: 30.h,
-                ),
-                label: "tour"),
-          ],
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/images/posts.png',
-                height: 30.h,
-              ),
-              label: "Posts"),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/images/gear.png',
-                height: 30.h,
-              ),
-              label: "More")
-        ],
-      ),
-    );
+    return widget.firebaseRequestType == FirebaseRequestType.register &&
+            userTypeEnum == UserTypeEnum.tourguide
+        ? const TourguideRegisterationPage()
+        : Scaffold(
+            body: userTypeEnum == UserTypeEnum.tourist
+                ? touristTabs[currentIndex]
+                : tourGuide[currentIndex],
+            bottomNavigationBar: BottomNavigationBar(
+              fixedColor: Colors.black,
+              onTap: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              currentIndex: currentIndex,
+              elevation: 20,
+              items: [
+                BottomNavigationBarItem(
+                    icon: Image.asset(
+                      'assets/images/home.png',
+                      height: 30.h,
+                    ),
+                    label: "Home"),
+                if (userTypeEnum == UserTypeEnum.tourguide) ...[
+                  BottomNavigationBarItem(
+                      icon: Image.asset(
+                        'assets/images/tourguide.png',
+                        height: 30.h,
+                      ),
+                      label: "Tour"),
+                ],
+                BottomNavigationBarItem(
+                    icon: Image.asset(
+                      'assets/images/posts.png',
+                      height: 30.h,
+                    ),
+                    label: "Posts"),
+                BottomNavigationBarItem(
+                    icon: Image.asset(
+                      'assets/images/gear.png',
+                      height: 30.h,
+                    ),
+                    label: "More")
+              ],
+            ),
+          );
   }
 }

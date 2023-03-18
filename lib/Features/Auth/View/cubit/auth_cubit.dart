@@ -4,9 +4,11 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:geolocator/geolocator.dart';
 import 'package:visit_egypt/Enums/user_type.dart';
+import 'package:visit_egypt/Features/Home/Model/tourguide_register_model.dart';
 
 import '../../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../../../../Enums/firebase_request_enum.dart';
@@ -21,6 +23,7 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({required this.authRepository}) : super(AuthInitial());
 
   final AuthRepository authRepository;
+  TourguideRegisterModel? tourguideRegisterModel;
   UserTypeEnum userTypeEnum = UserTypeEnum.tourist;
   Future<void> firebaseSignUp(AuthModel authModel, String userType) async {
     makeFirebaseRequest(FirebaseRequestType.register, authModel,
@@ -38,6 +41,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> makeFirebaseRequest(
       FirebaseRequestType requestType, AuthModel authModel,
       {String? userType}) async {
+    tourguideRegisterModel = null;
     UserCredential? userCridentials;
     try {
       if (requestType == FirebaseRequestType.forget) {
@@ -69,6 +73,27 @@ class AuthCubit extends Cubit<AuthState> {
     } catch (e) {
       emit(ErrorAuthState(errorMsg: e.toString()));
     }
+  }
+
+  getTourguideProfile() async {
+    try {
+      emit(TourGuideProfileLoadingState());
+      final FirebaseAuthService firebaseAuthService = FirebaseAuthService();
+      var tourguideModel = await firebaseAuthService.getTourguideProfile();
+      tourguideRegisterModel = tourguideModel;
+      emit(TourGuideProfileLoadedState(tourGuideRegisterModel: tourguideModel));
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      emit(TourGuideProfileErrorState(errorMsg: e.toString()));
+    }
+  }
+
+  Future<bool> updateTourguideData(
+      String userID, TourguideRegisterModel registerModel) async {
+    final FirebaseAuthService firebaseAuthService = FirebaseAuthService();
+    return await firebaseAuthService.updateUserData(userID, registerModel);
   }
 
   signUpUser(AuthModel authModel, String userType) async {

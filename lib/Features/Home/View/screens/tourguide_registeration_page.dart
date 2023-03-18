@@ -1,13 +1,18 @@
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_pickers/image_pickers.dart';
 import 'package:visit_egypt/Core/Colors/app_colors.dart';
 import 'package:visit_egypt/Core/Constants/constants.dart';
+import 'package:visit_egypt/Core/Shared/methods.dart';
+import 'package:visit_egypt/Enums/firebase_request_enum.dart';
+import 'package:visit_egypt/Features/Auth/View/cubit/auth_cubit.dart';
+import 'package:visit_egypt/Features/Home/Model/tourguide_register_model.dart';
+import 'package:visit_egypt/Features/bottom_navigation/bottom_navigation.dart';
 
 class TourguideRegisterationPage extends StatefulWidget {
   const TourguideRegisterationPage({super.key});
@@ -41,7 +46,9 @@ class _TourguideRegisterationPageState
   }
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _userNameController = TextEditingController();
+  bool isPageLoading = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -76,12 +83,12 @@ class _TourguideRegisterationPageState
                           shape: BoxShape.circle,
                           border:
                               Border.all(width: 2, color: CustomColors.whiteK),
-                          boxShadow: [
+                          boxShadow: const [
                             BoxShadow(
                                 blurRadius: 1,
                                 spreadRadius: 1,
-                                offset: const Offset(0, 2),
-                                color: Colors.grey.withOpacity(0.3))
+                                offset: Offset(0, 2),
+                                color: Colors.grey)
                           ]),
                       width: 90.w,
                       height: 90.h,
@@ -130,13 +137,25 @@ class _TourguideRegisterationPageState
                                 blurRadius: 1,
                                 spreadRadius: 1,
                                 offset: const Offset(0, 2),
-                                color: Colors.grey.withOpacity(0.3))
+                                color: images.isNotEmpty
+                                    ? Colors.grey
+                                    : Colors.grey.withOpacity(0.3))
                           ]),
                       width: 90.w,
                       height: 90.h,
                       child: InkWell(
                         onTap: () {
-                          selectImages();
+                          images.isEmpty
+                              ? ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                      content: Text(
+                                  'Please upload profile picture first !',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                )))
+                              : selectImages();
                         },
                         child: images.length < 2
                             ? const Center(
@@ -168,6 +187,7 @@ class _TourguideRegisterationPageState
                         ),
                         SizedBox(
                           child: TextFormField(
+                            controller: _userNameController,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Required';
@@ -184,6 +204,7 @@ class _TourguideRegisterationPageState
                         ),
                         SizedBox(
                           child: TextFormField(
+                            controller: _phoneController,
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Required';
@@ -212,16 +233,63 @@ class _TourguideRegisterationPageState
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
-                            child: Text(
-                          'Submit',
-                          style: TextStyle(
-                              color: CustomColors.whiteK, fontSize: 16.sp),
-                        )),
+                            child: isPageLoading
+                                ? const CircularProgressIndicator.adaptive(
+                                    backgroundColor: Colors.white,
+                                  )
+                                : Text(
+                                    'Submit',
+                                    style: TextStyle(
+                                        color: CustomColors.whiteK,
+                                        fontSize: 16.sp),
+                                  )),
                       ),
-                      onPressed: () {
+                      onPressed: () async {
                         if (!formKey.currentState!.validate()) {
                           return;
-                        } else {}
+                        } else {
+                          if (images.length < 2) {
+                            ConstantMethods.showContentToast(
+                                context, 'Please fill in the images', true);
+                          } else {
+                            TourguideRegisterModel tourModel =
+                                TourguideRegisterModel(
+                                    phoneNumber: _phoneController.text,
+                                    images: [
+                                      File(images[0].path!),
+                                      File(images[1].path!)
+                                    ],
+                                    userName: _userNameController.text);
+                            setState(() {
+                              isPageLoading = true;
+                            });
+                            bool isUpdated =
+                                await BlocProvider.of<AuthCubit>(context)
+                                    .updateTourguideData(
+                                        FirebaseAuth.instance.currentUser!.uid,
+                                        tourModel);
+                            setState(() {
+                              isPageLoading = false;
+                            });
+                            if (isUpdated) {
+                              // ignore: use_build_context_synchronously
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => BottomNav(
+                                        comingIndex: 0,
+                                        firebaseRequestType:
+                                            FirebaseRequestType.login),
+                                  ));
+                            } else {
+                              // ignore: use_build_context_synchronously
+                              ConstantMethods.showContentToast(
+                                  context,
+                                  'Something went wrong , please try again later',
+                                  true);
+                            }
+                          }
+                        }
                       },
                     ),
                   )

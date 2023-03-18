@@ -17,3 +17,7 @@ class TripsErrorState extends TripsState {
   final String errorMessage;
   const TripsErrorState(this.errorMessage);
 }
+
+class JoinTripLoadingState extends TripsState {}
+
+class JoinTripLoadedState extends TripsState {}

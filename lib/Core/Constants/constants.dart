@@ -152,6 +152,7 @@ class Constants {
   static const String usersCollection = 'users';
   static const String placesCollection = 'placesReviews';
   static const String trip = 'trip';
+  static const String allTrips = 'allTrips';
   static const kDefaultShadow = BoxShadow(
     offset: Offset(0, 15),
     blurRadius: 30,
@@ -162,6 +163,6 @@ class Constants {
 InputDecoration textFieldDecoration = InputDecoration(
   border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
   focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(width: 1, color: CustomColors.greyK),
+      borderSide: const BorderSide(width: 1, color: CustomColors.greyK),
       borderRadius: BorderRadius.circular(10)),
 );

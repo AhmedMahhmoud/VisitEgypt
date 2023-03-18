@@ -6,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readmore/readmore.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:visit_egypt/Enums/firebase_request_enum.dart';
+import 'package:visit_egypt/Enums/user_type.dart';
+import 'package:visit_egypt/Features/Auth/View/cubit/auth_cubit.dart';
 import 'package:visit_egypt/Features/Home/Model/place_model.dart';
+import 'package:visit_egypt/Features/Home/View/screens/all_trips.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/ticket.dart';
 import 'package:visit_egypt/Features/bottom_navigation/bottom_navigation.dart';
 import '../../../../Core/Colors/app_colors.dart';
@@ -183,6 +186,50 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                                           FontWeight.bold),
                                                 ),
                                                 const Spacer(),
+                                                BlocProvider.of<AuthCubit>(
+                                                                context)
+                                                            .userTypeEnum ==
+                                                        UserTypeEnum.tourist
+                                                    ? InkWell(
+                                                        onTap: () async {
+                                                          // await BlocProvider.of<
+                                                          //             TripsCubit>(
+                                                          //         context)
+                                                          //     .getTripsByLocation(
+                                                          //         placeModel
+                                                          //             .placeName);
+                                                          // ignore: use_build_context_synchronously
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        AllTripsScreen(
+                                                                          locationName:
+                                                                              placeModel.placeName,
+                                                                        )),
+                                                          );
+                                                        },
+                                                        child: Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(5),
+                                                          decoration: BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              border: Border.all(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .black)),
+                                                          child: Image.asset(
+                                                            'assets/images/tourguide.png',
+                                                            color: CustomColors
+                                                                .blackK,
+                                                            height: 30.h,
+                                                          ),
+                                                        ),
+                                                      )
+                                                    : Container(),
                                               ],
                                             ),
                                           ),

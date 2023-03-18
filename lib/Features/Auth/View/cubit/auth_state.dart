@@ -28,3 +28,15 @@ class ErrorAuthState extends AuthState {
   @override
   List<Object> get props => [errorMsg];
 }
+
+class TourGuideProfileLoadingState extends AuthState {}
+
+class TourGuideProfileLoadedState extends AuthState {
+  final TourguideRegisterModel tourGuideRegisterModel;
+  const TourGuideProfileLoadedState({required this.tourGuideRegisterModel});
+}
+
+class TourGuideProfileErrorState extends AuthState {
+  final String errorMsg;
+  const TourGuideProfileErrorState({required this.errorMsg});
+}
