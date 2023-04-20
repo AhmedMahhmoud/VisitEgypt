@@ -9,6 +9,7 @@ import 'package:visit_egypt/Features/Home/Model/tourguide_trip.dart';
 import 'package:visit_egypt/Features/Home/View/Cubit/trips_cubit.dart';
 
 import '../../../../Core/Shared/methods.dart';
+import '../../../Auth/View/cubit/auth_cubit.dart';
 import '../../../Posts/View/widgets/add_post_location_dropdown.dart';
 import '../../../bottom_navigation/bottom_navigation.dart';
 import 'location_chips.dart';
@@ -255,6 +256,11 @@ class _TripCreationDisplayState extends State<TripCreationDisplay> {
                               context, 'Please fill the data first', true);
                         } else {
                           TripModel tripModel = TripModel(
+                              tourGuideNumber:
+                                  BlocProvider.of<AuthCubit>(context)
+                                          .tourguideRegisterModel
+                                          ?.phoneNumber ??
+                                      '',
                               locations: locations,
                               hasEnded: false,
                               usersJoinedIDs: [],

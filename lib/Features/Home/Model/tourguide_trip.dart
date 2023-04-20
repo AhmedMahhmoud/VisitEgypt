@@ -10,6 +10,7 @@ class TripModel {
   final int numberOfJoiners;
   final String dayOfMeet;
   final String userID;
+  final String tourGuideNumber;
   bool isStarted = false;
   bool hasEnded = false;
   TripModel({
@@ -18,6 +19,7 @@ class TripModel {
     required this.numberOfJoiners,
     required this.dayOfMeet,
     required this.userID,
+    required this.tourGuideNumber,
     this.tripID,
     required this.totalPrice,
     this.description,
@@ -38,12 +40,14 @@ class TripModel {
       'hasEnded': hasEnded,
       'description': description,
       'isStarted': isStarted,
+      'tourGuideNumber': tourGuideNumber,
       'usersJoinedIds': usersJoinedIDs
     };
   }
 
   factory TripModel.fromMap(Map<String, dynamic> map) {
     return TripModel(
+      tourGuideNumber: map['tourGuideNumber'],
       hasEnded: map['hasEnded'],
       userID: map['userID'] ?? '',
       dayOfMeet: map['dayOfMeet'],

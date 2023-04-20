@@ -46,8 +46,17 @@ class DisplayMiultipleTripCardForTourist extends StatelessWidget {
                 textAlign: TextAlign.center,
                 child: Column(
                   children: [
-                    const Center(
-                      child: Icon(Icons.info),
+                    Center(
+                      child: Row(
+                        children: [
+                          const Icon(Icons.info),
+                          Expanded(child: Container()),
+                          const Icon(
+                            Icons.phone,
+                            color: Colors.green,
+                          )
+                        ],
+                      ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

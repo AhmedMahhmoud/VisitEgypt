@@ -42,6 +42,8 @@ class _BottomNavState extends State<BottomNav> {
       BlocProvider.of<HomeCubit>(context).getUserAddress();
       BlocProvider.of<HomeCubit>(context).getAllPlaces();
       BlocProvider.of<TripsCubit>(context).getAllcreatedTrips();
+    } else {
+      BlocProvider.of<AuthCubit>(context).getTourguideProfile();
     }
   }
 

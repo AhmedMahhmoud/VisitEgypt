@@ -134,6 +134,6 @@ class TripRepoImpl implements TripRepo {
         .collection(Constants.allTrips)
         .doc(id)
         .update({'hasEnded': true});
-    FirebaseFirestore.instance.collection(Constants.allTrips).doc(id).delete();
+    // FirebaseFirestore.instance.collection(Constants.allTrips).doc(id).delete();
   }
 }

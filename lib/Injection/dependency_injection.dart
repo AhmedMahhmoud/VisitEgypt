@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:visit_egypt/Features/Home/Logic/trip_trepository.dart';
 import 'package:visit_egypt/Features/Home/View/Cubit/trips_cubit.dart';
+import 'package:visit_egypt/Features/MachineLearning/View/cubit/machine_learning_cubit.dart';
 
 import '../Features/Auth/Logic/respository.dart';
 import '../Features/Auth/View/cubit/auth_cubit.dart';
@@ -27,4 +28,7 @@ Future<void> initGitIt() async {
   /// Trips Dependencies
   sl.registerFactory(() => TripsCubit(tripRepo: sl()));
   sl.registerLazySingleton<TripRepo>(() => TripRepoImpl());
+
+  //ML
+  sl.registerFactory(() => MachineLearningCubit());
 }

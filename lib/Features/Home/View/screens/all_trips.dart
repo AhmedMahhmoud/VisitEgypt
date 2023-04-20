@@ -21,9 +21,9 @@ class AllTripsScreen extends StatefulWidget {
 
 class _AllTripsScreenState extends State<AllTripsScreen> {
   int pageIndex = 0;
+  var userID = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context) {
-    var tripsCubit = BlocProvider.of<TripsCubit>(context);
     return Scaffold(
       backgroundColor: CustomColors.niceYellow,
       body: SafeArea(
@@ -96,21 +96,22 @@ class _AllTripsScreenState extends State<AllTripsScreen> {
                             return pageIndex == 0
                                 ? DisplaySingleTripCardForTourist(
                                     tripsList: allTrips
-                                        .where((element) => (element.locations.contains(widget.locationName) &&
+                                        .where((element) => (element.locations
+                                                    .contains(
+                                                        widget.locationName) &&
                                                 element.locations.length == 1 &&
                                                 (element.hasEnded == false) ||
                                             (element.hasEnded &&
-                                                element.usersJoinedIDs!.contains(FirebaseAuth
-                                                    .instance
-                                                    .currentUser!
-                                                    .uid))))
+                                                element.usersJoinedIDs!
+                                                    .contains(userID))))
                                         .toList())
                                 : DisplayMiultipleTripCardForTourist(
                                     tripsList: allTrips
-                                        .where((element) =>
-                                            element.locations.length > 1 &&
-                                            element.locations.contains(widget.locationName))
-                                        .where((element) => element.hasEnded == false)
+                                        .where((element) => (element.locations
+                                                    .contains(widget.locationName) &&
+                                                element.locations.length > 1 &&
+                                                (element.hasEnded == false) ||
+                                            (element.hasEnded && element.usersJoinedIDs!.contains(userID))))
                                         .toList());
                           }
                           return Container();

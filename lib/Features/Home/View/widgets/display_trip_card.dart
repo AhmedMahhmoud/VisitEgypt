@@ -10,8 +10,9 @@ import 'package:visit_egypt/Features/Home/View/Cubit/trips_cubit.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/rate_tourguide.dart';
 
 import 'credit_card_display.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class DisplayTripCard extends StatelessWidget {
+class DisplayTripCard extends StatefulWidget {
   const DisplayTripCard({
     super.key,
     required this.tripsList,
@@ -19,6 +20,11 @@ class DisplayTripCard extends StatelessWidget {
 
   final List<TripModel> tripsList;
 
+  @override
+  State<DisplayTripCard> createState() => _DisplayTripCardState();
+}
+
+class _DisplayTripCardState extends State<DisplayTripCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,7 +43,7 @@ class DisplayTripCard extends StatelessWidget {
                   BoxShadow(
                       blurRadius: 1, spreadRadius: 2, offset: Offset(0, 2))
                 ]),
-            height: 230.h,
+            height: 270.h,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: DefaultTextStyle(
@@ -53,9 +59,10 @@ class DisplayTripCard extends StatelessWidget {
                     Row(
                       children: [
                         const AutoSizeText('Trip Type :'),
-                        AutoSizeText(tripsList[index].locations.length == 1
-                            ? 'Single Place'
-                            : 'Multiple Places')
+                        AutoSizeText(
+                            widget.tripsList[index].locations.length == 1
+                                ? 'Single Place'
+                                : 'Multiple Places')
                       ],
                     ),
                     const SizedBox(
@@ -64,7 +71,7 @@ class DisplayTripCard extends StatelessWidget {
                     Row(
                       children: [
                         const AutoSizeText('Trip Meeting Day :'),
-                        AutoSizeText(tripsList[index].dayOfMeet)
+                        AutoSizeText(widget.tripsList[index].dayOfMeet)
                       ],
                     ),
                     const SizedBox(
@@ -73,7 +80,7 @@ class DisplayTripCard extends StatelessWidget {
                     Row(
                       children: [
                         const AutoSizeText('Trip Meeting Time :'),
-                        AutoSizeText(tripsList[index].timeOfMeet)
+                        AutoSizeText(widget.tripsList[index].timeOfMeet)
                       ],
                     ),
                     const SizedBox(
@@ -82,7 +89,8 @@ class DisplayTripCard extends StatelessWidget {
                     Row(
                       children: [
                         const AutoSizeText('Price :'),
-                        AutoSizeText(tripsList[index].totalPrice.toString())
+                        AutoSizeText(
+                            widget.tripsList[index].totalPrice.toString())
                       ],
                     ),
                     const SizedBox(
@@ -92,7 +100,7 @@ class DisplayTripCard extends StatelessWidget {
                       children: [
                         const AutoSizeText('Tourists joined number :'),
                         AutoSizeText(
-                            tripsList[index].numberOfJoiners.toString())
+                            widget.tripsList[index].numberOfJoiners.toString())
                       ],
                     ),
                     const Divider(
@@ -100,25 +108,34 @@ class DisplayTripCard extends StatelessWidget {
                       color: Colors.grey,
                     ),
                     MaterialButton(
-                      color: tripsList[index].numberOfJoiners >= 2
+                      color: widget.tripsList[index].numberOfJoiners >= 2
                           ? CustomColors.blackK
                           : Colors.grey,
                       onPressed: () {
-                        if (!tripsList[index].isStarted) {
-                          if (tripsList[index].numberOfJoiners < 2) {
+                        if (!widget.tripsList[index].isStarted) {
+                          if (widget.tripsList[index].numberOfJoiners < 2) {
                             ConstantMethods.showContentToast(
                                 context,
                                 "Can't start trip with less than 2 tourists",
                                 true);
                           } else {
                             BlocProvider.of<TripsCubit>(context)
-                                .startTrip(tripsList[index]);
+                                .startTrip(widget.tripsList[index]);
                           }
+                        } else {
+                          BlocProvider.of<TripsCubit>(context)
+                              .endTrip(widget.tripsList[index]);
+                          widget.tripsList.remove(widget.tripsList[index]);
+                          setState(() {});
+                          ConstantMethods.showContentToast(
+                            context,
+                            "Trip ended successfully",
+                          );
                         }
                       },
                       child: Center(
                         child: Text(
-                          tripsList[index].isStarted
+                          widget.tripsList[index].isStarted
                               ? "End Trip"
                               : "Start Trip",
                           style: const TextStyle(
@@ -133,7 +150,7 @@ class DisplayTripCard extends StatelessWidget {
             ),
           );
         },
-        itemCount: tripsList.length,
+        itemCount: widget.tripsList.length,
       ),
     );
   }
@@ -165,7 +182,7 @@ class DisplaySingleTripCardForTourist extends StatelessWidget {
                   BoxShadow(
                       blurRadius: 1, spreadRadius: 2, offset: Offset(0, 2))
                 ]),
-            height: 250.h,
+            height: 270.h,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: DefaultTextStyle(
@@ -174,8 +191,36 @@ class DisplaySingleTripCardForTourist extends StatelessWidget {
                 textAlign: TextAlign.center,
                 child: Column(
                   children: [
-                    const Center(
-                      child: Icon(Icons.info),
+                    Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(),
+                          ),
+                          const Icon(Icons.info),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: InkWell(
+                              onTap: () async {
+                                final url =
+                                    "tel:${tripsList[index].tourGuideNumber}";
+                                if (await canLaunchUrl(Uri.parse(url))) {
+                                  await launchUrl(Uri.parse(url));
+                                }
+                                {}
+                              },
+                              child: const Icon(
+                                Icons.phone,
+                                color: Colors.green,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     const Divider(),
                     Row(
