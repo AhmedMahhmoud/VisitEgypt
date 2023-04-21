@@ -55,10 +55,11 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
                 errorMsg: state.errorMsg,
               );
             } else if (state is MachineLearningLoadedState) {
+
               return MlLoadedWidget(
                 confidence: state.confidence,
                 images: images,
-                label: state.label,
+                label: state.label, predictedPlace: state.predictedPlace,
               );
             }
             return Column(

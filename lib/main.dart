@@ -13,6 +13,7 @@ import 'Features/Auth/View/cubit/auth_cubit.dart';
 import 'Features/Home/View/Cubit/home_cubit.dart';
 import 'Features/MachineLearning/View/machine_learning_page.dart';
 import 'Features/Posts/View/cubit/posts_cubit.dart';
+import 'Features/Splash/View/splash_screen.dart';
 import 'Services/Geolocator/geolocator.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -57,10 +58,10 @@ class MyApp extends StatelessWidget {
                 navigatorKey: navigatorKey,
                 useInheritedMediaQuery: true,
                 title: 'Visit Egypt',
-                home: const MachineLearningPage()
+                // home: const MachineLearningPage()
                 //BottomNav(comingIndex: 0)
                 //const HomePage()
-
+home: SplashScreen()
                 ));
       },
     );

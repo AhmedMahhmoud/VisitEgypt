@@ -9,6 +9,7 @@ import 'package:visit_egypt/Features/Home/View/screens/created_trips.dart';
 import '../../../Core/Colors/app_colors.dart';
 import '../../../Core/Constants/constants.dart';
 import '../../Auth/View/login_page.dart';
+import '../../MachineLearning/View/machine_learning_page.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
@@ -123,25 +124,48 @@ class _MoreScreenState extends State<MoreScreen> {
                         )
                       : Container(),
                   Center(
-                    child: SizedBox(
-                      width: 200,
-                      child: MaterialButton(
-                        color: CustomColors.blackK,
-                        onPressed: () {
-                          FirebaseAuth.instance.signOut();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const LoginPage(),
-                              ));
-                        },
-                        child: const Text(
-                          'Logout',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: CustomColors.whiteK),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 200,
+                          child: MaterialButton(
+                            color: CustomColors.blackK,
+                            onPressed: () {
+                              FirebaseAuth.instance.signOut();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MachineLearningPage(),
+                                  ));
+                            },
+                            child: const Text(
+                              'Predict Place',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: CustomColors.whiteK),
+                            ),
+                          ),
+                        ),      SizedBox(
+                          width: 200,
+                          child: MaterialButton(
+                            color: CustomColors.blackK,
+                            onPressed: () {
+                              FirebaseAuth.instance.signOut();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ));
+                            },
+                            child: const Text(
+                              'Logout',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: CustomColors.whiteK),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],
