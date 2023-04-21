@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_pickers/image_pickers.dart';
+import 'package:lottie/lottie.dart';
 import 'package:visit_egypt/Features/MachineLearning/View/cubit/machine_learning_cubit.dart';
 
 import '../../../Core/Colors/app_colors.dart';
+import '../Widgets/ml_error_widget.dart';
+import '../Widgets/ml_loaded_widget.dart';
 
 class MachineLearningPage extends StatefulWidget {
   const MachineLearningPage({super.key});
@@ -19,7 +23,7 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
   pickImage() async {
     List<Media> listImagePaths = await ImagePickers.pickerPaths(
         galleryMode: GalleryMode.image,
-        selectCount: 3,
+        selectCount: 1,
         showGif: false,
         showCamera: true,
         compressSize: 500,
@@ -38,49 +42,73 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<MachineLearningCubit, MachineLearningState>(
-        builder: (context, state) {
-          if (state is MachineLearningLoadingState) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (state is MachineLearningLoadedState) {
+      backgroundColor: CustomColors.lightGold,
+      body: SafeArea(
+        child: BlocBuilder<MachineLearningCubit, MachineLearningState>(
+          builder: (context, state) {
+            if (state is MachineLearningLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is MachineLearningErrorState) {
+              return MlErrorWidget(
+                errorMsg: state.errorMsg,
+              );
+            } else if (state is MachineLearningLoadedState) {
+              return MlLoadedWidget(
+                confidence: state.confidence,
+                images: images,
+                label: state.label,
+              );
+            }
             return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(
-                  image: FileImage(File(images.first.path!)),
-                ),
-                Center(
-                  child: Text(state.label),
-                ),
-              ],
-            );
-          }
-          return Center(
-              child: MaterialButton(
-            shape: const RoundedRectangleBorder(),
-            color: Colors.black,
-            onPressed: () {
-              pickImage();
-            },
-            child: Center(
-                child: Row(
-              children: const [
                 Text(
-                  'Generate Image',
-                  style: TextStyle(color: Colors.white),
+                  'Please add a historical image to be detected',
+                  style: TextStyle(
+                      fontFamily: 'Changa',
+                      color: Colors.black,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  width: 5,
+                  width: 200.w,
+                  height: 200.h,
+                  child: Lottie.asset('assets/lotties/imageDetect.json'),
                 ),
-                Icon(
-                  Icons.image,
-                  color: Colors.white,
-                )
+                Center(
+                    child: SizedBox(
+                  width: 170.w,
+                  child: MaterialButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    color: Colors.black,
+                    onPressed: () {
+                      pickImage();
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          'Upload Image',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Icon(
+                          Icons.image,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                )),
               ],
-            )),
-          ));
-        },
+            );
+          },
+        ),
       ),
     );
   }

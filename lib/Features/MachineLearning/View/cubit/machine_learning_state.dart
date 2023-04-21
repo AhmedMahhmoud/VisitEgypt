@@ -13,5 +13,12 @@ class MachineLearningLoadingState extends MachineLearningState {}
 
 class MachineLearningLoadedState extends MachineLearningState {
   final String label;
-  const MachineLearningLoadedState({required this.label});
+  final double confidence;
+  const MachineLearningLoadedState(
+      {required this.label, required this.confidence});
+}
+
+class MachineLearningErrorState extends MachineLearningState {
+  final String errorMsg;
+  const MachineLearningErrorState({required this.errorMsg});
 }
