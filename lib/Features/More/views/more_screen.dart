@@ -9,6 +9,7 @@ import 'package:visit_egypt/Features/Home/View/screens/created_trips.dart';
 import '../../../Core/Colors/app_colors.dart';
 import '../../../Core/Constants/constants.dart';
 import '../../Auth/View/login_page.dart';
+import '../../MachineLearning/View/cubit/machine_learning_cubit.dart';
 import '../../MachineLearning/View/machine_learning_page.dart';
 
 class MoreScreen extends StatefulWidget {
@@ -23,12 +24,16 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   void initState() {
     var authCubit = BlocProvider.of<AuthCubit>(context);
+    var ml_Cubit = BlocProvider.of<MachineLearningCubit>(context);
     _userTypeEnum = BlocProvider.of<AuthCubit>(context).userTypeEnum;
     if (_userTypeEnum == UserTypeEnum.tourguide) {
       if (authCubit.tourguideRegisterModel == null) {
         print("getting tourguide");
         authCubit.getTourguideProfile();
       }
+    }
+    else{
+      ml_Cubit.resetState();
     }
     super.initState();
   }

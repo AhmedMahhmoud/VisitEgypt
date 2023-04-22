@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_pickers/image_pickers.dart';
 import 'package:lottie/lottie.dart';
+import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Features/MachineLearning/View/cubit/machine_learning_cubit.dart';
+import 'package:visit_egypt/Features/bottom_navigation/bottom_navigation.dart';
 
 import '../../../Core/Colors/app_colors.dart';
 import '../Widgets/ml_error_widget.dart';
@@ -41,74 +43,86 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: CustomColors.lightGold,
-      body: SafeArea(
-        child: BlocBuilder<MachineLearningCubit, MachineLearningState>(
-          builder: (context, state) {
-            if (state is MachineLearningLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is MachineLearningErrorState) {
-              return MlErrorWidget(
-                errorMsg: state.errorMsg,
-              );
-            } else if (state is MachineLearningLoadedState) {
+    return WillPopScope(
+      onWillPop: (){
+        BlocProvider.of<MachineLearningCubit>(context).resetState();
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+               BottomNav(comingIndex: 2, firebaseRequestType: FirebaseRequestType.login),
+            ));
+        throw '';
+      },
+      child: Scaffold(
+        backgroundColor: CustomColors.lightGold,
+        body: SafeArea(
+          child: BlocBuilder<MachineLearningCubit, MachineLearningState>(
+            builder: (context, state) {
+              if (state is MachineLearningLoadingState) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is MachineLearningErrorState) {
+                return MlErrorWidget(
+                  errorMsg: state.errorMsg,
+                );
+              } else if (state is MachineLearningLoadedState) {
 
-              return MlLoadedWidget(
-                confidence: state.confidence,
-                images: images,
-                label: state.label, predictedPlace: state.predictedPlace,
-              );
-            }
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Please add a historical image to be detected',
-                  style: TextStyle(
-                      fontFamily: 'Changa',
-                      color: Colors.black,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  width: 200.w,
-                  height: 200.h,
-                  child: Lottie.asset('assets/lotties/imageDetect.json'),
-                ),
-                Center(
-                    child: SizedBox(
-                  width: 170.w,
-                  child: MaterialButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    color: Colors.black,
-                    onPressed: () {
-                      pickImage();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Upload Image',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Icon(
-                          Icons.image,
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
+                return MlLoadedWidget(
+                  confidence: state.confidence,
+                  images: images,
+                  label: state.label, predictedPlace: state.predictedPlace,
+                );
+              }
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Please add a historical image to be detected',
+                    style: TextStyle(
+                        fontFamily: 'Changa',
+                        color: Colors.black,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.bold),
                   ),
-                )),
-              ],
-            );
-          },
+                  SizedBox(
+                    width: 200.w,
+                    height: 200.h,
+                    child: Lottie.asset('assets/lotties/imageDetect.json'),
+                  ),
+                  Center(
+                      child: SizedBox(
+                    width: 170.w,
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      color: Colors.black,
+                      onPressed: () {
+                        pickImage();
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Upload Image',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Icon(
+                            Icons.image,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                    ),
+                  )),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
