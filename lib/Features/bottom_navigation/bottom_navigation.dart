@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,6 +35,24 @@ class _BottomNavState extends State<BottomNav> {
   @override
   void initState() {
     super.initState();
+
+    // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    //   print("Received message");
+    //   print(message.notification!.title);
+    //   print(message.notification!.body);
+    //   LocalNotification localNotification = LocalNotification();
+    //   localNotification.sendNotification(
+    //       message.notification!.title!, message.notification!.body!);
+    // }).onError((e) {
+    //   print('ee $e');
+    // });
+    // print("listening for message");
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print("Opened app from notification");
+      print(message.notification!.title);
+      print(message.notification!.body);
+    });
+
     (widget.comingIndex != -1)
         ? currentIndex = widget.comingIndex
         : currentIndex = 0;

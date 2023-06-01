@@ -24,16 +24,15 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   void initState() {
     var authCubit = BlocProvider.of<AuthCubit>(context);
-    var ml_Cubit = BlocProvider.of<MachineLearningCubit>(context);
+    var mlCubit = BlocProvider.of<MachineLearningCubit>(context);
     _userTypeEnum = BlocProvider.of<AuthCubit>(context).userTypeEnum;
     if (_userTypeEnum == UserTypeEnum.tourguide) {
       if (authCubit.tourguideRegisterModel == null) {
         print("getting tourguide");
         authCubit.getTourguideProfile();
       }
-    }
-    else{
-      ml_Cubit.resetState();
+    } else {
+      mlCubit.resetState();
     }
     super.initState();
   }
@@ -136,11 +135,11 @@ class _MoreScreenState extends State<MoreScreen> {
                           child: MaterialButton(
                             color: CustomColors.blackK,
                             onPressed: () {
-                              FirebaseAuth.instance.signOut();
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const MachineLearningPage(),
+                                    builder: (context) =>
+                                        const MachineLearningPage(),
                                   ));
                             },
                             child: const Text(
@@ -150,7 +149,8 @@ class _MoreScreenState extends State<MoreScreen> {
                                   color: CustomColors.whiteK),
                             ),
                           ),
-                        ),      SizedBox(
+                        ),
+                        SizedBox(
                           width: 200,
                           child: MaterialButton(
                             color: CustomColors.blackK,

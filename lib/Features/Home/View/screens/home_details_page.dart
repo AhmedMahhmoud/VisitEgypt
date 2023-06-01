@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:readmore/readmore.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:visit_egypt/Enums/firebase_request_enum.dart';
-import 'package:visit_egypt/Enums/user_type.dart';
-import 'package:visit_egypt/Features/Auth/View/cubit/auth_cubit.dart';
 import 'package:visit_egypt/Features/Home/Model/place_model.dart';
-import 'package:visit_egypt/Features/Home/View/screens/all_trips.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/ticket.dart';
 import 'package:visit_egypt/Features/bottom_navigation/bottom_navigation.dart';
 import '../../../../Core/Colors/app_colors.dart';
@@ -39,6 +37,44 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
   final CarouselController _controller = CarouselController();
   void updatePage(int page) {
     initialPageNotifier.value = page;
+  }
+
+  showMyDialog() {
+    return showDialog(
+      context: context,
+      barrierDismissible: true, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Safety Guides'),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Lottie.asset('assets/lotties/safetyguide.json'),
+                const Text(
+                    // placeModel.placeSafetyGuides,
+                    ""),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Got it'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -186,50 +222,14 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                                           FontWeight.bold),
                                                 ),
                                                 const Spacer(),
-                                                BlocProvider.of<AuthCubit>(
-                                                                context)
-                                                            .userTypeEnum ==
-                                                        UserTypeEnum.tourist
-                                                    ? InkWell(
-                                                        onTap: () async {
-                                                          // await BlocProvider.of<
-                                                          //             TripsCubit>(
-                                                          //         context)
-                                                          //     .getTripsByLocation(
-                                                          //         placeModel
-                                                          //             .placeName);
-                                                          // ignore: use_build_context_synchronously
-                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        AllTripsScreen(
-                                                                          locationName:
-                                                                              placeModel.placeName,
-                                                                        )),
-                                                          );
-                                                        },
-                                                        child: Container(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(5),
-                                                          decoration: BoxDecoration(
-                                                              shape: BoxShape
-                                                                  .circle,
-                                                              border: Border.all(
-                                                                  width: 1,
-                                                                  color: Colors
-                                                                      .black)),
-                                                          child: Image.asset(
-                                                            'assets/images/tourguide.png',
-                                                            color: CustomColors
-                                                                .blackK,
-                                                            height: 30.h,
-                                                          ),
-                                                        ),
-                                                      )
-                                                    : Container(),
+                                                InkWell(
+                                                  onTap: () => showMyDialog(),
+                                                  child: Image.asset(
+                                                    'assets/images/safety.png',
+                                                    height: 33.h,
+                                                    width: 40.w,
+                                                  ),
+                                                )
                                               ],
                                             ),
                                           ),

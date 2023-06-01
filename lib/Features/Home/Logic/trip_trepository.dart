@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:visit_egypt/Features/Home/Model/tourguide_trip.dart';
+import 'package:visit_egypt/Services/Push_Notifications/firebase_notifications.dart';
 
 import '../../../Core/Constants/constants.dart';
 
@@ -64,6 +65,7 @@ class TripRepoImpl implements TripRepo {
   handleJoinAndCancelTrip(
       String tripID, String tourGuideID, TripModel trip) async {
     bool isCancel = false;
+    print("THE TOURGUIDE TOKEN IS :${trip.tourGuideToken}");
     var listOfJoiners = trip.usersJoinedIDs;
     var currentUserId = FirebaseAuth.instance.currentUser!.uid;
     if (listOfJoiners!.contains(currentUserId)) {
@@ -96,6 +98,14 @@ class TripRepoImpl implements TripRepo {
       'numberOfJoiners':
           isCancel ? trip.numberOfJoiners - 1 : trip.numberOfJoiners + 1
     });
+    FirebaseRemoteNotification fb = FirebaseRemoteNotification();
+    if (!isCancel) {
+      await fb.sendNotification('New Join !',
+          'A new tourist just joined your trip !', trip.tourGuideToken);
+    } else {
+      await fb.sendNotification('Tourist Canceled !',
+          'A  tourist just canceled his trip !', trip.tourGuideToken);
+    }
   }
 
   @override

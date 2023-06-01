@@ -9,6 +9,7 @@ import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:visit_egypt/Enums/user_type.dart';
 import 'package:visit_egypt/Features/Home/Model/tourguide_register_model.dart';
+import 'package:visit_egypt/Services/Push_Notifications/firebase_notifications.dart';
 
 import '../../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../../../../Enums/firebase_request_enum.dart';
@@ -25,6 +26,7 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
   TourguideRegisterModel? tourguideRegisterModel;
   UserTypeEnum userTypeEnum = UserTypeEnum.tourist;
+  String userFcmToken = "";
   Future<void> firebaseSignUp(AuthModel authModel, String userType) async {
     makeFirebaseRequest(FirebaseRequestType.register, authModel,
         userType: userType);
@@ -60,6 +62,8 @@ class AuthCubit extends Cubit<AuthState> {
               .collection('users')
               .doc(userCridentials.user!.uid)
               .get();
+          userFcmToken = loginData.data()!['fcmToken'];
+
           if (loginData.data()!['userType'] == 'tourist') {
             userTypeEnum = UserTypeEnum.tourist;
           } else {
@@ -98,6 +102,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   signUpUser(AuthModel authModel, String userType) async {
     try {
+      final FirebaseRemoteNotification fB = FirebaseRemoteNotification();
+      final String fcmToken = await fB.getFcmToken();
+      inspect(fcmToken);
       late UserCredential userCridentials;
       final FirebaseAuthService firebaseAuthService = FirebaseAuthService();
 
@@ -108,8 +115,10 @@ class AuthCubit extends Cubit<AuthState> {
       } catch (e) {
         rethrow;
       }
+
       final UserData user = UserData.parseUserCridentalToUserData(
-          userCridentials, userLocation, userType);
+          userCridentials, userLocation, userType, fcmToken);
+      inspect(user);
       await firebaseAuthService.addUserToFirestore(user);
       return userCridentials;
     } catch (e) {

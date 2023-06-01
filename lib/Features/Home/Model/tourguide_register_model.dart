@@ -6,11 +6,13 @@ class TourguideRegisterModel {
   final List<File> images;
   final String? userImage;
   final String? userDegreeImage;
+  final String? token;
   TourguideRegisterModel(
       {required this.phoneNumber,
       required this.images,
       this.userImage,
       this.userDegreeImage,
+      required this.token,
       required this.userName});
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class TourguideRegisterModel {
       phoneNumber: map['phoneNumber'],
       userDegreeImage: map['images'][1],
       userImage: map['images'][0],
+      token: map['token'] ?? '',
       userName: map['userName'],
     );
   }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -254,6 +255,8 @@ class _TourguideRegisterationPageState
                           } else {
                             TourguideRegisterModel tourModel =
                                 TourguideRegisterModel(
+                                    token: await FirebaseMessaging.instance
+                                        .getToken(),
                                     phoneNumber: _phoneController.text,
                                     images: [
                                       File(images[0].path!),

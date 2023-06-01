@@ -13,12 +13,14 @@ class TripModel {
   final String tourGuideNumber;
   bool isStarted = false;
   bool hasEnded = false;
+  final String tourGuideToken;
   TripModel({
     required this.locations,
     required this.timeOfMeet,
     required this.numberOfJoiners,
     required this.dayOfMeet,
     required this.userID,
+    required this.tourGuideToken,
     required this.tourGuideNumber,
     this.tripID,
     required this.totalPrice,
@@ -40,6 +42,7 @@ class TripModel {
       'hasEnded': hasEnded,
       'description': description,
       'isStarted': isStarted,
+      'token': tourGuideToken,
       'tourGuideNumber': tourGuideNumber,
       'usersJoinedIds': usersJoinedIDs
     };
@@ -51,6 +54,7 @@ class TripModel {
       hasEnded: map['hasEnded'],
       userID: map['userID'] ?? '',
       dayOfMeet: map['dayOfMeet'],
+      tourGuideToken: map['token'] ?? '',
       numberOfJoiners: map['numberOfJoiners'],
       tripID: map['tripID'] ?? '',
       locations: map['locations'],

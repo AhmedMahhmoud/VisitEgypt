@@ -9,19 +9,21 @@ class UserData extends Equatable {
       required this.userID,
       required this.username,
       required this.userLocation,
+      this.fcmToken,
       required this.userType});
-
+  final String? fcmToken;
   final String email;
   final String userID;
   final Position userLocation;
   final String username;
   final String userType;
   @override
-  List<Object?> get props => [email, username, userLocation];
+  List<Object?> get props => [email, username, userLocation, fcmToken];
 
   Map<String, dynamic> toMap() {
     return {
       'email': email,
+      'fcmToken': fcmToken,
       'userType': userType,
       // 'username': username,
       'userLocation': {
@@ -32,13 +34,14 @@ class UserData extends Equatable {
   }
 
   static parseUserCridentalToUserData(UserCredential userCredential,
-      Position userCurrentLocation, String userType) {
+      Position userCurrentLocation, String userType, token) {
     return UserData(
         userType: userType,
         email: userCredential.user!.email ?? "",
         userID: userCredential.user!.uid,
         username: userCredential.user!.email ?? "",
-        userLocation: userCurrentLocation);
+        userLocation: userCurrentLocation,
+        fcmToken: token);
   }
 
   String toJson() => json.encode(toMap());

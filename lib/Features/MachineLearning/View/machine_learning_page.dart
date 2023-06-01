@@ -44,13 +44,14 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: (){
+      onWillPop: () {
         BlocProvider.of<MachineLearningCubit>(context).resetState();
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-               BottomNav(comingIndex: 2, firebaseRequestType: FirebaseRequestType.login),
+              builder: (context) => BottomNav(
+                  comingIndex: 2,
+                  firebaseRequestType: FirebaseRequestType.login),
             ));
         throw '';
       },
@@ -68,11 +69,11 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
                   errorMsg: state.errorMsg,
                 );
               } else if (state is MachineLearningLoadedState) {
-
                 return MlLoadedWidget(
                   confidence: state.confidence,
                   images: images,
-                  label: state.label, predictedPlace: state.predictedPlace,
+                  label: state.label,
+                  predictedPlace: state.predictedPlace,
                 );
               }
               return Column(

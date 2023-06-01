@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:visit_egypt/Features/Home/View/Cubit/trips_cubit.dart';
 import 'package:visit_egypt/Features/MachineLearning/View/cubit/machine_learning_cubit.dart';
@@ -11,13 +13,22 @@ import 'package:visit_egypt/Injection/dependency_injection.dart' as di;
 import 'Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import 'Features/Auth/View/cubit/auth_cubit.dart';
 import 'Features/Home/View/Cubit/home_cubit.dart';
-import 'Features/MachineLearning/View/machine_learning_page.dart';
 import 'Features/Posts/View/cubit/posts_cubit.dart';
 import 'Features/Splash/View/splash_screen.dart';
 import 'Services/Geolocator/geolocator.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+import 'Services/Push_Notifications/local_notifications.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+const InitializationSettings initializationSettings = InitializationSettings(
+  android: initializationSettingsAndroid,
+);
 
+const AndroidInitializationSettings initializationSettingsAndroid =
+    AndroidInitializationSettings('logo');
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -31,7 +42,25 @@ void main() async {
 /*  runApp(DevicePreview(
       builder: (context)=>
      const MyApp());*/
+
+  FirebaseMessaging.onBackgroundMessage(backgroundMessageHandler);
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onDidReceiveNotificationResponse:
+        (NotificationResponse notificationResponse) {},
+  );
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print("onMessageReceived:}");
+    LocalNotification localNotification = LocalNotification();
+    localNotification.showNotification(
+        message.notification?.title ?? '', message.notification?.body ?? '');
+  });
   runApp(const MyApp());
+}
+
+Future<void> backgroundMessageHandler(RemoteMessage message) async {
+  print("Handling a background message");
+  inspect(message);
 }
 
 class MyApp extends StatelessWidget {
@@ -61,8 +90,7 @@ class MyApp extends StatelessWidget {
                 // home: const MachineLearningPage()
                 //BottomNav(comingIndex: 0)
                 //const HomePage()
-home: SplashScreen()
-                ));
+                home: const SplashScreen()));
       },
     );
   }

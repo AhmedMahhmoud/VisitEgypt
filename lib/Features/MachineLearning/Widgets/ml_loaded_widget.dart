@@ -34,7 +34,7 @@ class MlLoadedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
- /*       SizedBox(
+        /*       SizedBox(
           height: 10.h,
         ),
 
@@ -46,17 +46,26 @@ class MlLoadedWidget extends StatelessWidget {
         ZoomIn(
           delay: const Duration(milliseconds: 350),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height*0.3,
+            height: MediaQuery.of(context).size.height * 0.3,
             width: MediaQuery.of(context).size.width,
             child: ClipRRect(
-              borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(20),bottomRight: Radius.circular(20)),
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20)),
               child: Image(
-                image: FileImage(File(images.first.path!,),),fit: BoxFit.fitWidth,
+                image: FileImage(
+                  File(
+                    images.first.path!,
+                  ),
+                ),
+                fit: BoxFit.fitWidth,
               ),
             ),
           ),
         ),
-        SizedBox(height: 10.h,),
+        SizedBox(
+          height: 10.h,
+        ),
         Center(
           child: Text(
             predictedPlace.placeName,
@@ -65,46 +74,42 @@ class MlLoadedWidget extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: SizedBox(height: 320.h,
+          child: SizedBox(
+            height: 320.h,
             child: Card(
               color: Colors.white,
               elevation: 4,
               shape: RoundedRectangleBorder(
-                  borderRadius:
-                  BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(20)),
               child: ListView(
                 children: [
-
                   Padding(
-                      padding: EdgeInsets.all(10.w,),
+                      padding: EdgeInsets.all(
+                        10.w,
+                      ),
                       child: ReadMoreText(
-                        predictedPlace!.placeDescription,
+                        predictedPlace.placeDescription,
                         trimLines: 3,
                         trimMode: TrimMode.Line,
                         lessStyle: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: CustomColors.lightGold,
-                          fontSize:
-                          setResponsiveFontSize(14),
+                          fontSize: setResponsiveFontSize(14),
                         ),
                         trimCollapsedText: 'Show more',
                         trimExpandedText: 'Show less',
                         moreStyle: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: CustomColors.lightGold,
-                          fontSize:
-                          setResponsiveFontSize(14),
+                          fontSize: setResponsiveFontSize(14),
                         ),
                       )),
                   SizedBox(
                     height: 10.h,
                   ),
-
-
-                  PredictedPlaceMapDisplay(predictedPlace: predictedPlace!, ),
-
-
-
+                  PredictedPlaceMapDisplay(
+                    predictedPlace: predictedPlace,
+                  ),
                   SizedBox(
                     height: 50.h,
                   ),
@@ -113,7 +118,6 @@ class MlLoadedWidget extends StatelessWidget {
             ),
           ),
         ),
-
         const Spacer(),
         FadeIn(
           delay: const Duration(milliseconds: 800),

@@ -46,6 +46,8 @@ class _TripCreationDisplayState extends State<TripCreationDisplay> {
 
   @override
   Widget build(BuildContext context) {
+    var tourGuideProfile =
+        BlocProvider.of<AuthCubit>(context).tourguideRegisterModel;
     return Align(
       alignment: Alignment.topLeft,
       child: DefaultTextStyle(
@@ -256,11 +258,10 @@ class _TripCreationDisplayState extends State<TripCreationDisplay> {
                               context, 'Please fill the data first', true);
                         } else {
                           TripModel tripModel = TripModel(
-                              tourGuideNumber:
+                              tourGuideToken:
                                   BlocProvider.of<AuthCubit>(context)
-                                          .tourguideRegisterModel
-                                          ?.phoneNumber ??
-                                      '',
+                                      .userFcmToken,
+                              tourGuideNumber: tourGuideProfile!.phoneNumber,
                               locations: locations,
                               hasEnded: false,
                               usersJoinedIDs: [],
