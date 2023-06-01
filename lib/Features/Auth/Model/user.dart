@@ -25,6 +25,7 @@ class UserData extends Equatable {
       'email': email,
       'fcmToken': fcmToken,
       'userType': userType,
+      // 'isTourguideActivated': isTourGuideActivated??false,
       // 'username': username,
       'userLocation': {
         "lat": userLocation.latitude,

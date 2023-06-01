@@ -12,6 +12,7 @@ import 'package:visit_egypt/Core/Constants/constants.dart';
 import 'package:visit_egypt/Core/Shared/methods.dart';
 import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Features/Auth/View/cubit/auth_cubit.dart';
+import 'package:visit_egypt/Features/Auth/View/login_page.dart';
 import 'package:visit_egypt/Features/Home/Model/tourguide_register_model.dart';
 import 'package:visit_egypt/Features/bottom_navigation/bottom_navigation.dart';
 
@@ -255,6 +256,7 @@ class _TourguideRegisterationPageState
                           } else {
                             TourguideRegisterModel tourModel =
                                 TourguideRegisterModel(
+                                    isAccountActivated: false,
                                     token: await FirebaseMessaging.instance
                                         .getToken(),
                                     phoneNumber: _phoneController.text,
@@ -276,13 +278,13 @@ class _TourguideRegisterationPageState
                             });
                             if (isUpdated) {
                               // ignore: use_build_context_synchronously
+                              ConstantMethods.showContentToast(context,
+                                  "Saved successfully , Please wait for admin review");
+                              // ignore: use_build_context_synchronously
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => BottomNav(
-                                        comingIndex: 0,
-                                        firebaseRequestType:
-                                            FirebaseRequestType.login),
+                                    builder: (context) => const LoginPage(),
                                   ));
                             } else {
                               // ignore: use_build_context_synchronously

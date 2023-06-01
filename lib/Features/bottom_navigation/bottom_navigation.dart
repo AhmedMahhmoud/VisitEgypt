@@ -47,11 +47,6 @@ class _BottomNavState extends State<BottomNav> {
     //   print('ee $e');
     // });
     // print("listening for message");
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print("Opened app from notification");
-      print(message.notification!.title);
-      print(message.notification!.body);
-    });
 
     (widget.comingIndex != -1)
         ? currentIndex = widget.comingIndex

@@ -52,9 +52,9 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
             child: ListBody(
               children: <Widget>[
                 Lottie.asset('assets/lotties/safetyguide.json'),
-                const Text(
-                    // placeModel.placeSafetyGuides,
-                    ""),
+                Text(
+                  placeModel.placeSafetyGuides,
+                ),
               ],
             ),
           ),

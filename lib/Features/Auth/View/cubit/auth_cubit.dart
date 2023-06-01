@@ -27,6 +27,7 @@ class AuthCubit extends Cubit<AuthState> {
   TourguideRegisterModel? tourguideRegisterModel;
   UserTypeEnum userTypeEnum = UserTypeEnum.tourist;
   String userFcmToken = "";
+  
   Future<void> firebaseSignUp(AuthModel authModel, String userType) async {
     makeFirebaseRequest(FirebaseRequestType.register, authModel,
         userType: userType);
@@ -63,11 +64,12 @@ class AuthCubit extends Cubit<AuthState> {
               .doc(userCridentials.user!.uid)
               .get();
           userFcmToken = loginData.data()!['fcmToken'];
-
+               
           if (loginData.data()!['userType'] == 'tourist') {
             userTypeEnum = UserTypeEnum.tourist;
           } else {
             userTypeEnum = UserTypeEnum.tourguide;
+
           }
         } else if (requestType == FirebaseRequestType.register) {
           userCridentials = await signUpUser(authModel, userType!);
