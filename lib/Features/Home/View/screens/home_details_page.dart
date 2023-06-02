@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:lottie/lottie.dart';
 import 'package:readmore/readmore.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import 'package:visit_egypt/Enums/firebase_request_enum.dart';
@@ -14,11 +13,14 @@ import '../../../../Core/Colors/app_colors.dart';
 import '../../../../Core/Constants/constants.dart';
 import '../../../../Core/Shared/methods.dart';
 import '../../../../Core/Styles/text_style.dart';
+import '../../../../Enums/user_type.dart';
+import '../../../Auth/View/cubit/auth_cubit.dart';
 import '../../../Posts/View/pages/posts_by_location.dart';
 import '../Cubit/home_cubit.dart';
 import '../widgets/place_card.dart';
 import '../widgets/place_location_map_display.dart';
 import '../widgets/reviews_display.dart';
+import 'all_trips.dart';
 
 class HomeDetailsPage extends StatefulWidget {
   final int placeId;
@@ -51,7 +53,7 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Lottie.asset('assets/lotties/safetyguide.json'),
+                // Lottie.asset('assets/lotties/safetyguide.json'),
                 Text(
                   placeModel.placeSafetyGuides,
                 ),
@@ -225,9 +227,10 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                                                 InkWell(
                                                   onTap: () => showMyDialog(),
                                                   child: Image.asset(
-                                                    'assets/images/safety.png',
-                                                    height: 33.h,
+                                                    'assets/images/saftey.png',
+                                                    height: 40.h,
                                                     width: 40.w,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 )
                                               ],
@@ -399,34 +402,79 @@ class _HomeDetailsPageState extends State<HomeDetailsPage> {
                           bottom: 16.h,
                           left: 45.w,
                           right: 45.w,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PostsByLocation(
-                                        locationName: placeModel.placeName),
-                                  ));
-                            },
-                            child: Container(
-                              height: 40.h,
-                              width: 200.w,
-                              alignment: Alignment.center,
-                              decoration: const BoxDecoration(
-                                color: CustomColors.lightGold,
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(20),
-                                  topLeft: Radius.circular(20),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(
+                                  height: 40.h,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                    color: CustomColors.lightGold,
+                                    borderRadius: BorderRadius.only(
+                                      bottomRight: Radius.circular(20),
+                                      topLeft: Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: InkWell(
+                                    onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PostsByLocation(
+                                              locationName:
+                                                  placeModel.placeName),
+                                        )),
+                                    child: AutoSizeText(
+                                      'Related posts',
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: setResponsiveFontSize(18)),
+                                    ),
+                                  ),
                                 ),
                               ),
-                              child: AutoSizeText(
-                                'See related posts',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: setResponsiveFontSize(18)),
+                              const SizedBox(
+                                width: 10,
                               ),
-                            ),
+                              BlocProvider.of<AuthCubit>(context)
+                                          .userTypeEnum ==
+                                      UserTypeEnum.tourist
+                                  ? Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        height: 40.h,
+                                        alignment: Alignment.center,
+                                        decoration: const BoxDecoration(
+                                          color: CustomColors.lightGold,
+                                          borderRadius: BorderRadius.only(
+                                            bottomLeft: Radius.circular(20),
+                                            topRight: Radius.circular(20),
+                                          ),
+                                        ),
+                                        child: InkWell(
+                                          onTap: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    AllTripsScreen(
+                                                      locationName:
+                                                          placeModel.placeName,
+                                                    )),
+                                          ),
+                                          child: AutoSizeText(
+                                            'Trips Availlable',
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize:
+                                                    setResponsiveFontSize(18)),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
+                            ],
                           ))
                     ],
                   ),

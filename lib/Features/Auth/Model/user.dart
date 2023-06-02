@@ -8,6 +8,7 @@ class UserData extends Equatable {
       {required this.email,
       required this.userID,
       required this.username,
+      this.isTourGuideActivated,
       required this.userLocation,
       this.fcmToken,
       required this.userType});
@@ -17,6 +18,7 @@ class UserData extends Equatable {
   final Position userLocation;
   final String username;
   final String userType;
+  final String? isTourGuideActivated;
   @override
   List<Object?> get props => [email, username, userLocation, fcmToken];
 
@@ -25,7 +27,7 @@ class UserData extends Equatable {
       'email': email,
       'fcmToken': fcmToken,
       'userType': userType,
-      // 'isTourguideActivated': isTourGuideActivated??false,
+      'isTourguideActivated': isTourGuideActivated ?? false,
       // 'username': username,
       'userLocation': {
         "lat": userLocation.latitude,

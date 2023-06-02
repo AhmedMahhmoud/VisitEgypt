@@ -4,6 +4,7 @@ import 'package:visit_egypt/Features/Home/Model/tourguide_trip.dart';
 import 'package:visit_egypt/Services/Push_Notifications/firebase_notifications.dart';
 
 import '../../../Core/Constants/constants.dart';
+import '../Model/tourguide_register_model.dart';
 
 abstract class TripRepo {
   handleJoinAndCancelTrip(String tripID, String tourGuideID, TripModel trip);
@@ -12,6 +13,8 @@ abstract class TripRepo {
   Future createNewTrip(TripModel tripModel);
   Future<List<TripModel>> getAllCreatedTripsByUserId();
   Future<List<TripModel>> getAllcreatedTrips();
+  updateTourGuideActiveAccountState(String userID);
+  Future<List<TourguideRegisterModel>> getPendingTourGuides();
 }
 
 class TripRepoImpl implements TripRepo {
@@ -145,5 +148,26 @@ class TripRepoImpl implements TripRepo {
         .doc(id)
         .update({'hasEnded': true});
     // FirebaseFirestore.instance.collection(Constants.allTrips).doc(id).delete();
+  }
+
+  @override
+  Future<List<TourguideRegisterModel>> getPendingTourGuides() async {
+    var users = await FirebaseFirestore.instance.collection("users").get();
+    List<TourguideRegisterModel> pendingGuides = [];
+    for (var i in users.docs) {
+      if (i.data()["userType"] == "tourguide" &&
+          i.data()["isTourguideActivated"] == false) {
+        pendingGuides.add(TourguideRegisterModel.fromMap(i.data())..id = i.id);
+      }
+    }
+    return pendingGuides;
+  }
+
+  @override
+  updateTourGuideActiveAccountState(String userID) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(userID)
+        .update({"isTourguideActivated": true});
   }
 }

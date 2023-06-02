@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:visit_egypt/Features/Home/Logic/trip_trepository.dart';
 
+import '../../Model/tourguide_register_model.dart';
 import '../../Model/tourguide_trip.dart';
 part 'trips_state.dart';
 
@@ -15,6 +16,18 @@ class TripsCubit extends Cubit<TripsState> {
     emit(TripsLoadingState());
     await tripRepo.createNewTrip(tripModel);
     emit(TripsLoadedState());
+  }
+
+  getPendingGuides() async {
+    emit(PendingGuidesLoadingState());
+    final guides = await tripRepo.getPendingTourGuides();
+    emit(PendingGuidesLoaded(guidesList: guides));
+  }
+
+  activateGuideAccount(String userID) async {
+    emit(PendingGuidesLoadingState());
+    await tripRepo.updateTourGuideActiveAccountState(userID);
+    getPendingGuides();
   }
 
   resetState() {

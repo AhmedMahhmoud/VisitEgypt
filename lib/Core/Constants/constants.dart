@@ -5,13 +5,13 @@ import '../../Features/Home/Model/place_model.dart';
 import '../../Features/MachineLearning/Model/predicted_place.dart';
 
 class Constants {
-
-
   static const List<PlaceModel> allPlaces = [
     PlaceModel(
         placeLat: 29.98133015625794,
         placeLong: 31.13773777184683,
         placeId: 1,
+        placeSafetyGuides:
+            'Wear light clothing that is breathable. Cotton trousers/capris and a t-shirt, a maxi dress, jumpsuit, or a maxi skirt and top combo would be ideal.\n\nPack your hat, sunglasses, and a light scarf to protect you from heat and potential sandstorms (these happen more than you think). I totally regretted not bringing mine!.\n\n Wear comfortable shoes as the surfaces at the Pyramid complex can be uneven. I did see a lot of women wearing revealing clothing like shorts and short dresses but I personally didn’t feel comfortable doing so. I was a woman travelling alone and I didn’t want to attract unwanted attention!',
         placeImagesList: [
           'assets/images/aboelhol.jpg',
           'assets/images/aboelhol1.jpg',
@@ -28,6 +28,8 @@ class Constants {
         placeLat: 22.728316423560162,
         placeLong: 32.72951202768114,
         placeId: 2,
+        placeSafetyGuides:
+            'Wear light clothing that is breathable. Cotton trousers/capris and a t-shirt, a maxi dress, jumpsuit, or a maxi skirt and top combo would be ideal.\n\nPack your hat, sunglasses, and a light scarf to protect you from heat and potential sandstorms (these happen more than you think). I totally regretted not bringing mine!.\n\n Wear comfortable shoes as the surfaces at the Pyramid complex can be uneven. I did see a lot of women wearing revealing clothing like shorts and short dresses but I personally didn’t feel comfortable doing so. I was a woman travelling alone and I didn’t want to attract unwanted attention!',
         placeImagesList: [
           'assets/images/abosimple.jpg',
           'assets/images/abosimple1.jpg',
@@ -53,6 +55,8 @@ class Constants {
         ],
         placeName: 'Cairo Tower',
         cityOfPlace: 'Cairo',
+        placeSafetyGuides:
+            'Cairo Tower is open every day from 8:00am until midnight, and until 1:00am in summer. Tickets are priced at 60 EGP per person (while children under 6 years old go free). The best time to visit is either in the late morning after the early haze has burned away; or in the evening when visitors are greeted by the spectacle of a million lights sparkling into life all over the city. ',
         placeDescription:
             'The Cairo Tower is a free-standing concrete tower in Cairo, Egypt. At 187 m (614 ft), it is the tallest structure in Egypt and North Africa. Built from 1956 to 1961, the tower was designed by the Egyptian architect Naoum Shebib, inspired by the Ancient Egyptian Architecture.[1] Its partially open lattice-work design is intended to evoke a pharaonic lotus plant, an iconic symbol of Ancient Egypt.[8] The tower is crowned by a circular observation deck and a revolving restaurant[9] that rotate around its axis occasionally[10] with a view over greater Cairo.[11] According to documents published by Major General Adel Shaheen, the funds for the construction of the tower were originated from the Government of the United States through the CIA that represented by Kermit Roosevelt, which had provided around 3 million to Gamal Abdel Nasser as a personal gift to him with the intent of stopping his support for Algerian Revolution and other African independence movements.[8][12][13] Affronted by the attempt to bribe him, Nasser decided to publicly rebuke the U.S. government by transferring all of the funds to the Egyptian government for the use of the tower construction, which he stated that it would be "visible from the US Embassy just across the Nile, as a taunting symbol of Egypt , Africa and the Middle East\'s resistance, revolutions and pride".[12][14]',
         placeImage: 'assets/images/cairotower.jpg',
@@ -60,6 +64,8 @@ class Constants {
     PlaceModel(
         placeLat: 30.02959626596546,
         placeLong: 31.260698221694632,
+        placeSafetyGuides:
+            ' The mosque stays open from 8 a.m. to 5 p.m. every day but is closed to visitors during Friday midday prayers. At all other times, non-Muslims are welcome to look around but must dress modestly and remove shoes before entering the mosque.',
         placeId: 4,
         placeImagesList: [
           'assets/images/mohamedali.jpg',
@@ -77,6 +83,8 @@ class Constants {
     PlaceModel(
         placeLat: 30.04835144175623,
         placeLong: 31.233659188237386,
+        placeSafetyGuides:
+            'In order to protect the exhibits and to maintain a safe environment where the visitor can appreciate the exhibits comfortably, please confirm with the following regulations: Large bags, large backpacks, luggage, or parcels larger than 40 x 40 cm are not permitted into the museum; you can store them in the cloakroom. Bags and backpacks may be subject to search at any time. Do not bring any sharp items or dangerous materials into the museum (such as knives, screwdrivers, scissors, and firearms). These items must stored in the cloakroom Do not bring umbrellas into the museum. Please leave them in the cloakroom. Do not bring folding seats or any other type of seat within the galleries unless you obtain permission from museum security, Animals or pets are not allowed in the museum. Musical instruments are not allowed inside the museum. Do not bring any advertising banners or carry placards or signs inside the museum unless you obtain approval from the concerned authorities.',
         placeId: 5,
         placeImagesList: [
           'assets/images/museum.jpg',
@@ -96,6 +104,8 @@ class Constants {
         placeLat: 29.979438936150302,
         placeLong: 31.13458813439292,
         placeId: 6,
+        placeSafetyGuides:
+            'Wear light clothing that is breathable. Cotton trousers/capris and a t-shirt, a maxi dress, jumpsuit, or a maxi skirt and top combo would be ideal.\n\nPack your hat, sunglasses, and a light scarf to protect you from heat and potential sandstorms (these happen more than you think). I totally regretted not bringing mine!.\n\n Wear comfortable shoes as the surfaces at the Pyramid complex can be uneven. I did see a lot of women wearing revealing clothing like shorts and short dresses but I personally didn’t feel comfortable doing so. I was a woman travelling alone and I didn’t want to attract unwanted attention!',
         placeImagesList: [
           'assets/images/pyramids.jpg',
           'assets/images/pyramids1.jpg',
@@ -113,6 +123,8 @@ class Constants {
         placeLat: 24.02566197900067,
         placeLong: 32.88420938450248,
         placeId: 7,
+        placeSafetyGuides:
+            'Wear light clothing that is breathable. Cotton trousers/capris and a t-shirt, a maxi dress, jumpsuit, or a maxi skirt and top combo would be ideal.\n\nPack your hat, sunglasses, and a light scarf to protect you from heat and potential sandstorms (these happen more than you think). I totally regretted not bringing mine!.\n\n Wear comfortable shoes as the surfaces at the Pyramid complex can be uneven. I did see a lot of women wearing revealing clothing like shorts and short dresses but I personally didn’t feel comfortable doing so. I was a woman travelling alone and I didn’t want to attract unwanted attention!',
         placeImagesList: [
           'assets/images/PhilaeTemple.jpg',
           'assets/images/PhilaeTemple1.jpg',
@@ -128,6 +140,8 @@ class Constants {
     PlaceModel(
         placeLat: 30.236529925884014,
         placeLong: 31.13759772462791,
+        placeSafetyGuides:
+            'Always swim in a lifeguarded area.\nNever swim alone, regardless of your age or level of swimming skills.\nKeep within your fitness and swimming capabilities.\nBe aware of weather and water conditions and heed warnings.',
         placeId: 8,
         placeImagesList: [
           'assets/images/qanater.PNG',
@@ -146,12 +160,36 @@ class Constants {
   ];
 
   static const List<PredictedPlace> allPredictedPlaces = [
-    PredictedPlace(placeName: 'Abo El Hol',placeDescription: 'Sphinx - Abu al-Hol. The leonine Sphinx, known as Abu al-Hol (Father Of Terror) to the Arabs, has been guarding the Giza Plateau for about 4500 years. Located at the approach to the Khafre Pyramid & facing the sunrise, this statue is about 66 ft high & is the largest monolithic statue in the world. known in Arabic as Abu Al Hol (Father of Terror), this sculpture of a man with the haunches of a lion was dubbed the Sphinx by the ancient Greeks because it resembled their mythical winged monster who set riddles and killed anyone unable to answer them. A geological survey has shown that it was most likely carved from the bedrock at the bottom of the causeway during Khafre’s reign, so it probably portrays his features. As is clear from the accounts of early Arab travellers, the nose was hammered off sometime between the 11th and 15th centuries, although some still like to blame Napoleon for the deed. Part of the fallen beard was carted off by 19th-century adventurers and is now on display in the British Museum in London. These days the Sphinx has potentially greater problems: pollution and rising groundwater are causing internal fractures, and it is under a constant state of repair.Legends and superstitions about the Sphinx abound, and the mystery surrounding its long-forgotten purpose is almost as intriguing as its appearance. On seeing it for the first time, many visitors agree with English playwright Alan Bennett, who noted in his diary that seeing the Sphinx is like meeting a TV personality in the flesh: he’s smaller than one had imagined.', placeLat: 29.98133015625794, placeLng: 31.13773777184683),
-    PredictedPlace(placeName: 'Abu Simbel Temple',placeDescription: 'Abu Simbel is a historic site comprising two massive rock-cut temples in the village of Abu Simbel near the border with Sudan. It is situated on the western bank of Lake Nasser, about 230 km (140 mi) southwest of Aswan (about 300 km (190 mi) by road). The twin temples were originally carved out of the mountainside in the 13th century BC, during the 19th Dynasty reign of the Pharaoh Ramesses II. They serve as a lasting monument to the king Ramesses II. His wife Nefertari and children can be seen in smaller figures by his feet, considered to be of lesser importance and were not given the same position of scale. This commemorates his victory at the Battle of Kadesh. Their huge external rock relief figures have become iconic.The complex was relocated in its entirety in 1968 as part of the International Campaign to Save the Monuments of Nubia, under the supervision of a Polish archaeologist, Kazimierz Michałowski, from the Polish Centre of Mediterranean Archaeology University of Warsaw,[1] on an artificial hill made from a domed structure, high above the Aswan High Dam reservoir. The relocation of the temples – together with other temples which run from Abu Simbel downriver to Philae including Amada, Wadi es-Sebua, and other Nubian sites – was necessary or they would have been submerged during the creation of Lake Nasser, the massive artificial water reservoir formed after the building of the Aswan High Dam on the River Nile.[2][1] The Abu Simbel complex, and the other relocated temples, are part of the UNESCO World Heritage Site known as the "Nubian Monuments', placeLat: 30.04595558993511, placeLng: 31.22416347791308),
-    PredictedPlace(placeName: 'Cairo Tower',placeDescription: 'The Cairo Tower is a free-standing concrete tower in Cairo, Egypt. At 187 m (614 ft), it is the tallest structure in Egypt and North Africa. Built from 1956 to 1961, the tower was designed by the Egyptian architect Naoum Shebib, inspired by the Ancient Egyptian Architecture.[1] Its partially open lattice-work design is intended to evoke a pharaonic lotus plant, an iconic symbol of Ancient Egypt.[8] The tower is crowned by a circular observation deck and a revolving restaurant[9] that rotate around its axis occasionally[10] with a view over greater Cairo.[11] According to documents published by Major General Adel Shaheen, the funds for the construction of the tower were originated from the Government of the United States through the CIA that represented by Kermit Roosevelt, which had provided around 3 million to Gamal Abdel Nasser as a personal gift to him with the intent of stopping his support for Algerian Revolution and other African independence movements.[8][12][13] Affronted by the attempt to bribe him, Nasser decided to publicly rebuke the U.S. government by transferring all of the funds to the Egyptian government for the use of the tower construction, which he stated that it would be "visible from the US Embassy just across the Nile, as a taunting symbol of Egypt , Africa and the Middle East', placeLat: 22.728316423560162, placeLng: 32.72951202768114),
-    PredictedPlace(placeName: 'Giza pyramid',placeDescription: 'The Great Pyramid and the Pyramid of Khafre are the largest pyramids built in ancient Egypt, and they have historically been common as emblems of Ancient Egypt , They were popularised in Hellenistic times, when the Great Pyramid was listed by Antipater of Sidon as one of the Seven Wonders of the World. It is by far the oldest of the Ancient Wonders and the only one still in existence. The Giza pyramid complex consists of the Great Pyramid (also known as the Pyramid of Cheops or Khufu and constructed c. 2580 – c. 2560 BC), the somewhat smaller Pyramid of Khafre (or Chephren) a few hundred metres to the south-west, and the relatively modest-sized Pyramid of Menkaure (or Mykerinos) a few hundred metres farther south-west. The Great Sphinx lies on the east side of the complex. Current consensus among Egyptologists is that the head of the Great Sphinx is that of Khafre. Along with these major monuments are a number of smaller satellite edifices, known as "queens" pyramids, causeways and valley pyramids', placeLat: 29.979438936150302, placeLng: 31.13458813439292),
-    PredictedPlace(placeName: 'Tutankhamun',placeDescription: 'was the antepenultimate pharaoh of the Eighteenth Dynasty of ancient Egypt. He ascended to the throne around the age of nine and reigned until his death around the age of nineteen. The most significant actions of his reign were reversing the societal changes enacted by his predecessor, Akhenaten, during the Amarna Period: Tutankhamun restored the traditional polytheistic form of ancient Egyptian religion, undoing the religious shift known as Atenism, and moved the royal court away from Akhenaten\'s capital, Amarna. Tutankhamun was one of few kings worshipped as a deity during his lifetime; this was usually done posthumously for most pharaohs.[7] In popular culture, he is known for his vastly opulent wealth found during the 1922 discovery of his tomb, KV62, the only such tomb to date to have been found in near-intact condition.[8] The discovery of his tomb is widely considered one of the greatest archaeological discoveries of all time', placeLat: 25.740389, placeLng: 32.601417),
-
+    PredictedPlace(
+        placeName: 'Abo El Hol',
+        placeDescription:
+            'Sphinx - Abu al-Hol. The leonine Sphinx, known as Abu al-Hol (Father Of Terror) to the Arabs, has been guarding the Giza Plateau for about 4500 years. Located at the approach to the Khafre Pyramid & facing the sunrise, this statue is about 66 ft high & is the largest monolithic statue in the world. known in Arabic as Abu Al Hol (Father of Terror), this sculpture of a man with the haunches of a lion was dubbed the Sphinx by the ancient Greeks because it resembled their mythical winged monster who set riddles and killed anyone unable to answer them. A geological survey has shown that it was most likely carved from the bedrock at the bottom of the causeway during Khafre’s reign, so it probably portrays his features. As is clear from the accounts of early Arab travellers, the nose was hammered off sometime between the 11th and 15th centuries, although some still like to blame Napoleon for the deed. Part of the fallen beard was carted off by 19th-century adventurers and is now on display in the British Museum in London. These days the Sphinx has potentially greater problems: pollution and rising groundwater are causing internal fractures, and it is under a constant state of repair.Legends and superstitions about the Sphinx abound, and the mystery surrounding its long-forgotten purpose is almost as intriguing as its appearance. On seeing it for the first time, many visitors agree with English playwright Alan Bennett, who noted in his diary that seeing the Sphinx is like meeting a TV personality in the flesh: he’s smaller than one had imagined.',
+        placeLat: 29.98133015625794,
+        placeLng: 31.13773777184683),
+    PredictedPlace(
+        placeName: 'Abu Simbel Temple',
+        placeDescription:
+            'Abu Simbel is a historic site comprising two massive rock-cut temples in the village of Abu Simbel near the border with Sudan. It is situated on the western bank of Lake Nasser, about 230 km (140 mi) southwest of Aswan (about 300 km (190 mi) by road). The twin temples were originally carved out of the mountainside in the 13th century BC, during the 19th Dynasty reign of the Pharaoh Ramesses II. They serve as a lasting monument to the king Ramesses II. His wife Nefertari and children can be seen in smaller figures by his feet, considered to be of lesser importance and were not given the same position of scale. This commemorates his victory at the Battle of Kadesh. Their huge external rock relief figures have become iconic.The complex was relocated in its entirety in 1968 as part of the International Campaign to Save the Monuments of Nubia, under the supervision of a Polish archaeologist, Kazimierz Michałowski, from the Polish Centre of Mediterranean Archaeology University of Warsaw,[1] on an artificial hill made from a domed structure, high above the Aswan High Dam reservoir. The relocation of the temples – together with other temples which run from Abu Simbel downriver to Philae including Amada, Wadi es-Sebua, and other Nubian sites – was necessary or they would have been submerged during the creation of Lake Nasser, the massive artificial water reservoir formed after the building of the Aswan High Dam on the River Nile.[2][1] The Abu Simbel complex, and the other relocated temples, are part of the UNESCO World Heritage Site known as the "Nubian Monuments',
+        placeLat: 30.04595558993511,
+        placeLng: 31.22416347791308),
+    PredictedPlace(
+        placeName: 'Cairo Tower',
+        placeDescription:
+            'The Cairo Tower is a free-standing concrete tower in Cairo, Egypt. At 187 m (614 ft), it is the tallest structure in Egypt and North Africa. Built from 1956 to 1961, the tower was designed by the Egyptian architect Naoum Shebib, inspired by the Ancient Egyptian Architecture.[1] Its partially open lattice-work design is intended to evoke a pharaonic lotus plant, an iconic symbol of Ancient Egypt.[8] The tower is crowned by a circular observation deck and a revolving restaurant[9] that rotate around its axis occasionally[10] with a view over greater Cairo.[11] According to documents published by Major General Adel Shaheen, the funds for the construction of the tower were originated from the Government of the United States through the CIA that represented by Kermit Roosevelt, which had provided around 3 million to Gamal Abdel Nasser as a personal gift to him with the intent of stopping his support for Algerian Revolution and other African independence movements.[8][12][13] Affronted by the attempt to bribe him, Nasser decided to publicly rebuke the U.S. government by transferring all of the funds to the Egyptian government for the use of the tower construction, which he stated that it would be "visible from the US Embassy just across the Nile, as a taunting symbol of Egypt , Africa and the Middle East',
+        placeLat: 22.728316423560162,
+        placeLng: 32.72951202768114),
+    PredictedPlace(
+        placeName: 'Giza pyramid',
+        placeDescription:
+            'The Great Pyramid and the Pyramid of Khafre are the largest pyramids built in ancient Egypt, and they have historically been common as emblems of Ancient Egypt , They were popularised in Hellenistic times, when the Great Pyramid was listed by Antipater of Sidon as one of the Seven Wonders of the World. It is by far the oldest of the Ancient Wonders and the only one still in existence. The Giza pyramid complex consists of the Great Pyramid (also known as the Pyramid of Cheops or Khufu and constructed c. 2580 – c. 2560 BC), the somewhat smaller Pyramid of Khafre (or Chephren) a few hundred metres to the south-west, and the relatively modest-sized Pyramid of Menkaure (or Mykerinos) a few hundred metres farther south-west. The Great Sphinx lies on the east side of the complex. Current consensus among Egyptologists is that the head of the Great Sphinx is that of Khafre. Along with these major monuments are a number of smaller satellite edifices, known as "queens" pyramids, causeways and valley pyramids',
+        placeLat: 29.979438936150302,
+        placeLng: 31.13458813439292),
+    PredictedPlace(
+        placeName: 'Tutankhamun',
+        placeDescription:
+            'was the antepenultimate pharaoh of the Eighteenth Dynasty of ancient Egypt. He ascended to the throne around the age of nine and reigned until his death around the age of nineteen. The most significant actions of his reign were reversing the societal changes enacted by his predecessor, Akhenaten, during the Amarna Period: Tutankhamun restored the traditional polytheistic form of ancient Egyptian religion, undoing the religious shift known as Atenism, and moved the royal court away from Akhenaten\'s capital, Amarna. Tutankhamun was one of few kings worshipped as a deity during his lifetime; this was usually done posthumously for most pharaohs.[7] In popular culture, he is known for his vastly opulent wealth found during the 1922 discovery of his tomb, KV62, the only such tomb to date to have been found in near-intact condition.[8] The discovery of his tomb is widely considered one of the greatest archaeological discoveries of all time',
+        placeLat: 25.740389,
+        placeLng: 32.601417),
   ];
 
   static const SizedBox heightSpace = SizedBox(
@@ -170,6 +208,56 @@ class Constants {
     blurRadius: 30,
     color: Colors.black12, // Black color with 12% opacity
   );
+}
+
+final List<Notification> dailyNotification = [
+  Notification(
+      title: 'The Pyramids of Giza',
+      description:
+          'The only surviving wonder of the ancient world, these three pyramids are the enduring symbol of Ancient Egypt.'),
+  Notification(
+      title: 'The Nile River',
+      description:
+          'The longest river in the world, the Nile has been the lifeblood of Egypt for thousands of years.'),
+  Notification(
+      title: 'The Valley of the Kings',
+      description:
+          'The burial site of many pharaohs, including Tutankhamun, this ancient necropolis is a testament to the power of the Egyptian civilization.'),
+  Notification(
+      title: 'The Great Sphinx of Giza',
+      description:
+          'This iconic statue of a mythical creature with the head of a human and the body of a lion has guarded the Pyramids of Giza for thousands of years.'),
+  Notification(
+      title: 'Abu Simbel Temples',
+      description:
+          'These temples were built by the pharaoh Ramses II and are a testament to the grandeur and power of the New Kingdom era in Ancient Egypt.'),
+  Notification(
+      title: 'The Karnak Temple Complex',
+      description:
+          'This vast temple complex in Luxor is one of the largest ancient religious sites in the world, and was dedicated to the god Amun.'),
+  Notification(
+      title: 'The Egyptian Museum',
+      description:
+          'Located in Cairo, this museum houses an extensive collection of ancient Egyptian artifacts, including the treasures of Tutankhamun.'),
+  Notification(
+      title: 'Luxor Temple',
+      description:
+          'This temple in Luxor was dedicated to the god Amun and was a site of pilgrimage for thousands of years.'),
+  Notification(
+      title: 'The White Desert',
+      description:
+          'This desert in western Egypt is known for its unique rock formations, which have been shaped by wind and sand over millions of years.'),
+  Notification(
+      title: 'The Red Sea',
+      description:
+          'This sea is home to some of the world\'s most beautiful coral reefs, and is a popular destination for diving and snorkeling.'),
+];
+
+class Notification {
+  final String title;
+  final String description;
+
+  Notification({required this.title, required this.description});
 }
 
 InputDecoration textFieldDecoration = InputDecoration(

@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:visit_egypt/Core/Constants/constants.dart';
 import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Services/Push_Notifications/local_notifications.dart';
-
+import 'dart:math';
 import '../../../Core/Colors/app_colors.dart';
 import '../../../Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import '../../../Core/Styles/text_style.dart';
@@ -40,9 +41,11 @@ class _SplashScreenState extends State<SplashScreen>
     animationValue = Tween(begin: 1.0, end: 0.5).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.easeIn));
     LocalNotification localNotification = LocalNotification();
+    final index = Random().nextInt(dailyNotification.length);
+
     localNotification.sendNotification(
-      'Schedule Notification Test',
-      'This message is scheduled successfully',
+      dailyNotification[index].title,
+      dailyNotification[index].description,
     );
     displaySplashTime();
   }

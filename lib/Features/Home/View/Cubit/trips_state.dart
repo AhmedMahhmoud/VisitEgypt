@@ -21,3 +21,12 @@ class TripsErrorState extends TripsState {
 class JoinTripLoadingState extends TripsState {}
 
 class JoinTripLoadedState extends TripsState {}
+
+class PendingGuidesLoadingState extends TripsState {}
+
+class PendingGuidesLoaded extends TripsState {
+  final List<TourguideRegisterModel> guidesList;
+  const PendingGuidesLoaded({required this.guidesList});
+  @override
+  List<Object> get props => [guidesList];
+}

@@ -8,12 +8,12 @@ class LocalNotification implements NotificationHandler {
   sendNotification(String title, String body) async {
     final notification = FlutterLocalNotificationsPlugin();
     tz.initializeTimeZones();
+
     await notification.zonedSchedule(0, title, body,
         _scheduleDaily(const Time(9)), await _notificationDetails(),
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         androidAllowWhileIdle: true);
-    print('notification scheduled');
   }
 
   Future<void> showNotification(String title, String body) async {
@@ -32,10 +32,28 @@ class LocalNotification implements NotificationHandler {
   }
 
   tz.TZDateTime _scheduleDaily(Time time) {
-    final now = tz.TZDateTime.now(tz.local);
-    final date = tz.TZDateTime(tz.local, now.year, now.month, now.day,
-        time.hour, time.minute, time.second);
-    return date.isBefore(now) ? date.add(const Duration(days: 1)) : date;
+    final scheduledDate = tz.TZDateTime.now(tz.local).add(
+      const Duration(hours: 24),
+    );
+    final scheduledTime = tz.TZDateTime(
+      tz.getLocation('Africa/Cairo'),
+      scheduledDate.year,
+      scheduledDate.month,
+      scheduledDate.day,
+      13,
+    );
+
+    final date = tz.TZDateTime(
+        tz.local,
+        scheduledTime.year,
+        scheduledTime.month,
+        scheduledTime.day,
+        time.hour,
+        time.minute,
+        time.second);
+    return date.isBefore(scheduledTime)
+        ? date.add(const Duration(days: 1))
+        : date;
     //check if it is not passed already
   }
 }

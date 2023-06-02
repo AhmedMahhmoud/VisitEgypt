@@ -5,12 +5,14 @@ class TourguideRegisterModel {
   final String userName, phoneNumber;
   final List<File> images;
   final String? userImage;
+  String? id;
   final String? userDegreeImage;
   final bool? isAccountActivated;
   final String? token;
   TourguideRegisterModel(
       {required this.phoneNumber,
       required this.images,
+      this.id,
       required this.isAccountActivated,
       this.userImage,
       this.userDegreeImage,
@@ -28,7 +30,7 @@ class TourguideRegisterModel {
       userDegreeImage: map['images'][1],
       isAccountActivated: map['isTourguideActivated'],
       userImage: map['images'][0],
-      token: map['token'] ?? '',
+      token: map['fcmToken'] ?? '',
       userName: map['userName'],
     );
   }

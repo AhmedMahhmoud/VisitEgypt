@@ -150,26 +150,7 @@ class _MoreScreenState extends State<MoreScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 200,
-                          child: MaterialButton(
-                            color: CustomColors.blackK,
-                            onPressed: () {
-                              FirebaseAuth.instance.signOut();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginPage(),
-                                  ));
-                            },
-                            child: const Text(
-                              'Logout',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: CustomColors.whiteK),
-                            ),
-                          ),
-                        ),
+                        const LogOut(),
                       ],
                     ),
                   ),
@@ -177,6 +158,35 @@ class _MoreScreenState extends State<MoreScreen> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class LogOut extends StatelessWidget {
+  const LogOut({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      child: MaterialButton(
+        color: CustomColors.blackK,
+        onPressed: () {
+          FirebaseAuth.instance.signOut();
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginPage(),
+              ));
+        },
+        child: const Text(
+          'Logout',
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: CustomColors.whiteK),
         ),
       ),
     );

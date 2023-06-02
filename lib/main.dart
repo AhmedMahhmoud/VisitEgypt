@@ -10,6 +10,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:visit_egypt/Features/Home/View/Cubit/trips_cubit.dart';
 import 'package:visit_egypt/Features/MachineLearning/View/cubit/machine_learning_cubit.dart';
 import 'package:visit_egypt/Injection/dependency_injection.dart' as di;
+import 'package:visit_egypt/Services/Push_Notifications/local_notifications.dart';
 import 'Core/Shared/SharedPreferences (Singelton)/shared_pref.dart';
 import 'Features/Auth/View/cubit/auth_cubit.dart';
 import 'Features/Home/View/Cubit/home_cubit.dart';
@@ -17,8 +18,6 @@ import 'Features/Posts/View/cubit/posts_cubit.dart';
 import 'Features/Splash/View/splash_screen.dart';
 import 'Services/Geolocator/geolocator.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-
-import 'Services/Push_Notifications/local_notifications.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -32,6 +31,16 @@ const AndroidInitializationSettings initializationSettingsAndroid =
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  NotificationSettings settings = await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
   await di.initGitIt();
   await Prefs.init();
   SystemChrome.setPreferredOrientations(
@@ -50,10 +59,9 @@ void main() async {
         (NotificationResponse notificationResponse) {},
   );
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print("onMessageReceived:}");
     LocalNotification localNotification = LocalNotification();
     localNotification.showNotification(
-        message.notification?.title ?? '', message.notification?.body ?? '');
+        message.data["title"], message.data["body"]);
   });
   runApp(const MyApp());
 }

@@ -10,11 +10,9 @@ import 'package:image_pickers/image_pickers.dart';
 import 'package:visit_egypt/Core/Colors/app_colors.dart';
 import 'package:visit_egypt/Core/Constants/constants.dart';
 import 'package:visit_egypt/Core/Shared/methods.dart';
-import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Features/Auth/View/cubit/auth_cubit.dart';
 import 'package:visit_egypt/Features/Auth/View/login_page.dart';
 import 'package:visit_egypt/Features/Home/Model/tourguide_register_model.dart';
-import 'package:visit_egypt/Features/bottom_navigation/bottom_navigation.dart';
 
 class TourguideRegisterationPage extends StatefulWidget {
   const TourguideRegisterationPage({super.key});
@@ -56,7 +54,7 @@ class _TourguideRegisterationPageState
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        backgroundColor: CustomColors.niceOrange,
+        backgroundColor: CustomColors.lightGold,
         body: Form(
           key: formKey,
           child: SafeArea(

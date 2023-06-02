@@ -11,8 +11,8 @@ class HomeInitial extends HomeState {}
 
 class ListLoading extends HomeState {}
 
-
 class UserAddressLoading extends HomeState {}
+
 class UserAddressLoaded extends HomeState {
   final String address;
   const UserAddressLoaded({required this.address});
@@ -20,12 +20,9 @@ class UserAddressLoaded extends HomeState {
   List<Object> get props => [address];
 }
 
-
 class ListFinished extends HomeState {
   final List<PlaceModel> resultPlaces;
   const ListFinished({required this.resultPlaces});
   @override
   List<Object> get props => [resultPlaces];
 }
-
-
