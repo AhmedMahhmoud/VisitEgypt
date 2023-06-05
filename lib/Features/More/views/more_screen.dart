@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:visit_egypt/Enums/user_type.dart';
 import 'package:visit_egypt/Features/Auth/View/cubit/auth_cubit.dart';
 import 'package:visit_egypt/Features/Home/View/screens/created_trips.dart';
@@ -10,7 +11,6 @@ import '../../../Core/Colors/app_colors.dart';
 import '../../../Core/Constants/constants.dart';
 import '../../Auth/View/login_page.dart';
 import '../../MachineLearning/View/cubit/machine_learning_cubit.dart';
-import '../../MachineLearning/View/machine_learning_page.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({super.key});
@@ -127,33 +127,7 @@ class _MoreScreenState extends State<MoreScreen> {
                               )),
                         )
                       : Container(),
-                  Center(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: 200,
-                          child: MaterialButton(
-                            color: CustomColors.blackK,
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const MachineLearningPage(),
-                                  ));
-                            },
-                            child: const Text(
-                              'Predict Place',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: CustomColors.whiteK),
-                            ),
-                          ),
-                        ),
-                        const LogOut(),
-                      ],
-                    ),
-                  ),
+                  const LogOut(),
                 ],
               ),
             );
@@ -172,12 +146,13 @@ class LogOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 200,
+      width: 150.w,
       child: MaterialButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: CustomColors.blackK,
         onPressed: () {
           FirebaseAuth.instance.signOut();
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => const LoginPage(),

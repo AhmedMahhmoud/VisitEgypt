@@ -24,9 +24,10 @@ class TripsCubit extends Cubit<TripsState> {
     emit(PendingGuidesLoaded(guidesList: guides));
   }
 
-  activateGuideAccount(String userID) async {
+  activateGuideAccount(
+      String userID, TourGuideApplicationEnum acceptActivation) async {
     emit(PendingGuidesLoadingState());
-    await tripRepo.updateTourGuideActiveAccountState(userID);
+    await tripRepo.updateTourGuideActiveAccountState(userID, acceptActivation);
     getPendingGuides();
   }
 
@@ -76,4 +77,10 @@ class TripsCubit extends Cubit<TripsState> {
     tripsListByID = await tripRepo.getAllCreatedTripsByUserId();
     emit(TripsLoadedState());
   }
+}
+
+enum TourGuideApplicationEnum {
+  accept,
+  reject,
+  resubmit,
 }

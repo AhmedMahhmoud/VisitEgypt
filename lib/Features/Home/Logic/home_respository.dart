@@ -10,7 +10,6 @@ import '../View/Cubit/home_cubit.dart';
 
 abstract class HomeRepository {
   Future<List<PlaceModel>> getAllPlaces();
-
   List<PlaceModel> searchInPlaces(String placeName);
   Future<List<PlaceReview>> getPlacesReviews(String placeName);
   List<PlaceModel> filterPlacesByRate();

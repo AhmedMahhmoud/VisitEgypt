@@ -5,6 +5,7 @@ import 'package:visit_egypt/Services/Push_Notifications/firebase_notifications.d
 
 import '../../../Core/Constants/constants.dart';
 import '../Model/tourguide_register_model.dart';
+import '../View/Cubit/trips_cubit.dart';
 
 abstract class TripRepo {
   handleJoinAndCancelTrip(String tripID, String tourGuideID, TripModel trip);
@@ -13,7 +14,8 @@ abstract class TripRepo {
   Future createNewTrip(TripModel tripModel);
   Future<List<TripModel>> getAllCreatedTripsByUserId();
   Future<List<TripModel>> getAllcreatedTrips();
-  updateTourGuideActiveAccountState(String userID);
+  updateTourGuideActiveAccountState(
+      String userID, TourGuideApplicationEnum acceptActivation);
   Future<List<TourguideRegisterModel>> getPendingTourGuides();
 }
 
@@ -164,10 +166,14 @@ class TripRepoImpl implements TripRepo {
   }
 
   @override
-  updateTourGuideActiveAccountState(String userID) async {
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc(userID)
-        .update({"isTourguideActivated": true});
+  updateTourGuideActiveAccountState(
+      String userID, TourGuideApplicationEnum state) async {
+    await FirebaseFirestore.instance.collection("users").doc(userID).update({
+      "isTourguideActivated": state == TourGuideApplicationEnum.accept
+          ? true
+          : state == TourGuideApplicationEnum.reject
+              ? null
+              : false
+    });
   }
 }

@@ -1,8 +1,6 @@
 import 'dart:io';
-import '../../../../Core/Constants/constants.dart';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +11,6 @@ import 'package:visit_egypt/Features/MachineLearning/Widgets/predicted_place_map
 
 import '../../../Core/Colors/app_colors.dart';
 import '../../../Core/Styles/text_style.dart';
-import '../../Home/View/widgets/place_location_map_display.dart';
 import '../Model/predicted_place.dart';
 
 class MlLoadedWidget extends StatelessWidget {
@@ -32,17 +29,9 @@ class MlLoadedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
+      physics: const BouncingScrollPhysics(),
       children: [
-        /*       SizedBox(
-          height: 10.h,
-        ),
-
-        Text(
-          "Accuracy : ${(confidence * 100).toStringAsFixed(2)} %",
-          style: TextStyle(fontSize: 15.sp, color: Colors.grey[700]),
-        ),
-        const Divider(),*/
         ZoomIn(
           delay: const Duration(milliseconds: 350),
           child: SizedBox(
@@ -104,21 +93,14 @@ class MlLoadedWidget extends StatelessWidget {
                           fontSize: setResponsiveFontSize(14),
                         ),
                       )),
-                  SizedBox(
-                    height: 10.h,
-                  ),
                   PredictedPlaceMapDisplay(
                     predictedPlace: predictedPlace,
-                  ),
-                  SizedBox(
-                    height: 50.h,
                   ),
                 ],
               ),
             ),
           ),
         ),
-        const Spacer(),
         FadeIn(
           delay: const Duration(milliseconds: 800),
           child: Center(

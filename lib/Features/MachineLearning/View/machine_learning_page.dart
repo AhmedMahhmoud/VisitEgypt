@@ -46,7 +46,7 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
     return WillPopScope(
       onWillPop: () {
         BlocProvider.of<MachineLearningCubit>(context).resetState();
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => BottomNav(
@@ -102,9 +102,9 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
                       onPressed: () {
                         pickImage();
                       },
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Text(
                             'Upload Image',
                             style: TextStyle(color: Colors.white),
