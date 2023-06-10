@@ -13,10 +13,11 @@ class MachineLearningLoadingState extends MachineLearningState {}
 
 class MachineLearningLoadedState extends MachineLearningState {
   final String label;
-  final double confidence;
   final PredictedPlace predictedPlace;
-  const MachineLearningLoadedState(
-      {required this.label, required this.confidence,required this.predictedPlace, });
+  const MachineLearningLoadedState({
+    required this.label,
+    required this.predictedPlace,
+  });
 }
 
 class MachineLearningErrorState extends MachineLearningState {

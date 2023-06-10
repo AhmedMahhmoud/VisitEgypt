@@ -13,8 +13,7 @@ class MachineLearningCubit extends Cubit<MachineLearningState> {
   MachineLearningCubit() : super(MachineLearningInitial());
   loadModel() async {
     await Tflite.loadModel(
-            model: 'assets/model_unquant.tflite', labels: 'assets/labels.txt')
-        .then((value) => print(value));
+        model: 'assets/model_unquant.tflite', labels: 'assets/labels.txt');
   }
 
   resetState() {
@@ -26,16 +25,19 @@ class MachineLearningCubit extends Cubit<MachineLearningState> {
     try {
       var output = await Tflite.runModelOnImage(
           path: image.path,
-          numResults: 2,
-          threshold: 0.5,
-          imageMean: 127.5,
-          imageStd: 127.5);
+          numResults:
+              1, //This parameter specifies the maximum number of results that should be returned by the model For example, if numResults is set to 2, the model will return the top 2
+          threshold:
+              0.5, //This parameter specifies the minimum confidence threshold (min accuracy res)
+          imageMean:
+              127.5, //mean value that should be subtracted from each pixel in the image before it is processed by the model. This is a normalization step that helps the model work better with different types of images.
+          imageStd:
+              127.5); //standard deviation value that should be divided by each pixel in the image before it is processed by the model. This is another normalization step
       log(output.toString());
-      inspect(output);
-      if (output![0]['confidence'] > 0.7) {
+      if (output![0]['confidence'] > 0.8) {
         emit(MachineLearningLoadedState(
             label: "${output[0]['label']}".replaceAll(RegExp(r'[0-9]'), ''),
-            confidence: output[0]['confidence'],
+            // confidence: output[0]['confidence'],
             predictedPlace: getPredictedPlace(
                 "${output[0]['label']}".replaceAll(RegExp(r'[0-9]'), ''))));
       } else {
@@ -50,7 +52,6 @@ class MachineLearningCubit extends Cubit<MachineLearningState> {
 
   PredictedPlace getPredictedPlace(String label) {
     PredictedPlace predictedPlace;
-    print(label);
     switch (label.trim()) {
       case 'Cairo tower':
         predictedPlace = Constants.allPredictedPlaces[2];

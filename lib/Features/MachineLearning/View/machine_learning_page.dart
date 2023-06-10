@@ -70,7 +70,6 @@ class _MachineLearningPageState extends State<MachineLearningPage> {
                 );
               } else if (state is MachineLearningLoadedState) {
                 return MlLoadedWidget(
-                  confidence: state.confidence,
                   images: images,
                   label: state.label,
                   predictedPlace: state.predictedPlace,

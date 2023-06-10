@@ -15,10 +15,10 @@ import '../Model/predicted_place.dart';
 
 class MlLoadedWidget extends StatelessWidget {
   final String label;
-  final double confidence;
+  // final double confidence;
   final PredictedPlace predictedPlace;
   const MlLoadedWidget({
-    required this.confidence,
+    // required this.confidence,
     required this.predictedPlace,
     required this.label,
     super.key,

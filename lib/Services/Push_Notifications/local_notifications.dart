@@ -8,7 +8,6 @@ class LocalNotification implements NotificationHandler {
   sendNotification(String title, String body) async {
     final notification = FlutterLocalNotificationsPlugin();
     tz.initializeTimeZones();
-
     await notification.zonedSchedule(0, title, body,
         _scheduleDaily(const Time(9)), await _notificationDetails(),
         uiLocalNotificationDateInterpretation:
