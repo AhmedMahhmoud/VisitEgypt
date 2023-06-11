@@ -58,11 +58,13 @@ class HomeRepositoryImp implements HomeRepository {
 
   @override
   List<PlaceModel> filterPlacesByRate() {
-    List<PlaceModel> results = [];
+    List<PlaceModel> results = [...Constants.allPlaces];
 
-    results =
-        Constants.allPlaces.where((place) => place.placeRate >= 8).toList();
-
+    // results =
+    //     Constants.allPlaces.where((place) => place.placeRate >= 8).toList();
+    results.sort(
+      (a, b) => b.placeRate.compareTo(a.placeRate),
+    );
     return results;
   }
 

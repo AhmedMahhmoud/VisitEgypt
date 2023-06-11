@@ -1,5 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +11,9 @@ import 'package:visit_egypt/Enums/firebase_request_enum.dart';
 import 'package:visit_egypt/Features/Home/View/widgets/tourist_page_display.dart';
 import 'package:visit_egypt/Features/MachineLearning/View/machine_learning_page.dart';
 
+import '../../Core/Constants/constants.dart';
 import '../../Enums/user_type.dart';
+import '../../Services/Push_Notifications/local_notifications.dart';
 import '../Auth/View/cubit/auth_cubit.dart';
 import '../Home/View/Cubit/home_cubit.dart';
 import '../Home/View/Cubit/trips_cubit.dart';
@@ -40,7 +44,14 @@ class _BottomNavState extends State<BottomNav> {
   @override
   void initState() {
     super.initState();
+    LocalNotification localNotification = LocalNotification();
+    final index = Random().nextInt(dailyNotification.length);
 
+    localNotification.sendNotification(
+      dailyNotification[index].title,
+      dailyNotification[index].description,
+    );
+    print("triggered notification");
     (widget.comingIndex != -1)
         ? currentIndex = widget.comingIndex
         : currentIndex = 0;
@@ -193,7 +204,7 @@ class _BottomNavState extends State<BottomNav> {
                           if (userTypeEnum == UserTypeEnum.tourguide) ...[
                             BottomNavigationBarItem(
                                 icon: Image.asset(
-                                  'assets/images/tourguide.png',
+                                  'assets/images/tourguideIcon.png',
                                   height: 30.h,
                                 ),
                                 label: "Tour"),
